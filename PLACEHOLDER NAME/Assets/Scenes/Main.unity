@@ -488,7 +488,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 87573896, guid: 0504e590b3f4d9c4e8ca23acbe801fc9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -529,12 +529,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1638205284}
+  damageBlink: {fileID: 1638205285}
   maxSpeed: 10.2
   accelaration: 6.9
   deaccelaration: 13.2
-  maxHP: 0
-  currHP: 0
-  damageBlink: {fileID: 1638205285}
+  maxHP: 100
+  currHP: 100
 --- !u!61 &1638205283
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -619,7 +619,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 484f62a8ce10a054a8d3fd70209f2a91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blinkColor: {r: 5.2395525, g: 4.9133162, b: 4.9133162, a: 0}
+  blinkColor: {r: 10.479105, g: 9.8266325, b: 9.8266325, a: 0}
   blinkAnimationTime: 0.2
   currBlinkAmount: 0
   sprite: {fileID: 1638205280}

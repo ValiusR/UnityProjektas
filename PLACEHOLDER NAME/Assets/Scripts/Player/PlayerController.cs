@@ -5,10 +5,13 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     // Component references
+    [Header("References")]
     [SerializeField] Rigidbody2D rb;
+    [SerializeField] DamageBlink damageBlink;
 
 
     // Movement
+    [Header("Movement")]
     [Range(0.1f, 20f)]
     [SerializeField] float maxSpeed;
     [Range(0.1f, 20f)]
@@ -17,14 +20,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float deaccelaration;
 
     //Health
+    [Header("Health")]
     [SerializeField] int maxHP;
     [SerializeField] int currHP;
 
     //Weapon data
+    //[Header("Weapons")]
 
 
-    //Shaders
-    [SerializeField] DamageBlink damageBlink;
 
     void Start()
     {
