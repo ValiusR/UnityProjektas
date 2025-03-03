@@ -1,0 +1,27 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.UI;
+using UnityEngine;
+
+public class HealthBarManager : MonoBehaviour
+{
+    [SerializeField] PlayerController playerController; // Public field to assign the Player script
+    [Header("Image")]
+    [SerializeField] Image healthBarFill;
+
+    void Update() 
+    {
+        if (playerController != null)
+        {
+            UpdateHealthBar(playerController.currHP, playerController.maxHP);
+        }
+    }
+
+    private void UpdateHealthBar(int currentHealth, int maxHealth)
+    {
+        if (healthBarFill != null)
+        {
+            healthBarFill.fillAmount = (float)currentHealth / (float)maxHealth;
+        }
+    }
+}
