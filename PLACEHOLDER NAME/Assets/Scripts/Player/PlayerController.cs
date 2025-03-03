@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float accelaration;
     [Range(0.1f, 20f)]
     [SerializeField] float deaccelaration;
+    [SerializeField] public Vector2 playerInput;
 
     //Health
     //idk kaip geriau palikt taip, ar kad butu get metodas 
@@ -42,7 +43,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 playerInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        playerInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
         if (playerInput != new Vector2(0, 0))
         {

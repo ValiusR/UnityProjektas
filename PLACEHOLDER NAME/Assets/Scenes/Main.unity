@@ -659,6 +659,7 @@ GameObject:
   - component: {fileID: 1638205284}
   - component: {fileID: 1638205283}
   - component: {fileID: 1638205282}
+  - component: {fileID: 1638205287}
   - component: {fileID: 1638205285}
   - component: {fileID: 1638205286}
   m_Layer: 0
@@ -753,6 +754,7 @@ MonoBehaviour:
   maxSpeed: 10.2
   accelaration: 6.9
   deaccelaration: 13.2
+  playerInput: {x: 0, y: 0}
   maxHP: 100
   currHP: 100
 --- !u!61 &1638205283
@@ -856,6 +858,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuSceneName: PauseMenu
+--- !u!114 &1638205287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1638205279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b86b87b89ed45f848a2ab630c8601c0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  am: {fileID: 0}
+  pc: {fileID: 0}
 --- !u!1 &1692744271
 GameObject:
   m_ObjectHideFlags: 0
