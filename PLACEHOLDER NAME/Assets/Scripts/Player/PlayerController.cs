@@ -20,19 +20,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float deaccelaration;
     [SerializeField] public Vector2 playerInput;
 
+
     //Health
-    //idk kaip geriau palikt taip, ar kad butu get metodas 
     [Header("Health")]
     public int maxHP;
     public int currHP;
-    /*
-    [SerializeField] static int maxHP;
-    [SerializeField] static int currHP;
-    */
+   
 
     //Weapon data
     //[Header("Weapons")]
-
 
 
     void Start()

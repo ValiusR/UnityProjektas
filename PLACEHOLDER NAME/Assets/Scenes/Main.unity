@@ -448,6 +448,7 @@ GameObject:
   - component: {fileID: 1638205285}
   - component: {fileID: 1638205286}
   - component: {fileID: 1638205289}
+  - component: {fileID: 1638205290}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -537,7 +538,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 1638205284}
   damageBlink: {fileID: 1638205285}
-  maxSpeed: 10.2
+  maxSpeed: 6.9
   accelaration: 6.9
   deaccelaration: 13.2
   playerInput: {x: 0, y: 0}
@@ -679,6 +680,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1638205290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1638205279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21f3bd341da3b3c4c973f4af2fbb79be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 2520920212582657922, guid: a642894db510e5c49a9ed8e4242380fc, type: 3}
+  damage: 9
+  speed: 6.8
+  shootCooldown: 0.3
 --- !u!1 &1692744271
 GameObject:
   m_ObjectHideFlags: 0
