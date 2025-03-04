@@ -18,11 +18,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float accelaration;
     [Range(0.1f, 20f)]
     [SerializeField] float deaccelaration;
+    [SerializeField] public Vector2 playerInput;
 
     //Health
+    //idk kaip geriau palikt taip, ar kad butu get metodas 
     [Header("Health")]
-    [SerializeField] int maxHP;
-    [SerializeField] int currHP;
+    public int maxHP;
+    public int currHP;
+    /*
+    [SerializeField] static int maxHP;
+    [SerializeField] static int currHP;
+    */
 
     //Weapon data
     //[Header("Weapons")]
@@ -37,7 +43,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 playerInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        playerInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
         if (playerInput != new Vector2(0, 0))
         {
@@ -50,7 +56,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            TakeDamage(0);
+            TakeDamage(1);
         }
     }
 
