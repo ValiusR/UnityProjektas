@@ -9,6 +9,11 @@ public class HealthBarManager : MonoBehaviour
     [Header("Image")]
     [SerializeField] Image healthBarFill;
 
+    void Start()
+    {
+        playerController = GetComponent<PlayerController>();
+    }
+
     void Update() 
     {
         if (playerController != null)
@@ -23,7 +28,7 @@ public class HealthBarManager : MonoBehaviour
         Debug.Log("Max health: " + maxHealth);
         if (healthBarFill != null)
         {
-            healthBarFill.fillAmount = (float)currentHealth / (float)maxHealth;
+            healthBarFill.fillAmount = currentHealth / (float)maxHealth;
         }
     }
 }
