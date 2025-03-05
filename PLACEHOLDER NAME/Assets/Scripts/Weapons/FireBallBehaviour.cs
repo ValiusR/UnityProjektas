@@ -9,7 +9,7 @@ public class FireBallBehaviour : MonoBehaviour
 
     [Range(0f, 10f)]
     [SerializeField] float destroyAfterSeconds;
-    private float currDestroySeconds;
+    [SerializeField] float currDestroySeconds;
 
     [Range(0f, 20f)]
     [SerializeField] float speed;
@@ -35,7 +35,7 @@ public class FireBallBehaviour : MonoBehaviour
         currDestroySeconds -= Time.deltaTime;
         if (currDestroySeconds < 0f)
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
 
         //rb.velocity = new Vector2(1f,0f);
