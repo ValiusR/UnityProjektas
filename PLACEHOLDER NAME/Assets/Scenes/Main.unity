@@ -461,6 +461,7 @@ GameObject:
   - component: {fileID: 1638205289}
   - component: {fileID: 1638205290}
   - component: {fileID: 1638205291}
+  - component: {fileID: 1638205292}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -549,13 +550,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1638205284}
-  damageBlink: {fileID: 1638205285}
   maxSpeed: 6.9
   accelaration: 6.9
   deaccelaration: 13.2
   playerInput: {x: 0, y: 0}
-  maxHP: 100
-  currHP: 50
 --- !u!61 &1638205283
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -722,6 +720,21 @@ MonoBehaviour:
   damage: 8
   speed: 7.8
   shootCooldown: 0.6
+--- !u!114 &1638205292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1638205279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3c3fbb6790cc9042bc30b6bd2ee1451, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageBlink: {fileID: 1638205285}
+  maxHP: 100
+  currHP: 100
 --- !u!1 &1692744271
 GameObject:
   m_ObjectHideFlags: 0

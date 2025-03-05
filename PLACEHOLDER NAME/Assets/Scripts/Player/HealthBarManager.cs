@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class HealthBarManager : MonoBehaviour
 {
-    [SerializeField] PlayerController playerController; // Public field to assign the Player script
+    [SerializeField] PlayerHealthController playerController; // Public field to assign the Player script
     [Header("Image")]
     [SerializeField] Image healthBarFill;
 
     void Start()
     {
-        playerController = GetComponent<PlayerController>();
+        playerController = GetComponent<PlayerHealthController>();
     }
 
     void Update() 

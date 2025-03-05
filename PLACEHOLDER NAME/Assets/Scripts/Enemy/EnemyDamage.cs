@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyDamage : MonoBehaviour
 {
-    [SerializeField] PlayerController pc;
+    [SerializeField] PlayerHealthController pc;
     [SerializeField] int damage;
     [SerializeField] float attackSpeed;
     private float timer;
@@ -12,7 +12,7 @@ public class EnemyDamage : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        pc = FindObjectOfType<PlayerController>();
+        pc = FindObjectOfType<PlayerHealthController>();
         timer = 0;
     }
 

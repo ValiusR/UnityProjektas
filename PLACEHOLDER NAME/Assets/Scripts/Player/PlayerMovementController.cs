@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerMovementController : MonoBehaviour
 {
     // Component references
     [Header("References")]
     [SerializeField] Rigidbody2D rb;
-    [SerializeField] DamageBlink damageBlink;
 
 
     // Movement
@@ -19,17 +18,6 @@ public class PlayerController : MonoBehaviour
     [Range(0.1f, 20f)]
     [SerializeField] float deaccelaration;
     [SerializeField] public Vector2 playerInput;
-
-
-    //Health
-    [Header("Health")]
-    public int maxHP;
-    public int currHP;
-   
-
-    //Weapon data
-    //[Header("Weapons")]
-
 
     void Start()
     {
@@ -50,10 +38,6 @@ public class PlayerController : MonoBehaviour
             MovePlayer(deaccelaration, playerInput);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            TakeDamage(1);
-        }
     }
 
     public void MovePlayer(float accel, Vector2 direction)
@@ -67,17 +51,5 @@ public class PlayerController : MonoBehaviour
         rb.velocity = new Vector2(moveVelocity.x, moveVelocity.y);
     }
 
-    public void TakeDamage(int damage)
-    {
-        currHP -= damage;
-
-        //Play hurt animation
-        damageBlink.PlayBlink();
-
-        if(currHP <= 0) 
-        { 
-            // Game over
-
-        }
-    }
+    
 }
