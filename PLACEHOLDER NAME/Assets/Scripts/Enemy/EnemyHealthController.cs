@@ -8,6 +8,7 @@ public class EnemyHealthController : MonoBehaviour
 
     public int maxHP;
     public int currHP;
+    public int scorePoints;
     public void TakeDamage(int damage)
     {
         currHP -= damage;
@@ -18,7 +19,7 @@ public class EnemyHealthController : MonoBehaviour
         if (currHP <= 0)
         {
             Destroy(this.gameObject);
-
+            ScoreManager.addScore(scorePoints);
         }
     }
 }
