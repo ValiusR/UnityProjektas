@@ -14,12 +14,15 @@ public class FireBallBehaviour : MonoBehaviour
     [Range(0f, 20f)]
     [SerializeField] float speed;
 
+    [HideInInspector]
+    public int damage;
+
     // Start is called before the first frame update
     void Start()
     {
         currDestroySeconds = destroyAfterSeconds;
 
-        Vector2 direction =  Camera.main.ScreenToWorldPoint(Input.mousePosition) - this.transform.position;
+        Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - this.transform.position;
 
         direction = direction.normalized;
 
@@ -39,5 +42,15 @@ public class FireBallBehaviour : MonoBehaviour
         }
 
         //rb.velocity = new Vector2(1f,0f);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            collision.gameObject.GetComponent<EnemyHealthController>().TakeDamage(this.damage);
+
+            Destroy(this.gameObject);
+        }
     }
 }

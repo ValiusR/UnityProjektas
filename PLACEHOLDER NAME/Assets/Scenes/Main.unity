@@ -188,7 +188,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7890012505201186229, guid: 240e178dc60fb7942a6781953c563043, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -778,7 +778,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 2520920212582657922, guid: a642894db510e5c49a9ed8e4242380fc, type: 3}
-  damage: 8
+  damage: 2
   speed: 7.8
   shootCooldown: 0.6
 --- !u!114 &1638205292

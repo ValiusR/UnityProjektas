@@ -12,9 +12,11 @@ GameObject:
   - component: {fileID: 3882399134646399941}
   - component: {fileID: 6460671449326177547}
   - component: {fileID: 5057363765544083799}
+  - component: {fileID: 5924182587477082791}
+  - component: {fileID: -4575511655656049223}
   m_Layer: 7
   m_Name: Bat
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -54,7 +56,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: c5b7e02f8bc4d944d883b5566865d643, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -152,3 +154,34 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.1875, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &5924182587477082791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7890012505201186229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 165ae471a20252d438aa7bdd0fa4d3c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageBlink: {fileID: -4575511655656049223}
+  maxHP: 9
+  currHP: 6
+--- !u!114 &-4575511655656049223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7890012505201186229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 484f62a8ce10a054a8d3fd70209f2a91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blinkColor: {r: 2, g: 2, b: 2, a: 0}
+  blinkAnimationTime: 0.2
+  currBlinkAmount: 0
+  sprite: {fileID: 3882399134646399941}

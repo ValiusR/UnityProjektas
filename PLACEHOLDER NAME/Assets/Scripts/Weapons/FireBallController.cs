@@ -16,7 +16,8 @@ public class FireBallController : WeaponController
     {
         base.Attack();
 
-        GameObject wpn = Instantiate(prefab);
-        wpn.transform.position = gameObject.transform.position;
+        GameObject fireball = Instantiate(prefab);
+        fireball.transform.position = gameObject.transform.position;
+        fireball.GetComponent<FireBallBehaviour>().damage = this.damage;
     }
 }

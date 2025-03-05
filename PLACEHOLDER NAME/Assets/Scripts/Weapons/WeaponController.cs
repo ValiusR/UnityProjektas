@@ -7,7 +7,7 @@ public class WeaponController : MonoBehaviour
     public GameObject prefab;
 
     [Range(0f, 100f)]
-    [SerializeField] int damage;
+    public int damage;
 
     [Range(0f, 100f)]
     [SerializeField] float speed;
