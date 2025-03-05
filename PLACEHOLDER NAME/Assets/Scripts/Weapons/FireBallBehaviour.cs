@@ -40,12 +40,12 @@ public class FireBallBehaviour : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
-        //rb.velocity = new Vector2(1f,0f);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+       
+
         if (collision.gameObject.tag == "Enemy")
         {
             collision.gameObject.GetComponent<EnemyHealthController>().TakeDamage(this.damage);
