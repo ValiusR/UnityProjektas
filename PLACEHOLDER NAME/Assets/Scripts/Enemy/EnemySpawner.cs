@@ -68,7 +68,7 @@ public class EnemySpawner : MonoBehaviour
                 if (enemyGroup.spawnCount < enemyGroup.enemyCount)
                 {
                     Vector2 spawnPosition = new Vector2(player.transform.position.x
-                        + Random.Range(-20f, 20f), player.transform.position.y + Random.Range(-20f, 20f));
+                        + Random.Range(-30f, 30f), player.transform.position.y + Random.Range(-30f, 30f));
                     Instantiate(enemyGroup.enemyPrefab, spawnPosition, Quaternion.identity);
 
                     enemyGroup.spawnCount++;
