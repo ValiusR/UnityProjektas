@@ -5,12 +5,18 @@ using UnityEngine;
 public class PlayerHealthController : MonoBehaviour
 {
     [SerializeField] DamageBlink damageBlink;
-
     public int maxHP;
     public int currHP;
     public void TakeDamage(int damage)
     {
-        currHP -= damage;
+        if(currHP > damage)
+        {
+            currHP -= damage;
+        }
+        else
+        {
+            currHP = 0;
+        }
 
         //Play hurt animation
         damageBlink.PlayBlink();

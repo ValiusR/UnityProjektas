@@ -2,24 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using TMPro;
 
 public class HealthBarManager : MonoBehaviour
 {
     [SerializeField] PlayerHealthController playerController; // Public field to assign the Player script
     [Header("Image")]
     [SerializeField] Image healthBarFill;
+    [SerializeField] TextMeshProUGUI healthMeterText;
 
     void Start()
     {
-        playerController = GetComponent<PlayerHealthController>();
     }
 
-    void Update() 
+    void Update()
     {
-        if (playerController != null)
-        {
-            UpdateHealthBar(playerController.currHP, playerController.maxHP);
-        }
+        UpdateHealthBar(playerController.currHP, playerController.maxHP);
     }
 
     private void UpdateHealthBar(int currentHealth, int maxHealth)
@@ -29,6 +27,11 @@ public class HealthBarManager : MonoBehaviour
         if (healthBarFill != null)
         {
             healthBarFill.fillAmount = currentHealth / (float)maxHealth;
+
+        }
+        if (healthMeterText != null)
+        {
+            healthMeterText.text = currentHealth + "/" + maxHealth;
         }
     }
 }
