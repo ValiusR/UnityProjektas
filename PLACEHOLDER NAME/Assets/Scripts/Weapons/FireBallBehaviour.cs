@@ -1,56 +1,72 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class FireBallBehaviour : MonoBehaviour
 {
-    [SerializeField] Rigidbody2D rb;
+    [SerializeField] private Rigidbody2D rb;
 
     [Range(0f, 10f)]
-    [SerializeField] float destroyAfterSeconds;
-    [SerializeField] float currDestroySeconds;
+    [SerializeField] private float destroyAfterSeconds;
+    private float currDestroySeconds;
 
     [Range(0f, 20f)]
-    [SerializeField] float speed;
+    [SerializeField] private float speed;
 
     [HideInInspector]
     public int damage;
 
-    // Start is called before the first frame update
+    [SerializeField] private LayerMask propLayer;
+    [SerializeField] private float collisionRadius = 0.1f;
+
+    private Vector2 direction;
+
     void Start()
     {
         currDestroySeconds = destroyAfterSeconds;
-
-        Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - this.transform.position;
-
+        direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         direction = direction.normalized;
-
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // Convert to degrees
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle);
-
-        rb.velocity = direction * speed;
+        rb.isKinematic = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        currDestroySeconds -= Time.deltaTime;
+        currDestroySeconds -= Time.fixedDeltaTime;
         if (currDestroySeconds < 0f)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
+            return;
+        }
+
+        Vector2 movement = direction * speed * Time.fixedDeltaTime;
+        rb.MovePosition(rb.position + movement);
+
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(rb.position, collisionRadius);
+
+        foreach (Collider2D hitCollider in hitColliders)
+        {
+            if (((1 << hitCollider.gameObject.layer) & propLayer) != 0)
+            {
+                Destroy(gameObject);
+                break;
+            }
+
+            if (hitCollider.CompareTag("Enemy"))
+            {
+                EnemyHealthController enemyHealth = hitCollider.GetComponent<EnemyHealthController>();
+                if (enemyHealth != null)
+                {
+                    enemyHealth.TakeDamage(damage);
+                    Destroy(gameObject);
+                    break;
+                }
+            }
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    void OnDrawGizmosSelected()
     {
-       
-
-        if (collision.gameObject.tag == "Enemy")
-        {
-            collision.gameObject.GetComponent<EnemyHealthController>().TakeDamage(this.damage);
-
-            Destroy(this.gameObject);
-        }
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, collisionRadius);
     }
 }
