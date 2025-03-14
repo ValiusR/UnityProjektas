@@ -38,6 +38,10 @@ public class WeaponController : MonoBehaviour
     {
         currCooldown = shootCooldown;
     }
+    public virtual string GetDescription()
+    {
+        return $"Deals {damage} damage per hit.";
+    }
 
 
 }

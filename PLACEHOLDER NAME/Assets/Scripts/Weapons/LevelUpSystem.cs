@@ -4,14 +4,25 @@ using UnityEngine;
 public class LevelUpSystem : MonoBehaviour
 {
     public List<WeaponController> allWeapons; // List of all available weapons
+    public List<WeaponController> unlockedWeapons; // List of weapons the player has unlocked
     public int numberOfOptions = 3; // Number of options to present on level up
 
     private int currentLevel = 1;
     private int experience = 0;
     private int experienceToNextLevel = 100;
 
-    // Reference to the LevelUpUI (you can assign this in the inspector or find it dynamically)
+    // Reference to the LevelUpUI (assign this in the inspector or find it dynamically)
    // public LevelUpUI levelUpUI;
+
+    private void Start()
+    {
+        // Initialize the unlocked weapons list (e.g., with a starting weapon)
+        unlockedWeapons = new List<WeaponController>();
+        if (allWeapons.Count > 0)
+        {
+            unlockedWeapons.Add(allWeapons[0]); // Unlock the first weapon by default
+        }
+    }
 
     public void GainExperience(int amount)
     {
@@ -32,28 +43,46 @@ public class LevelUpSystem : MonoBehaviour
         List<WeaponUpgradeOption> options = GenerateWeaponUpgradeOptions();
 
         // Show the level-up UI with the options
-      //  levelUpUI.ShowOptions(options);
+       // levelUpUI.ShowOptions(options);
     }
 
     private List<WeaponUpgradeOption> GenerateWeaponUpgradeOptions()
     {
         List<WeaponUpgradeOption> options = new List<WeaponUpgradeOption>();
 
+        // Create a list of weapons that are not yet unlocked
+        List<WeaponController> lockedWeapons = new List<WeaponController>(allWeapons);
+        lockedWeapons.RemoveAll(weapon => unlockedWeapons.Contains(weapon));
+
         // Ensure we don't try to select more options than available weapons
-        int numOptions = Mathf.Min(numberOfOptions, allWeapons.Count);
+        int numOptions = Mathf.Min(numberOfOptions, unlockedWeapons.Count + lockedWeapons.Count);
 
-        // Shuffle the list and pick the first 'numOptions' weapons
-        List<WeaponController> shuffledWeapons = new List<WeaponController>(allWeapons);
-        Shuffle(shuffledWeapons);
+        // Shuffle the lists and pick the first 'numOptions' weapons
+        List<WeaponController> shuffledUnlockedWeapons = new List<WeaponController>(unlockedWeapons);
+        List<WeaponController> shuffledLockedWeapons = new List<WeaponController>(lockedWeapons);
+        Shuffle(shuffledUnlockedWeapons);
+        Shuffle(shuffledLockedWeapons);
 
-        for (int i = 0; i < numOptions; i++)
+        // Add upgrade options for unlocked weapons
+        foreach (var weapon in shuffledUnlockedWeapons)
         {
-            WeaponController weapon = shuffledWeapons[i];
+            if (options.Count >= numOptions) break;
 
-            // Create an upgrade option for this weapon
             string name = weapon.name;
-            string description = $"Increase {weapon.name}'s damage by 10%";
+            string description = $"Upgrade {weapon.name}: Increase damage by 10%";
             System.Action applyEffect = () => ApplyUpgrade(weapon);
+
+            options.Add(new WeaponUpgradeOption(name, description, applyEffect));
+        }
+
+        // Add unlock options for locked weapons
+        foreach (var weapon in shuffledLockedWeapons)
+        {
+            if (options.Count >= numOptions) break;
+
+            string name = weapon.name;
+            string description = $"Unlock {weapon.name}: {weapon.GetDescription()}";
+            System.Action applyEffect = () => UnlockWeapon(weapon);
 
             options.Add(new WeaponUpgradeOption(name, description, applyEffect));
         }
@@ -76,6 +105,12 @@ public class LevelUpSystem : MonoBehaviour
     {
         weapon.damage = (int)(weapon.damage * 1.1f); // Increase damage by 10%
         Debug.Log($"Upgraded {weapon.name} to {weapon.damage} damage");
+    }
+
+    private void UnlockWeapon(WeaponController weapon)
+    {
+        unlockedWeapons.Add(weapon);
+        Debug.Log($"Unlocked {weapon.name}");
     }
 
     private int CalculateExperienceToNextLevel()
