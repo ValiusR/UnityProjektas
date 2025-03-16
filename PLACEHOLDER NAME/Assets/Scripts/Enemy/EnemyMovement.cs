@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] Transform player;
-    [SerializeField] float moveSpeed;
+    [SerializeField] public float moveSpeed;
     private float startMoveSpeed;
 
 

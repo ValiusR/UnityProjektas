@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static EnemySpawner;
 
 public class FireBallController : WeaponController
 {
@@ -18,6 +19,14 @@ public class FireBallController : WeaponController
 
         GameObject fireball = Instantiate(prefab);
         fireball.transform.position = gameObject.transform.position;
-        fireball.GetComponent<FireBallBehaviour>().damage = this.damage;
+
+        FireBallBehaviour stats = fireball.GetComponent<FireBallBehaviour>();
+        stats.damage = this.damage;
+        stats.speed = this.speed;
+    }
+
+    public override string GetDescription()
+    {
+        return $"Deals {damage} damage per hit.";
     }
 }

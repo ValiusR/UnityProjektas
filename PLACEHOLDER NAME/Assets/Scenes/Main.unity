@@ -444,12 +444,13 @@ GameObject:
   - component: {fileID: 1638205284}
   - component: {fileID: 1638205283}
   - component: {fileID: 1638205282}
+  - component: {fileID: 1638205292}
   - component: {fileID: 1638205288}
+  - component: {fileID: 1638205289}
   - component: {fileID: 1638205285}
   - component: {fileID: 1638205286}
-  - component: {fileID: 1638205289}
   - component: {fileID: 1638205291}
-  - component: {fileID: 1638205292}
+  - component: {fileID: 1638205293}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -539,9 +540,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 1638205284}
   boxCollider: {fileID: 0}
-  maxSpeed: 10.8
+  maxSpeed: 6
   acceleration: 4.2
-  deacceleration: 3.2
+  deacceleration: 10
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -696,8 +697,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 2520920212582657922, guid: a642894db510e5c49a9ed8e4242380fc, type: 3}
   damage: 2
-  speed: 7.8
-  shootCooldown: 0.6
+  speed: 8
+  shootCooldown: 1
 --- !u!114 &1638205292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -713,6 +714,24 @@ MonoBehaviour:
   damageBlink: {fileID: 1638205285}
   maxHP: 100
   currHP: 100
+--- !u!114 &1638205293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1638205279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b04c3b2dc537d4e42943af8e7efd565a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 3269140025777334952, guid: 4ce9d742e8fc8db42acb144b61c643b2, type: 3}
+  damage: 1
+  speed: 7
+  shootCooldown: 1.7
+  freezeLength: 6
+  freezeStrength: 5
 --- !u!1 &1692744271
 GameObject:
   m_ObjectHideFlags: 0

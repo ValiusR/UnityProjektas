@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
+    [Header("Base weapon data")]
+
     public GameObject prefab;
 
     [Range(0f, 100f)]
     public int damage;
 
     [Range(0f, 100f)]
-    [SerializeField] float speed;
+    public float speed;
 
     [Range(0f, 15)]
-    [SerializeField] float shootCooldown;
+    public float shootCooldown;
 
     private float currCooldown;
 
@@ -40,7 +42,8 @@ public class WeaponController : MonoBehaviour
     }
     public virtual string GetDescription()
     {
-        return $"Deals {damage} damage per hit.";
+        throw new UnassignedReferenceException(" GetDescription() method is run for base weapon class ");
+
     }
 
 

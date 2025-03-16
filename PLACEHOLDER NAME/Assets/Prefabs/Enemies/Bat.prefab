@@ -11,13 +11,14 @@ GameObject:
   - component: {fileID: 6746005066330777203}
   - component: {fileID: 3882399134646399941}
   - component: {fileID: 6460671449326177547}
+  - component: {fileID: 309395215964324872}
   - component: {fileID: 5057363765544083799}
   - component: {fileID: 5924182587477082791}
   - component: {fileID: -4575511655656049223}
   - component: {fileID: 5134682288276909792}
   - component: {fileID: 1888759539661845970}
-  - component: {fileID: 309395215964324872}
   - component: {fileID: 8765725260785373281}
+  - component: {fileID: -2968254330293074885}
   m_Layer: 7
   m_Name: Bat
   m_TagString: Enemy
@@ -113,6 +114,33 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!50 &309395215964324872
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7890012505201186229}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 1
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!61 &5057363765544083799
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -173,7 +201,7 @@ MonoBehaviour:
   damageBlink: {fileID: -4575511655656049223}
   fadeOut: {fileID: 8765725260785373281}
   maxHP: 9
-  currHP: 6
+  currHP: 9
   scorePoints: 10
 --- !u!114 &-4575511655656049223
 MonoBehaviour:
@@ -220,33 +248,6 @@ MonoBehaviour:
   pc: {fileID: 0}
   damage: 2
   attackSpeed: 1
---- !u!50 &309395215964324872
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7890012505201186229}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 1
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 0
-  m_CollisionDetection: 1
-  m_Constraints: 4
 --- !u!114 &8765725260785373281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,3 +264,16 @@ MonoBehaviour:
   currFadeAmount: 0
   sprite: {fileID: 3882399134646399941}
   material: {fileID: 2100000, guid: 3d276aa7edb70ea428b6ce8e5e6beca5, type: 2}
+--- !u!114 &-2968254330293074885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7890012505201186229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df71c9afdbda0b246a611e6940d87710, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  freezeColor: {r: 0.41628695, g: 0.5186489, b: 0.8584906, a: 1}

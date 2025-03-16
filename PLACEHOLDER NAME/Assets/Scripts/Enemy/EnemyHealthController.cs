@@ -9,6 +9,7 @@ public class EnemyHealthController : MonoBehaviour
 
     public int maxHP;
     public int currHP;
+
     public int scorePoints;
     public void TakeDamage(int damage)
     {
@@ -22,9 +23,11 @@ public class EnemyHealthController : MonoBehaviour
             StartCoroutine(PlayDeathAnimation());
             ScoreManager.addScore(scorePoints);
 
+            //The enemy stops moving
             GetComponent<EnemyMovement>().enabled = false;
 
-            //PROBLEM, KOL PLAYINA ANIMATION, BATSAI VIS TIEK GALI PRADANGINTI PROJECTILES
+            //The enemy can't get hit by projectiles
+            GetComponent<Collider2D>().enabled = false;
         }
     }
 
