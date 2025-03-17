@@ -154,6 +154,6 @@ public class LevelUpSystem : MonoBehaviour
     private int CalculateExperienceToNextLevel()
     {
         // Example formula for experience needed to reach the next level
-        return 100 + (currentLevel * 50);
+        return 50 + currentLevel * 50;
     }
 }
