@@ -6,10 +6,10 @@ public class LevelUpSystem : MonoBehaviour
     public List<WeaponController> allWeapons; // List of all available weapons
     public List<WeaponController> unlockedWeapons; // List of weapons the player has unlocked
     public int numberOfOptions = 3; // Number of options to present on level up
-
-    private int currentLevel = 1;
-    private int experience = 0;
-    private int experienceToNextLevel = 100;
+    public LevelUpUiManager levelUpUI;
+    public int currentLevel = 1;
+    public static int experience = 0;
+    public int experienceToNextLevel = 100;
 
     // Reference to the LevelUpUI (assign this in the inspector or find it dynamically)
    // public LevelUpUI levelUpUI;
@@ -24,6 +24,20 @@ public class LevelUpSystem : MonoBehaviour
         }
     }
 
+    //paskui istrint reikes-------------------------
+    private void Update()
+    {
+        if(experience >= experienceToNextLevel)
+        {
+            LevelUp();
+        }
+    }
+    public static void GainXP(int amount)
+    {
+        experience += amount;
+    }
+
+    //----------------------------------------
     public void GainExperience(int amount)
     {
         experience += amount;
@@ -36,11 +50,16 @@ public class LevelUpSystem : MonoBehaviour
     private void LevelUp()
     {
         currentLevel++;
-        experience -= experienceToNextLevel;
+        //experience -= experienceToNextLevel;
+        experience = 0;
         experienceToNextLevel = CalculateExperienceToNextLevel();
 
         // Generate level-up options
         List<WeaponUpgradeOption> options = GenerateWeaponUpgradeOptions();
+
+
+        levelUpUI.setWeaponUpgradeOptions(options);
+        levelUpUI.ShowUI();
 
         // Show the level-up UI with the options
        // levelUpUI.ShowOptions(options);

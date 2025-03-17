@@ -13,7 +13,6 @@ public class ScoreManager : MonoBehaviour
         currScore += score;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(scoreText != null)

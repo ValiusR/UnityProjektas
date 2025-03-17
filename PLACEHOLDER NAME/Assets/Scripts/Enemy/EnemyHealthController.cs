@@ -6,7 +6,6 @@ public class EnemyHealthController : MonoBehaviour
 {
     [SerializeField] DamageBlink damageBlink;
     [SerializeField] FadeOut fadeOut;
-
     public int maxHP;
     public int currHP;
 
@@ -22,8 +21,8 @@ public class EnemyHealthController : MonoBehaviour
         {
             StartCoroutine(PlayDeathAnimation());
             ScoreManager.addScore(scorePoints);
-
             //The enemy stops moving
+            LevelUpSystem.GainXP(100);
             GetComponent<EnemyMovement>().enabled = false;
 
             //The enemy can't get hit by projectiles
