@@ -61,37 +61,37 @@ public class LevelUpSystem : MonoBehaviour
     {
         List<WeaponUpgradeOption> options = new List<WeaponUpgradeOption>();
 
-        // Create a list of weapons that are not yet unlocked
+        // Neatrakinti ginklai
         List<WeaponController> lockedWeapons = new List<WeaponController>(allWeapons);
         lockedWeapons.RemoveAll(weapon => unlockedWeapons.Contains(weapon));
 
-        // Shuffle the locked weapons list
+        // Randomizinam neatrakintus
         Shuffle(lockedWeapons);
 
-        // Add unlock options for locked weapons
+        // atrakinimo pasirinkimai
         foreach (var weapon in lockedWeapons)
         {
-            if (options.Count >= 2) break; // Limit to 2 options
+            if (options.Count >= 2) break; // max 2 pasirinkimai
 
-            string name = weapon.name;
+           // string name = weapon.name;
             string description = $"Unlock {weapon.GetName()}: {weapon.GetDescription()}";
             System.Action applyEffect = () => UnlockWeapon(weapon);
 
             options.Add(new WeaponUpgradeOption(name, description, applyEffect));
         }
 
-        // If there are fewer than 2 options, add upgrade options for unlocked weapons
+        // jei maziau nei 2 pasirinkimai
         if (options.Count < 2)
         {
-            // Shuffle the unlocked weapons list
+            // randomiziname
             List<WeaponController> shuffledUnlockedWeapons = new List<WeaponController>(unlockedWeapons);
             Shuffle(shuffledUnlockedWeapons);
 
             foreach (var weapon in shuffledUnlockedWeapons)
             {
-                if (options.Count >= 2) break; // Limit to 2 options
+                if (options.Count >= 2) break; // max 2 pasirinkimai
 
-                string name = weapon.name;
+               // string name = weapon.name;
                 string description = $"Upgrade {weapon.GetName()}: Increase damage by 10%";
                 System.Action applyEffect = () => ApplyUpgrade(weapon);
 
