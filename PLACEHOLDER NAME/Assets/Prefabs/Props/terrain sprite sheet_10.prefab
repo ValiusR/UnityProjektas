@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5480451452222802393}
   - component: {fileID: 4794236545843712966}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: terrain sprite sheet_10
   m_TagString: Untagged
   m_Icon: {fileID: 0}

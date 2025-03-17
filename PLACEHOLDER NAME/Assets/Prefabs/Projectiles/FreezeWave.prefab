@@ -180,3 +180,4 @@ MonoBehaviour:
     m_Bits: 256
   collisionRadius: 0.1
   freezeLength: 0
+  freezeStrength: 0
