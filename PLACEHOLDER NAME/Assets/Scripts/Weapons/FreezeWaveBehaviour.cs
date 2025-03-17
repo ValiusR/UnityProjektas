@@ -11,12 +11,7 @@ public class FreezeWaveBehaviour : BaseWeaponBehaviour
 
     public override void OnCollisionWithEnemy(Collider2D collider)
     {
-          base.OnCollisionWithEnemy(collider);
-        /*EnemyHealthController enemyHealth = collider.GetComponent<EnemyHealthController>();
-        if (enemyHealth != null)
-        {
-            enemyHealth.TakeDamage(damage);
-        }*/
+        base.OnCollisionWithEnemy(collider);
 
         FreezeAnimationController freeze = collider.GetComponent<FreezeAnimationController>();
 
