@@ -203,6 +203,7 @@ MonoBehaviour:
   maxHP: 40
   currHP: 40
   scorePoints: 10
+  xp: 50
 --- !u!114 &-4575511655656049223
 MonoBehaviour:
   m_ObjectHideFlags: 0

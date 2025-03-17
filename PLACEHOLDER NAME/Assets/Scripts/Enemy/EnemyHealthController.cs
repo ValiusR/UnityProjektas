@@ -10,6 +10,7 @@ public class EnemyHealthController : MonoBehaviour
     public int currHP;
 
     public int scorePoints;
+    public int xp;
     public void TakeDamage(int damage)
     {
         currHP -= damage;
@@ -22,7 +23,7 @@ public class EnemyHealthController : MonoBehaviour
             StartCoroutine(PlayDeathAnimation());
             ScoreManager.addScore(scorePoints);
             //The enemy stops moving
-            LevelUpSystem.GainXP(100);
+            LevelUpSystem.GainXP(xp);
             GetComponent<EnemyMovement>().enabled = false;
 
             //The enemy can't get hit by projectiles
