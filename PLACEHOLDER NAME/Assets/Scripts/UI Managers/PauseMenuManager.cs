@@ -18,7 +18,7 @@ public class PauseMenuManager : MonoBehaviour
     public void QuitToMainMenu()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(2); //Scene doesn't exist yet
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void QuitGame()
