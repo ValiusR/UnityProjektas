@@ -46,7 +46,7 @@ public class LevelUpUiManager : MonoBehaviour
 
     public void ShowUI()
     {
-        if(weaponUpgradeOptions != null && weaponUpgradeOptions.Capacity >= 1)
+        if(weaponUpgradeOptions != null && weaponUpgradeOptions.Count >= 1)
         {
             Debug.Log("Option 1 Name: " + weaponUpgradeOptions[0].name);
             Debug.Log("Option 1 Description: " + weaponUpgradeOptions[0].description);
@@ -54,7 +54,7 @@ public class LevelUpUiManager : MonoBehaviour
             button1Description.text = weaponUpgradeOptions[0].description;
             button1Action = weaponUpgradeOptions[0].applyEffect;
         }
-        if(weaponUpgradeOptions != null && weaponUpgradeOptions.Capacity >= 2)
+        if(weaponUpgradeOptions != null && weaponUpgradeOptions.Count >= 2)
         {
             Debug.Log("Option 2 Name: " + weaponUpgradeOptions[1].name);
             Debug.Log("Option 2 Description: " + weaponUpgradeOptions[1].description);

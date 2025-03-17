@@ -11,9 +11,6 @@ public class LevelUpSystem : MonoBehaviour
     public static int experience = 0;
     public int experienceToNextLevel = 100;
 
-    // Reference to the LevelUpUI (assign this in the inspector or find it dynamically)
-   // public LevelUpUI levelUpUI;
-
     private void Start()
     {
         // Initialize the unlocked weapons list (e.g., with a starting weapon)
@@ -21,23 +18,23 @@ public class LevelUpSystem : MonoBehaviour
         if (allWeapons.Count > 0)
         {
             unlockedWeapons.Add(allWeapons[0]); // Unlock the first weapon by default
+            EnableWeaponBehavior(allWeapons[0]); // Enable the starting weapon's behavior
         }
     }
 
-    //paskui istrint reikes-------------------------
     private void Update()
     {
-        if(experience >= experienceToNextLevel)
+        if (experience >= experienceToNextLevel)
         {
             LevelUp();
         }
     }
+
     public static void GainXP(int amount)
     {
         experience += amount;
     }
 
-    //----------------------------------------
     public void GainExperience(int amount)
     {
         experience += amount;
@@ -50,19 +47,14 @@ public class LevelUpSystem : MonoBehaviour
     private void LevelUp()
     {
         currentLevel++;
-        //experience -= experienceToNextLevel;
         experience = 0;
         experienceToNextLevel = CalculateExperienceToNextLevel();
 
         // Generate level-up options
         List<WeaponUpgradeOption> options = GenerateWeaponUpgradeOptions();
 
-
         levelUpUI.setWeaponUpgradeOptions(options);
         levelUpUI.ShowUI();
-
-        // Show the level-up UI with the options
-       // levelUpUI.ShowOptions(options);
     }
 
     private List<WeaponUpgradeOption> GenerateWeaponUpgradeOptions()
@@ -73,37 +65,38 @@ public class LevelUpSystem : MonoBehaviour
         List<WeaponController> lockedWeapons = new List<WeaponController>(allWeapons);
         lockedWeapons.RemoveAll(weapon => unlockedWeapons.Contains(weapon));
 
-        // Ensure we don't try to select more options than available weapons
-        int numOptions = Mathf.Min(numberOfOptions, unlockedWeapons.Count + lockedWeapons.Count);
+        // Shuffle the locked weapons list
+        Shuffle(lockedWeapons);
 
-        // Shuffle the lists and pick the first 'numOptions' weapons
-        List<WeaponController> shuffledUnlockedWeapons = new List<WeaponController>(unlockedWeapons);
-        List<WeaponController> shuffledLockedWeapons = new List<WeaponController>(lockedWeapons);
-        Shuffle(shuffledUnlockedWeapons);
-        Shuffle(shuffledLockedWeapons);
-
-        // Add upgrade options for unlocked weapons
-        foreach (var weapon in shuffledUnlockedWeapons)
+        // Add unlock options for locked weapons
+        foreach (var weapon in lockedWeapons)
         {
-            if (options.Count >= numOptions) break;
+            if (options.Count >= 2) break; // Limit to 2 options
 
             string name = weapon.name;
-            string description = $"Upgrade {weapon.name}: Increase damage by 10%";
-            System.Action applyEffect = () => ApplyUpgrade(weapon);
+            string description = $"Unlock {weapon.GetName()}: {weapon.GetDescription()}";
+            System.Action applyEffect = () => UnlockWeapon(weapon);
 
             options.Add(new WeaponUpgradeOption(name, description, applyEffect));
         }
 
-        // Add unlock options for locked weapons
-        foreach (var weapon in shuffledLockedWeapons)
+        // If there are fewer than 2 options, add upgrade options for unlocked weapons
+        if (options.Count < 2)
         {
-            if (options.Count >= numOptions) break;
+            // Shuffle the unlocked weapons list
+            List<WeaponController> shuffledUnlockedWeapons = new List<WeaponController>(unlockedWeapons);
+            Shuffle(shuffledUnlockedWeapons);
 
-            string name = weapon.name;
-            string description = $"Unlock {weapon.name}: {weapon.GetDescription()}";
-            System.Action applyEffect = () => UnlockWeapon(weapon);
+            foreach (var weapon in shuffledUnlockedWeapons)
+            {
+                if (options.Count >= 2) break; // Limit to 2 options
 
-            options.Add(new WeaponUpgradeOption(name, description, applyEffect));
+                string name = weapon.name;
+                string description = $"Upgrade {weapon.GetName()}: Increase damage by 10%";
+                System.Action applyEffect = () => ApplyUpgrade(weapon);
+
+                options.Add(new WeaponUpgradeOption(name, description, applyEffect));
+            }
         }
 
         return options;
@@ -130,6 +123,32 @@ public class LevelUpSystem : MonoBehaviour
     {
         unlockedWeapons.Add(weapon);
         Debug.Log($"Unlocked {weapon.name}");
+
+        // Enable the weapon's behavior script on the Player
+        EnableWeaponBehavior(weapon);
+    }
+
+    private void EnableWeaponBehavior(WeaponController weapon)
+    {
+        // Get the weapon's behavior script type
+        System.Type weaponBehaviorType = weapon.GetType();
+
+        // Find the corresponding behavior script on the Player
+        Component weaponBehavior = gameObject.GetComponent(weaponBehaviorType);
+
+        if (weaponBehavior != null)
+        {
+            // Enable the behavior script
+            if (weaponBehavior is MonoBehaviour)
+            {
+                ((MonoBehaviour)weaponBehavior).enabled = true;
+                Debug.Log($"Enabled {weaponBehaviorType.Name} on Player");
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"Could not find {weaponBehaviorType.Name} on Player");
+        }
     }
 
     private int CalculateExperienceToNextLevel()

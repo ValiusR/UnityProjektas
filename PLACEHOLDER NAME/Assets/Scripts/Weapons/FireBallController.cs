@@ -27,6 +27,10 @@ public class FireBallController : WeaponController
 
     public override string GetDescription()
     {
-        return $"Deals {damage} damage per hit.";
+        return $"Fires a ball of fire that deals {damage} damage per hit.";
+    }
+    public override string GetName()
+    {
+        return $"Fireball";
     }
 }

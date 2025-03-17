@@ -11,14 +11,19 @@ public class FreezeWaveBehaviour : BaseWeaponBehaviour
 
     public override void OnCollisionWithEnemy(Collider2D collider)
     {
-        base.OnCollisionWithEnemy(collider);
+          base.OnCollisionWithEnemy(collider);
+        /*EnemyHealthController enemyHealth = collider.GetComponent<EnemyHealthController>();
+        if (enemyHealth != null)
+        {
+            enemyHealth.TakeDamage(damage);
+        }*/
 
         FreezeAnimationController freeze = collider.GetComponent<FreezeAnimationController>();
 
         if(freeze == null)
         {
             throw new Exception("Why is there no FreezeAnimationController on enemy?");
-            return;
+           // return;
         }
 
         freeze.ActivateFreeze(freezeLength, freezeStrength);

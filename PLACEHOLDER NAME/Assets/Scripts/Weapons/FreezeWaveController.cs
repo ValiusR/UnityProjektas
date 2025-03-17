@@ -34,4 +34,8 @@ public class FreezeWaveController : WeaponController
     {
         return $"Deals {damage} damage per hit. Slows down hit enemies.";
     }
+    public override string GetName()
+    {
+        return $"Freeze wave";
+    }
 }

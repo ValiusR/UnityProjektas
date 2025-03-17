@@ -848,13 +848,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1638205279}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 21f3bd341da3b3c4c973f4af2fbb79be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 2520920212582657922, guid: a642894db510e5c49a9ed8e4242380fc, type: 3}
-  damage: 2
+  damage: 20
   speed: 8
   shootCooldown: 1
 --- !u!114 &1638205292
@@ -879,13 +879,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1638205279}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b04c3b2dc537d4e42943af8e7efd565a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 3269140025777334952, guid: 4ce9d742e8fc8db42acb144b61c643b2, type: 3}
-  damage: 1
+  damage: 10
   speed: 7
   shootCooldown: 1.7
   freezeLength: 6
@@ -903,8 +903,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allWeapons:
-  - {fileID: 1638205293}
   - {fileID: 1638205291}
+  - {fileID: 1638205293}
   unlockedWeapons:
   - {fileID: 1638205291}
   numberOfOptions: 2

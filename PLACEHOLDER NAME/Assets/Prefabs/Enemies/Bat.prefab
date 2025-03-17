@@ -200,8 +200,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageBlink: {fileID: -4575511655656049223}
   fadeOut: {fileID: 8765725260785373281}
-  maxHP: 9
-  currHP: 9
+  maxHP: 40
+  currHP: 40
   scorePoints: 10
 --- !u!114 &-4575511655656049223
 MonoBehaviour:
