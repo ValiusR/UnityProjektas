@@ -22,7 +22,7 @@ public class BaseWeaponBehaviour : MonoBehaviour
 
     private Vector2 direction;
 
-    void Start()
+    public virtual void Start()
     {
         currDestroySeconds = destroyAfterSeconds;
 
@@ -35,7 +35,7 @@ public class BaseWeaponBehaviour : MonoBehaviour
         //rb.isKinematic = true;
     }
 
-    void FixedUpdate()
+    public virtual void FixedUpdate()
     {
         currDestroySeconds -= Time.fixedDeltaTime;
         if (currDestroySeconds < 0f)
@@ -44,9 +44,8 @@ public class BaseWeaponBehaviour : MonoBehaviour
             return;
         }
 
-        Vector2 movement = direction * speed * Time.fixedDeltaTime;
-        rb.MovePosition(rb.position + movement);
 
+        MoveProjectile();
         SolveCollisions();
     }
 
@@ -79,6 +78,12 @@ public class BaseWeaponBehaviour : MonoBehaviour
                 OnCollisionWithEnemy(hitCollider);
             }
         }
+    }
+
+    public virtual void MoveProjectile()
+    {
+        Vector2 movement = direction * speed * Time.fixedDeltaTime;
+        rb.MovePosition(rb.position + movement);
     }
 
     public virtual void OnCollisionWithEnemy(Collider2D collider)
