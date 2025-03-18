@@ -5,24 +5,24 @@ using UnityEngine;
 public class EnemyDamage : MonoBehaviour
 {
     [SerializeField] PlayerHealthController pc;
-    [SerializeField] int damage;
-    [SerializeField] float attackSpeed;
-    private float timer;
+    [SerializeField] public int damage;
+    [SerializeField] public float attackSpeed;
+    protected float timer;
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         pc = FindObjectOfType<PlayerHealthController>();
         timer = 0;
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    protected virtual private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
