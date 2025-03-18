@@ -8,8 +8,8 @@ public class BaseWeaponBehaviour : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
 
     [Range(0f, 10f)]
-    [SerializeField] private float destroyAfterSeconds;
-    private float currDestroySeconds;
+    [SerializeField] protected float destroyAfterSeconds;
+    protected float currDestroySeconds;
 
     [HideInInspector] 
     public float speed;
@@ -17,8 +17,8 @@ public class BaseWeaponBehaviour : MonoBehaviour
     [HideInInspector]
     public int damage;
 
-    [SerializeField] private LayerMask propLayer;
-    [SerializeField] private float collisionRadius = 0.1f;
+    [SerializeField] protected LayerMask propLayer;
+    [SerializeField] public float collisionRadius = 0.1f;
 
     private Vector2 direction;
 

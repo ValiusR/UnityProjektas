@@ -925,9 +925,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 35273354904022579, guid: 110701f1fbb9e43448bde3245da85c3c, type: 3}
-  damage: 3
-  speed: 4
-  shootCooldown: 2
+  damage: 5
+  speed: 6
+  shootCooldown: 1
+  areaPrefab: {fileID: 3655188734221225493, guid: b530b34b348f4494c9445ca3202608eb, type: 3}
+  damageAreaSize: 2
+  howFastEnemiesTakeDamage: 0.5
 --- !u!1 &1692744271
 GameObject:
   m_ObjectHideFlags: 0

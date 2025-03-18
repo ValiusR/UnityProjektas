@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class MagicFlaskController : WeaponController
 {
+    [Header("Magic flask properties")]
+    [SerializeField] GameObject areaPrefab;
+    [SerializeField] float damageAreaSize;
+    [SerializeField] float howFastEnemiesTakeDamage;
+
     protected override void Start()
     {
         base.Start();
@@ -19,6 +24,11 @@ public class MagicFlaskController : WeaponController
         MagicFlaskBehaviour stats = flask.GetComponent<MagicFlaskBehaviour>();
         stats.damage = this.damage;
         stats.speed = this.speed;
+        stats.damageField = this.areaPrefab;
+        
+        //This / 2 is here, because SpriteRenderer.scale = 0.5 * Physics2D.Overlap()
+        stats.areaSize = this.damageAreaSize / 2;
+        stats.damageSpeed = howFastEnemiesTakeDamage;
     }
 
     public override string GetDescription()

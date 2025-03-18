@@ -1,9 +1,12 @@
+using DG.Tweening;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MagicFlaskBehaviour : BaseWeaponBehaviour
 {
+    [HideInInspector] public GameObject damageField;
+    [HideInInspector] public float areaSize;
+    [HideInInspector] public float damageSpeed;
 
     public override void Start()
     {
@@ -25,18 +28,33 @@ public class MagicFlaskBehaviour : BaseWeaponBehaviour
         float distance = Vector2.Distance(start, finish);
 
         float flyTime = distance / speed;
-        float currTime = 0;
+        
+        //Smooth movement
+        transform?.DOMove(finish, flyTime).SetEase(Ease.Linear);
+        //Rotation
+        transform?.DORotate(new Vector3(0f, 0f, 360f), 0.5f, RotateMode.FastBeyond360).SetEase(Ease.Linear).SetLoops(-1, LoopType.Restart); 
+        
+        //Wait until flask gets to finish position
+        yield return new WaitForSeconds(flyTime);
 
-        while (currTime < flyTime) 
-        { 
-            currTime += Time.deltaTime;
+        //Remove the tween animations
+        transform.DOKill();
 
-            this.transform.position = Vector2.Lerp(start, finish, currTime/flyTime);
-
-            yield return null;
-
-        }
-
+        CreateDamageArea();
         Destroy(this.gameObject);
+    }
+
+    public void CreateDamageArea()
+    {
+        GameObject area = Instantiate(damageField);
+
+        MagicFlaskDamageAreaBehaviour behaviour = area.GetComponent<MagicFlaskDamageAreaBehaviour>();
+
+        behaviour.damage = this.damage;
+        behaviour.size = this.areaSize;
+        behaviour.collisionRadius = areaSize;
+        behaviour.damageSpeed = this.damageSpeed;
+
+        area.transform.position = transform.position;
     }
 }
