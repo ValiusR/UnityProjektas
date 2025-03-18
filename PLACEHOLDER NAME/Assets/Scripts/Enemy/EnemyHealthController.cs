@@ -24,14 +24,20 @@ public class EnemyHealthController : MonoBehaviour
             ScoreManager.addScore(scorePoints);
             //The enemy stops moving
             LevelUpSystem.GainXP(xp);
+
+
+
             if (GetComponent<EnemyMovement>() != null)
-            { 
-                GetComponent<EnemyMovement>().enabled = false; 
-            }
-            else
             {
-                GetComponent<SkeletonController>().enabled = false;
+                GetComponent<EnemyMovement>().enabled = false;
+
+                if(GetComponent<SkeletonController>() != null)
+                {
+                    GetComponent<SkeletonController>().enabled = false;
+                    GetComponent<Animator>().enabled = false;
+                }
             }
+            
 
             //The enemy can't get hit by projectiles
             GetComponent<Collider2D>().enabled = false;

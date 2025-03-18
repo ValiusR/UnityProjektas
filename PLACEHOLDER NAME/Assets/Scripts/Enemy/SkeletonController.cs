@@ -62,4 +62,6 @@ public class SkeletonController : MonoBehaviour
     {
         Instantiate(arrow, arrowPos.position, Quaternion.identity);
     }
+
+    
 }

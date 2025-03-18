@@ -315,4 +315,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df71c9afdbda0b246a611e6940d87710, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  freezeColor: {r: 0.41568628, g: 0.5176471, b: 0.85882354, a: 0}
+  freezeColor: {r: 0.2110893, g: 0.30802694, b: 0.6320754, a: 1}
