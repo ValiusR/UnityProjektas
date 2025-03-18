@@ -926,8 +926,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 35273354904022579, guid: 110701f1fbb9e43448bde3245da85c3c, type: 3}
   damage: 3
-  speed: 5.3
-  shootCooldown: 0.29
+  speed: 4
+  shootCooldown: 2
 --- !u!1 &1692744271
 GameObject:
   m_ObjectHideFlags: 0
