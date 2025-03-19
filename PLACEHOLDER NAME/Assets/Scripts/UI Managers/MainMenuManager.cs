@@ -6,22 +6,18 @@ using UnityEngine.SceneManagement;
 public class MainMenuManager : MonoBehaviour
 {
 
+
+    [SerializeField] GameObject optionsMenu; // Assign your Options UI Prefab in the Inspector
+
     public void NewGame()
     {
         Debug.Log("MainMenuManager NewGame()");
         SceneManager.LoadScene("Main");
-        SceneManager.UnloadSceneAsync("PauseMenu");
-        /*
-        Debug.Log("Resume button: Resume()");
-        MenuListener menuListener = FindObjectOfType<MenuListener>();
-        if (menuListener != null)
-        {
-            menuListener.ResumeGame();
-        }
-       */
+        //SceneManager.UnloadSceneAsync("PauseMenu");
     }
     public void Options()
     {
+        optionsMenu.SetActive(true);
         Debug.Log("MainMenuManager Options()");
     }
 
