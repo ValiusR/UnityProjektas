@@ -5,7 +5,7 @@ using UnityEngine;
 public class MagicFlaskDamageAreaBehaviour : BaseWeaponBehaviour
 {
     [HideInInspector] public float size;
-     public float damageSpeed;
+    public float damageSpeed;
 
     private float currDamageSpeed;
 
@@ -13,6 +13,8 @@ public class MagicFlaskDamageAreaBehaviour : BaseWeaponBehaviour
     {
         currDestroySeconds = destroyAfterSeconds;
         currDamageSpeed = 0;
+
+        SolveCollisions();
     }
 
     public override void FixedUpdate()
@@ -20,14 +22,14 @@ public class MagicFlaskDamageAreaBehaviour : BaseWeaponBehaviour
         currDestroySeconds -= Time.fixedDeltaTime;
         if (currDestroySeconds < 0f)
         {
-            Destroy(gameObject);
+            StartCoroutine( PlayDeathAnimation());
             return;
         }
 
         currDamageSpeed += Time.fixedDeltaTime;
 
         //Deal damage to every enemy that is in the area
-        if(currDamageSpeed > damageSpeed)
+        if (currDamageSpeed > damageSpeed)
         {
             SolveCollisions();
             currDamageSpeed = 0;
@@ -57,5 +59,15 @@ public class MagicFlaskDamageAreaBehaviour : BaseWeaponBehaviour
         {
             enemyHealth.TakeDamage(damage);
         }
+    }
+
+    
+
+    public IEnumerator PlayDeathAnimation()
+    {
+        yield return StartCoroutine(GetComponent<FadeOut>().FadeAnimation());
+
+        Destroy(this.gameObject);
+
     }
 }
