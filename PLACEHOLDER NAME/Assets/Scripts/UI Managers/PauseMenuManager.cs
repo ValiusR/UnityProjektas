@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenuManager : MonoBehaviour
 {
-
+    [SerializeField] GameObject optionsMenu; // Assign your Options UI Prefab in the Inspector
     public void Resume()
     {
         Debug.Log("Resume button: Resume()");
@@ -24,5 +24,11 @@ public class PauseMenuManager : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void Options()
+    {
+        optionsMenu.SetActive(true);
+        Debug.Log("MainMenuManager Options()");
     }
 }
