@@ -283,7 +283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 484f62a8ce10a054a8d3fd70209f2a91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blinkColor: {r: 0.7490196, g: 0.7490196, b: 0.7490196, a: 0}
+  blinkColor: {r: 2.0000005, g: 2.0000005, b: 2.0000005, a: 0}
   blinkAnimationTime: 0.2
   currBlinkAmount: 0
   sprite: {fileID: 1037465701472859362}
