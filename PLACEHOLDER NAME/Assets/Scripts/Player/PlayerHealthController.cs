@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealthController : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class PlayerHealthController : MonoBehaviour
         if (currHP <= 0)
         {
             // Game over
+            SceneManager.LoadScene("MainMenu");
 
         }
     }
