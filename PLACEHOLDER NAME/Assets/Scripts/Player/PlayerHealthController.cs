@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerHealthController : MonoBehaviour
 {
     [SerializeField] DamageBlink damageBlink;
+    [SerializeField] DeathUiManager deathUIManager; // Assign your Options UI Prefab in the Inspector
     public int maxHP;
     public int currHP;
     public void TakeDamage(int damage)
@@ -22,10 +23,17 @@ public class PlayerHealthController : MonoBehaviour
         //Play hurt animation
         damageBlink.PlayBlink();
 
+        //Death
         if (currHP <= 0)
         {
-            // Game over
-            SceneManager.LoadScene("MainMenu");
+            if (deathUIManager != null)
+            {
+                deathUIManager.ShowDeathUI();
+            }
+            else
+            {
+                SceneManager.LoadScene("MainMenu");
+            }
 
         }
     }
