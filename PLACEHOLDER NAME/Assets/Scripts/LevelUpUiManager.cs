@@ -9,11 +9,14 @@ public class LevelUpUiManager : MonoBehaviour
     private List<WeaponUpgradeOption> weaponUpgradeOptions;
     private System.Action button1Action;
     private System.Action button2Action;
+    private System.Action button3Action;
 
     [SerializeField] TextMeshProUGUI button1Title;
     [SerializeField] TextMeshProUGUI button1Description;
     [SerializeField] TextMeshProUGUI button2Title;
     [SerializeField] TextMeshProUGUI button2Description;
+    [SerializeField] TextMeshProUGUI button3Title;
+    [SerializeField] TextMeshProUGUI button3Description;
 
     private void Start()
     {
@@ -31,6 +34,11 @@ public class LevelUpUiManager : MonoBehaviour
         HideUI();
     }
     public void Button3()
+    {
+        button3Action();
+        HideUI();
+    }
+    public void Button4()
     {
         playerController.maxHP += 10;
         playerController.currHP = playerController.maxHP;
@@ -61,6 +69,14 @@ public class LevelUpUiManager : MonoBehaviour
             button2Title.text = weaponUpgradeOptions[1].name;
             button2Description.text = weaponUpgradeOptions[1].description;
             button2Action = weaponUpgradeOptions[1].applyEffect;
+        }
+        if (weaponUpgradeOptions != null && weaponUpgradeOptions.Count >= 2)
+        {
+            Debug.Log("Option 3 Name: " + weaponUpgradeOptions[2].name);
+            Debug.Log("Option 3 Description: " + weaponUpgradeOptions[2].description);
+            button3Title.text = weaponUpgradeOptions[2].name;
+            button3Description.text = weaponUpgradeOptions[2].description;
+            button3Action = weaponUpgradeOptions[2].applyEffect;
         }
 
         gameObject.SetActive(true);
