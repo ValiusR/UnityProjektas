@@ -61,45 +61,55 @@ public class LevelUpSystem : MonoBehaviour
     {
         List<WeaponUpgradeOption> options = new List<WeaponUpgradeOption>();
 
-        // Neatrakinti ginklai
+        // Create pools of available options
         List<WeaponController> lockedWeapons = new List<WeaponController>(allWeapons);
         lockedWeapons.RemoveAll(weapon => unlockedWeapons.Contains(weapon));
 
-        // Randomizinam neatrakintus
+        List<WeaponController> upgradableWeapons = new List<WeaponController>(unlockedWeapons);
+
+        // Calculate how many of each type we should show (adjust ratios as needed)
+        int maxUpgrades = Mathf.Min(upgradableWeapons.Count, numberOfOptions);
+        int maxUnlocks = Mathf.Min(lockedWeapons.Count, numberOfOptions - maxUpgrades);
+
+        // 1. First add weapon upgrades
+        Shuffle(upgradableWeapons);
+        for (int i = 0; i < maxUpgrades && options.Count < numberOfOptions; i++)
+        {
+            var weapon = upgradableWeapons[i];
+            options.Add(new WeaponUpgradeOption(
+                weapon.GetName(),
+                $"Upgrade {weapon.GetName()}: Increase damage by 10%",
+                () => ApplyUpgrade(weapon)
+            ));
+        }
+
+        // 2. Then add weapon unlocks if we have space
         Shuffle(lockedWeapons);
-
-        // atrakinimo pasirinkimai
-        foreach (var weapon in lockedWeapons)
+        for (int i = 0; i < maxUnlocks && options.Count < numberOfOptions; i++)
         {
-            if (options.Count >= 2) break; // max 2 pasirinkimai
-
-           // string name = weapon.name;
-            string description = $"Unlock {weapon.GetName()}: {weapon.GetDescription()}";
-            System.Action applyEffect = () => UnlockWeapon(weapon);
-
-            options.Add(new WeaponUpgradeOption(name, description, applyEffect));
+            var weapon = lockedWeapons[i];
+            options.Add(new WeaponUpgradeOption(
+                weapon.GetName(),
+                $"Unlock {weapon.GetName()}: {weapon.GetDescription()}",
+                () => UnlockWeapon(weapon))
+            );
         }
 
-        // jei maziau nei 2 pasirinkimai
-        if (options.Count < 2)
+        // 3. If we still need more options, fill with random upgrades
+        while (options.Count < numberOfOptions && unlockedWeapons.Count > 0)
         {
-            // randomiziname
-            List<WeaponController> shuffledUnlockedWeapons = new List<WeaponController>(unlockedWeapons);
-            Shuffle(shuffledUnlockedWeapons);
-
-            foreach (var weapon in shuffledUnlockedWeapons)
-            {
-                if (options.Count >= 2) break; // max 2 pasirinkimai
-
-               // string name = weapon.name;
-                string description = $"Upgrade {weapon.GetName()}: Increase damage by 10%";
-                System.Action applyEffect = () => ApplyUpgrade(weapon);
-
-                options.Add(new WeaponUpgradeOption(name, description, applyEffect));
-            }
+            var weapon = unlockedWeapons[Random.Range(0, unlockedWeapons.Count)];
+            options.Add(new WeaponUpgradeOption(
+                weapon.GetName(),
+                $"Upgrade {weapon.GetName()}: Increase damage by 10%",
+                () => ApplyUpgrade(weapon))
+            );
         }
 
-        return options;
+        // Final shuffle to randomize order
+        Shuffle(options);
+
+        return options.Count > numberOfOptions ? options.GetRange(0, numberOfOptions) : options;
     }
 
     private void Shuffle<T>(List<T> list)

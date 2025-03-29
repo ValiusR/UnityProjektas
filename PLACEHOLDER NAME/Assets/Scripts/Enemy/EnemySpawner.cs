@@ -14,6 +14,8 @@ public class EnemySpawner : MonoBehaviour
         public int waveQuota;
         public int spawnInterval;
         public int spawnCount;
+        public float maxSpawnDistance = 30f;
+        public float minSpawnDistance = 20f;
     }
     public List<Wave> waves;
 
@@ -67,8 +69,15 @@ public class EnemySpawner : MonoBehaviour
             {
                 if (enemyGroup.spawnCount < enemyGroup.enemyCount)
                 {
-                    Vector2 spawnPosition = new Vector2(player.transform.position.x
-                        + Random.Range(-30f, 30f), player.transform.position.y + Random.Range(-30f, 30f));
+                    float xDirection = Random.value > 0.5f ? 1f : -1f;
+                    float yDirection = Random.value > 0.5f ? 1f : -1f;
+
+                    Vector2 spawnPosition = new Vector2(
+                        player.position.x + Random.Range(xDirection * waves[currentWaveCount].minSpawnDistance,
+                                                      xDirection * waves[currentWaveCount].maxSpawnDistance),
+                        player.position.y + Random.Range(yDirection * waves[currentWaveCount].minSpawnDistance,
+                                                      yDirection * waves[currentWaveCount].maxSpawnDistance)
+                    );
                     Instantiate(enemyGroup.enemyPrefab, spawnPosition, Quaternion.identity);
 
                     enemyGroup.spawnCount++;
