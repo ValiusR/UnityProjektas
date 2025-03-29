@@ -10,6 +10,10 @@ public class TimerManager : MonoBehaviour
     public static int seconds = 0;
     public static int minutes = 0;
     float elapsedTime;
+
+    public static string formattedTime;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +27,7 @@ public class TimerManager : MonoBehaviour
         minutes = Mathf.FloorToInt(elapsedTime / 60);
         seconds = Mathf.FloorToInt(elapsedTime % 60);
         //timerText.text = string.Format("{0}:{1:00}:{2:00}", "Timer", minutes, seconds);
-        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        formattedTime = string.Format("{0:00}:{1:00}", minutes, seconds);
+        timerText.text = formattedTime;
     }   
 }
