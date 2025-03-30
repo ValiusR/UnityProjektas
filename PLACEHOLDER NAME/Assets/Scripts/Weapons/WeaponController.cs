@@ -18,6 +18,7 @@ public class WeaponController : MonoBehaviour
     public float shootCooldown;
 
     private float currCooldown;
+    public int weaponLevel=1;
 
 
     protected virtual void Start()
@@ -40,6 +41,10 @@ public class WeaponController : MonoBehaviour
     {
         currCooldown = shootCooldown;
     }
+    public virtual void EvolveWeapon()
+    {
+        throw new UnassignedReferenceException(" Weapon() method is run for base weapon class ");
+    }
     public virtual string GetDescription()
     {
         throw new UnassignedReferenceException(" GetDescription() method is run for base weapon class ");
@@ -50,6 +55,10 @@ public class WeaponController : MonoBehaviour
         throw new UnassignedReferenceException(" GetName() method is run for base weapon class ");
 
     }
+    public virtual string GetEvolutionDescription()
+    {
+        throw new UnassignedReferenceException(" GetEvolutionDescription() method is run for base weapon class ");
 
+    }
 
 }

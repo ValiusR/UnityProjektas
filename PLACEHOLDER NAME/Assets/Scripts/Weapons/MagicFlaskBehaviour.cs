@@ -7,6 +7,7 @@ public class MagicFlaskBehaviour : BaseWeaponBehaviour
     [HideInInspector] public GameObject damageField;
     [HideInInspector] public float areaSize;
     [HideInInspector] public float damageSpeed;
+    
 
     public override void Start()
     {

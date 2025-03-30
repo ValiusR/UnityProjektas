@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static EnemySpawner;
 
 public class FreezeWaveController : WeaponController
 {
     [Header("Freeze weapon data")]
     [SerializeField] public float freezeLength;
     [SerializeField] public float freezeStrength;
+    [SerializeField] public bool canPierce;
 
 
     protected override void Start()
@@ -14,8 +16,11 @@ public class FreezeWaveController : WeaponController
         base.Start();
     }
 
+    public override void EvolveWeapon()
+    {
+        this.canPierce = true;
 
-
+    }
     protected override void Attack()
     {
         base.Attack();
@@ -28,6 +33,7 @@ public class FreezeWaveController : WeaponController
         stats.speed = this.speed;
         stats.freezeLength = this.freezeLength;
         stats.freezeStrength = this.freezeStrength;
+        stats.canPierce = this.canPierce;
     }
 
     public override string GetDescription()
@@ -37,5 +43,9 @@ public class FreezeWaveController : WeaponController
     public override string GetName()
     {
         return $"Freeze wave";
+    }
+    public override string GetEvolutionDescription()
+    {
+        return $"Pierces enemies.";
     }
 }

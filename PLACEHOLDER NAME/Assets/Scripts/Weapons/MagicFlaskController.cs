@@ -13,7 +13,12 @@ public class MagicFlaskController : WeaponController
     {
         base.Start();
     }
+    public override void EvolveWeapon()
+    {
+        // this.damageAreaSize *= (float)1.5;
+        this.howFastEnemiesTakeDamage = (float)(0.8 * this.howFastEnemiesTakeDamage);
 
+    }
     protected override void Attack()
     {
         base.Attack();

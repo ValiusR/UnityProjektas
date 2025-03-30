@@ -143,6 +143,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93791aee51248b34cbe549e075992baa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xpValue: 20
+  xpValue: 200
   collectSound: {fileID: 8300000, guid: 7eb5f5d56eeba104aa7cdd788d6870bd, type: 3}
   collectEffect: {fileID: 0}

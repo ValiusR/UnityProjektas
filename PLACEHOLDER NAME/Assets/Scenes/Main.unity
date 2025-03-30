@@ -681,6 +681,9 @@ MonoBehaviour:
   damage: 20
   speed: 8
   shootCooldown: 1
+  weaponLevel: 1
+  tripleShot: 0
+  spreadAngle: 20
 --- !u!114 &1638205292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -713,8 +716,10 @@ MonoBehaviour:
   damage: 10
   speed: 7
   shootCooldown: 1.7
+  weaponLevel: 1
   freezeLength: 6
   freezeStrength: 5
+  canPierce: 0
 --- !u!114 &1638205294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -737,6 +742,7 @@ MonoBehaviour:
   levelUpUI: {fileID: 1891469946}
   currentLevel: 1
   experienceToNextLevel: 100
+  weaponEvolutionInterval: 2
 --- !u!114 &1638205295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -753,6 +759,7 @@ MonoBehaviour:
   damage: 5
   speed: 6
   shootCooldown: 1
+  weaponLevel: 1
   areaPrefab: {fileID: 3655188734221225493, guid: b530b34b348f4494c9445ca3202608eb, type: 3}
   damageAreaSize: 2
   howFastEnemiesTakeDamage: 0.5
@@ -836,6 +843,70 @@ PrefabInstance:
       propertyPath: playerController
       value: 
       objectReference: {fileID: 1638205292}
+    - target: {fileID: 4665300621201862887, guid: 29ebe964bf56071489e5d02c6ef8c14d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4665300621201862887, guid: 29ebe964bf56071489e5d02c6ef8c14d, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4665300621201862887, guid: 29ebe964bf56071489e5d02c6ef8c14d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4665300621201862887, guid: 29ebe964bf56071489e5d02c6ef8c14d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4991311790440723822, guid: 29ebe964bf56071489e5d02c6ef8c14d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4991311790440723822, guid: 29ebe964bf56071489e5d02c6ef8c14d, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4991311790440723822, guid: 29ebe964bf56071489e5d02c6ef8c14d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4991311790440723822, guid: 29ebe964bf56071489e5d02c6ef8c14d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5665772453206985136, guid: 29ebe964bf56071489e5d02c6ef8c14d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5665772453206985136, guid: 29ebe964bf56071489e5d02c6ef8c14d, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5665772453206985136, guid: 29ebe964bf56071489e5d02c6ef8c14d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5665772453206985136, guid: 29ebe964bf56071489e5d02c6ef8c14d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6854292517870809517, guid: 29ebe964bf56071489e5d02c6ef8c14d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6854292517870809517, guid: 29ebe964bf56071489e5d02c6ef8c14d, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6854292517870809517, guid: 29ebe964bf56071489e5d02c6ef8c14d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6854292517870809517, guid: 29ebe964bf56071489e5d02c6ef8c14d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7007456303624861344, guid: 29ebe964bf56071489e5d02c6ef8c14d, type: 3}
       propertyPath: m_Name
       value: LevelUPUI

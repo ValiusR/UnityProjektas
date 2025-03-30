@@ -5,7 +5,7 @@ using UnityEngine;
 public class BaseWeaponBehaviour : MonoBehaviour
 {
     [Header("Base weapon behaviour stats")]
-    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] public Rigidbody2D rb;
 
     [Range(0f, 10f)]
     [SerializeField] protected float destroyAfterSeconds;
@@ -20,7 +20,7 @@ public class BaseWeaponBehaviour : MonoBehaviour
     [SerializeField] protected LayerMask propLayer;
     [SerializeField] public float collisionRadius = 0.1f;
 
-    private Vector2 direction;
+    public Vector2 direction;
 
     public virtual void Start()
     {
@@ -92,7 +92,7 @@ public class BaseWeaponBehaviour : MonoBehaviour
         if (enemyHealth != null)
         {
             enemyHealth.TakeDamage(damage);
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 

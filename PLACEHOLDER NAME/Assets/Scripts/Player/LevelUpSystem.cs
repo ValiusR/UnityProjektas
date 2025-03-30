@@ -10,6 +10,7 @@ public class LevelUpSystem : MonoBehaviour
     public int currentLevel = 1;
     public static int experience = 0;
     public int experienceToNextLevel = 100;
+    public int weaponEvolutionInterval = 2;
 
     private void Start()
     {
@@ -76,11 +77,22 @@ public class LevelUpSystem : MonoBehaviour
         for (int i = 0; i < maxUpgrades && options.Count < numberOfOptions; i++)
         {
             var weapon = upgradableWeapons[i];
-            options.Add(new WeaponUpgradeOption(
-                weapon.GetName(),
-                $"Upgrade {weapon.GetName()}: Increase damage by 10%",
-                () => ApplyUpgrade(weapon)
-            ));
+            if (weapon.weaponLevel == weaponEvolutionInterval -1)
+            {
+                options.Add(new WeaponUpgradeOption(
+                    weapon.GetName(),
+                    $"Upgrade {weapon.GetName()}: Increase damage by 10%",
+                    () => ApplyUpgradeAndEvolve(weapon) ));
+                // cia descriptiona extra
+            }
+            else
+            {
+                options.Add(new WeaponUpgradeOption(
+                                    weapon.GetName(),
+                                    $"Upgrade {weapon.GetName()}: Increase damage by 10%",
+                                    () => ApplyUpgrade(weapon)));
+            }
+                
         }
 
         // 2. Then add weapon unlocks if we have space
@@ -94,17 +106,7 @@ public class LevelUpSystem : MonoBehaviour
                 () => UnlockWeapon(weapon))
             );
         }
-
-        // 3. If we still need more options, fill with random upgrades
-        while (options.Count < numberOfOptions && unlockedWeapons.Count > 0)
-        {
-            var weapon = unlockedWeapons[Random.Range(0, unlockedWeapons.Count)];
-            options.Add(new WeaponUpgradeOption(
-                weapon.GetName(),
-                $"Upgrade {weapon.GetName()}: Increase damage by 10%",
-                () => ApplyUpgrade(weapon))
-            );
-        }
+        
 
         // Final shuffle to randomize order
         Shuffle(options);
@@ -125,10 +127,17 @@ public class LevelUpSystem : MonoBehaviour
 
     private void ApplyUpgrade(WeaponController weapon)
     {
+        weapon.weaponLevel++;
         weapon.damage = (int)(weapon.damage * 1.1f); // Increase damage by 10%
         Debug.Log($"Upgraded {weapon.name} to {weapon.damage} damage");
     }
-
+    private void ApplyUpgradeAndEvolve(WeaponController weapon)
+    {
+        weapon.weaponLevel++;
+        weapon.damage = (int)(weapon.damage * 1.1f); // Increase damage by 10%
+        weapon.EvolveWeapon();
+        Debug.Log($"EVOLVED {weapon.name} to {weapon.damage} damage");
+    }
     private void UnlockWeapon(WeaponController weapon)
     {
         unlockedWeapons.Add(weapon);
