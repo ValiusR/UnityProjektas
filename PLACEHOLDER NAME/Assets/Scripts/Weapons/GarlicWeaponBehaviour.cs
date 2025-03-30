@@ -9,8 +9,6 @@ public class GarlicWeaponBehaviour : BaseWeaponBehaviour
 
     private float currDamageSpeed;
 
-    public Transform transformToFollow;
-
     protected override void FixedUpdate()
     {
         MoveProjectile();

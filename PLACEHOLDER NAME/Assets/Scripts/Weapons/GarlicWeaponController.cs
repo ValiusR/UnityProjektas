@@ -10,8 +10,16 @@ public class GarlicWeaponController : WeaponController
     public float howFastEnemiesTakeDamage;
 
 
+
     protected override void Start()
     {
+        // Empty start needed
+    }
+
+    private void OnEnable()
+    {
+        // When the garlicController is enabled, then
+        // spawn the damage zone
         Attack();
     }
 
@@ -19,13 +27,13 @@ public class GarlicWeaponController : WeaponController
     {
         GameObject zone = Instantiate(this.prefab);
         zone.transform.SetParent(this.transform);
+        zone.transform.localPosition = new Vector3(0, 0, 0);
 
         GarlicWeaponBehaviour stats = zone.GetComponent<GarlicWeaponBehaviour>();
 
         stats.damage = this.damage;
         stats.collisionRadius = this.damageAreaSize;
         stats.damageSpeed = howFastEnemiesTakeDamage;
-        stats.transformToFollow = this.gameObject.transform;
     }
 
     protected override void Update()
@@ -39,6 +47,6 @@ public class GarlicWeaponController : WeaponController
 
     public override string GetName()
     {
-        return "Garlic type weapon (PLACEHOLDER)";
+        return "Garlic";
     }
 }
