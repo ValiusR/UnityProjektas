@@ -21,6 +21,15 @@ public class FireBallBehaviour : BaseWeaponBehaviour
         float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
+    protected override void OnCollisionWithEnemy(Collider2D collider)
+    {
+        EnemyHealthController enemyHealth = collider.GetComponent<EnemyHealthController>();
+        if (enemyHealth != null)
+        {
+            enemyHealth.TakeDamage(damage);
+            Destroy(gameObject);
+        }
+    }
 
     protected override void MoveProjectile()
     {

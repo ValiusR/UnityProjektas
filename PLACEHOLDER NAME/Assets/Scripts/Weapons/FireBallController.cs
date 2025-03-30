@@ -70,6 +70,7 @@ public class FireBallController : WeaponController
     }*/
     public override void EvolveWeapon()
     {
+        
         this.tripleShot = true;
 
     }
