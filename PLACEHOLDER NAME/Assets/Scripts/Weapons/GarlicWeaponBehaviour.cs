@@ -2,31 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MagicFlaskDamageAreaBehaviour : BaseWeaponBehaviour
+public class GarlicWeaponBehaviour : BaseWeaponBehaviour
 {
-    [Header("Magic flask behaviour data")]
+    [Header("Garlic behaviour data")]
     public float damageSpeed;
 
     private float currDamageSpeed;
 
-    protected override void Start()
-    {
-        currDestroySeconds = destroyAfterSeconds;
-        currDamageSpeed = 0;
-
-        this.transform.localScale = new Vector3(collisionRadius, collisionRadius, 1);
-
-        SolveCollisions();
-    }
-
     protected override void FixedUpdate()
     {
-        currDestroySeconds -= Time.fixedDeltaTime;
-        if (currDestroySeconds < 0f)
-        {
-            StartCoroutine( PlayDeathAnimation());
-            return;
-        }
+        MoveProjectile();
 
         currDamageSpeed += Time.fixedDeltaTime;
 
@@ -36,8 +21,11 @@ public class MagicFlaskDamageAreaBehaviour : BaseWeaponBehaviour
             SolveCollisions();
             currDamageSpeed = 0;
         }
+    }
 
-
+    protected override void MoveProjectile()
+    {
+        // MoveProjectile method not necessary
     }
 
     protected override void SolveCollisions()
@@ -63,13 +51,16 @@ public class MagicFlaskDamageAreaBehaviour : BaseWeaponBehaviour
         }
     }
 
-    
-
-    public IEnumerator PlayDeathAnimation()
+    // Start is called before the first frame update
+    protected override void Start()
     {
-        yield return StartCoroutine(GetComponent<FadeOut>().FadeAnimation());
+        currDestroySeconds = destroyAfterSeconds;
+        currDamageSpeed = 0;
 
-        Destroy(this.gameObject);
+        this.transform.localScale = new Vector3(collisionRadius, collisionRadius, 1);
 
+        SolveCollisions();
     }
+
+    
 }

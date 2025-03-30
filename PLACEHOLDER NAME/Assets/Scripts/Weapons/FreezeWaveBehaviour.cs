@@ -10,7 +10,7 @@ public class FreezeWaveBehaviour : BaseWeaponBehaviour
     [HideInInspector] public float freezeStrength;
     [SerializeField] public bool canPierce;
 
-    public override void OnCollisionWithEnemy(Collider2D collider)
+    protected override void OnCollisionWithEnemy(Collider2D collider)
     {
         base.OnCollisionWithEnemy(collider);
         if (!canPierce)

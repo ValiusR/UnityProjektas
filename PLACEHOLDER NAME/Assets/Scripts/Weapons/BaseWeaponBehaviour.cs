@@ -5,7 +5,7 @@ using UnityEngine;
 public class BaseWeaponBehaviour : MonoBehaviour
 {
     [Header("Base weapon behaviour stats")]
-    [SerializeField] public Rigidbody2D rb;
+    [SerializeField] protected Rigidbody2D rb;
 
     [Range(0f, 10f)]
     [SerializeField] protected float destroyAfterSeconds;
@@ -22,7 +22,7 @@ public class BaseWeaponBehaviour : MonoBehaviour
 
     public Vector2 direction;
 
-    public virtual void Start()
+    protected virtual void Start()
     {
         currDestroySeconds = destroyAfterSeconds;
 
@@ -35,7 +35,7 @@ public class BaseWeaponBehaviour : MonoBehaviour
         //rb.isKinematic = true;
     }
 
-    public virtual void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         currDestroySeconds -= Time.fixedDeltaTime;
         if (currDestroySeconds < 0f)
@@ -59,7 +59,7 @@ public class BaseWeaponBehaviour : MonoBehaviour
         return false;
     }
 
-    public virtual void SolveCollisions()
+    protected virtual void SolveCollisions()
     {
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(rb.position, collisionRadius);
 
@@ -80,13 +80,13 @@ public class BaseWeaponBehaviour : MonoBehaviour
         }
     }
 
-    public virtual void MoveProjectile()
+    protected virtual void MoveProjectile()
     {
         Vector2 movement = direction * speed * Time.fixedDeltaTime;
         rb.MovePosition(rb.position + movement);
     }
 
-    public virtual void OnCollisionWithEnemy(Collider2D collider)
+    protected virtual void OnCollisionWithEnemy(Collider2D collider)
     {
         EnemyHealthController enemyHealth = collider.GetComponent<EnemyHealthController>();
         if (enemyHealth != null)

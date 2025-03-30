@@ -32,7 +32,7 @@ public class MagicFlaskController : WeaponController
         stats.damageField = this.areaPrefab;
         
         //This / 2 is here, because SpriteRenderer.scale = 0.5 * Physics2D.Overlap()
-        stats.areaSize = this.damageAreaSize / 2;
+        stats.areaSize = this.damageAreaSize;
         stats.damageSpeed = howFastEnemiesTakeDamage;
     }
 
