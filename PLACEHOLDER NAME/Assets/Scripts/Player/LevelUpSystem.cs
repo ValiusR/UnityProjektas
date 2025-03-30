@@ -27,7 +27,9 @@ public class LevelUpSystem : MonoBehaviour
     {
         if (experience >= experienceToNextLevel)
         {
+            int experienceToAdd = experience % experienceToNextLevel;
             LevelUp();
+            experience += experienceToAdd;
         }
     }
 
@@ -41,7 +43,9 @@ public class LevelUpSystem : MonoBehaviour
         experience += amount;
         if (experience >= experienceToNextLevel)
         {
+            int experienceToAdd = experience % experienceToNextLevel;
             LevelUp();
+            experience += experienceToAdd;
         }
     }
 
