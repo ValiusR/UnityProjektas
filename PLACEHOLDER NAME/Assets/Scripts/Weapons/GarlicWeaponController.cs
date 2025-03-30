@@ -22,7 +22,11 @@ public class GarlicWeaponController : WeaponController
         // spawn the damage zone
         Attack();
     }
+    public override void EvolveWeapon()
+    {
+        this.howFastEnemiesTakeDamage *= (float)0.8;
 
+    }
     protected override void Attack()
     {
         GameObject zone = Instantiate(this.prefab);
@@ -44,7 +48,10 @@ public class GarlicWeaponController : WeaponController
     {
         return "Creates a zone around the player that damages surrounding enemies";
     }
-
+    public override string GetEvolutionDescription()
+    {
+        return $"Decreases the damage interval of garlic by 20%.";
+    }
     public override string GetName()
     {
         return "Garlic";

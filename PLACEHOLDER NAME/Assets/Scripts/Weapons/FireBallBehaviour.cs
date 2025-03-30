@@ -5,7 +5,7 @@ public class FireBallBehaviour : BaseWeaponBehaviour
     // Add this to explicitly track direction
     private Vector2 _direction;
 
-    public override void Start()
+    protected override void Start()
     {
         base.Start();
         // Disable any physics interference
@@ -22,7 +22,7 @@ public class FireBallBehaviour : BaseWeaponBehaviour
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
-    public override void MoveProjectile()
+    protected override void MoveProjectile()
     {
         if (rb != null)
         {

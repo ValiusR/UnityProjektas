@@ -15,8 +15,8 @@ public class MagicFlaskController : WeaponController
     }
     public override void EvolveWeapon()
     {
-        // this.damageAreaSize *= (float)1.5;
-        this.howFastEnemiesTakeDamage = (float)(0.8 * this.howFastEnemiesTakeDamage);
+         this.damageAreaSize *= (float)1.2;
+       // this.howFastEnemiesTakeDamage = (float)(0.8 * this.howFastEnemiesTakeDamage);
 
     }
     protected override void Attack()
@@ -39,6 +39,10 @@ public class MagicFlaskController : WeaponController
     public override string GetDescription()
     {
         return $"Sends out a magic flask, that explodes in to a damaging zone.";
+    }
+    public override string GetEvolutionDescription()
+    {
+        return $"Increases the zone radius by 20%.";
     }
     public override string GetName()
     {

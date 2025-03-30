@@ -763,7 +763,7 @@ MonoBehaviour:
   shootCooldown: 1
   weaponLevel: 1
   areaPrefab: {fileID: 3655188734221225493, guid: b530b34b348f4494c9445ca3202608eb, type: 3}
-  damageAreaSize: 5
+  damageAreaSize: 3
   howFastEnemiesTakeDamage: 0.5
 --- !u!114 &1638205296
 MonoBehaviour:
@@ -781,6 +781,7 @@ MonoBehaviour:
   damage: 5
   speed: 0
   shootCooldown: 0
+  weaponLevel: 1
   damageAreaSize: 3
   howFastEnemiesTakeDamage: 0.5
 --- !u!1001 &1710356223
