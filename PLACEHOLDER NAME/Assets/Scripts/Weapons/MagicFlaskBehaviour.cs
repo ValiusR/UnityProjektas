@@ -8,7 +8,7 @@ public class MagicFlaskBehaviour : BaseWeaponBehaviour
     [HideInInspector] public float areaSize;
     [HideInInspector] public float damageSpeed;
 
-    public override void Start()
+    protected override void Start()
     {
         Vector2 start = this.gameObject.transform.position;
         Vector2 destination = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -16,7 +16,7 @@ public class MagicFlaskBehaviour : BaseWeaponBehaviour
         StartCoroutine(PlayFlyingAnimation(start, destination, speed));
     }
 
-    public override void FixedUpdate()
+    protected override void FixedUpdate()
     {
         // This weapon behaves has custom movement and custom collision detection
         // So base class FixedUpdate not needed
@@ -51,7 +51,6 @@ public class MagicFlaskBehaviour : BaseWeaponBehaviour
         MagicFlaskDamageAreaBehaviour behaviour = area.GetComponent<MagicFlaskDamageAreaBehaviour>();
 
         behaviour.damage = this.damage;
-        behaviour.size = this.areaSize;
         behaviour.collisionRadius = areaSize;
         behaviour.damageSpeed = this.damageSpeed;
 

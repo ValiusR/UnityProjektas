@@ -9,7 +9,7 @@ public class FreezeWaveBehaviour : BaseWeaponBehaviour
     [HideInInspector] public float freezeLength;
     [HideInInspector] public float freezeStrength;
 
-    public override void OnCollisionWithEnemy(Collider2D collider)
+    protected override void OnCollisionWithEnemy(Collider2D collider)
     {
         base.OnCollisionWithEnemy(collider);
 
