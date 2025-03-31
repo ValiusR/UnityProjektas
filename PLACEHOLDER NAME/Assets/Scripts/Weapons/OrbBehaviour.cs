@@ -1,13 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 
-public class GarlicWeaponBehaviour : BaseWeaponBehaviour
+public class OrbBehaviour : BaseWeaponBehaviour
 {
-    [Header("Garlic behaviour data")]
+    public Transform pointToFollow;
     public float damageSpeed;
-
     private float currDamageSpeed;
 
     protected override void FixedUpdate()
@@ -26,12 +24,17 @@ public class GarlicWeaponBehaviour : BaseWeaponBehaviour
 
     protected override void MoveProjectile()
     {
-        // MoveProjectile method not necessary
+        this.transform.RotateAround(pointToFollow.position, new Vector3(0, 0, 1), speed * 5 * Time.deltaTime);
+    }
+
+    protected override void OnCollisionWithEnemy(Collider2D collider)
+    {
+        base.OnCollisionWithEnemy(collider);
     }
 
     protected override void SolveCollisions()
     {
-        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, collisionRadius / 2);
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(rb.position, collisionRadius);
 
         foreach (Collider2D hitCollider in hitColliders)
         {
@@ -43,28 +46,11 @@ public class GarlicWeaponBehaviour : BaseWeaponBehaviour
         }
     }
 
-    protected override void OnCollisionWithEnemy(Collider2D collider)
-    {
-        EnemyHealthController enemyHealth = collider.GetComponent<EnemyHealthController>();
-        if (enemyHealth != null)
-        {
-            enemyHealth.TakeDamage(damage);
-        }
-    }
-
     // Start is called before the first frame update
     protected override void Start()
     {
-        currDestroySeconds = destroyAfterSeconds;
-        currDamageSpeed = 0;
-
-        SolveCollisions();
+        
     }
 
-    public void SetScale()
-    {
-        this.transform.localScale = new Vector3(collisionRadius, collisionRadius, 1);
-    }
-
-
+   
 }

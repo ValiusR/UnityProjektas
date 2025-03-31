@@ -739,6 +739,7 @@ GameObject:
   - component: {fileID: 1638205293}
   - component: {fileID: 1638205295}
   - component: {fileID: 1638205296}
+  - component: {fileID: 1638205297}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1043,6 +1044,7 @@ MonoBehaviour:
   - {fileID: 1638205293}
   - {fileID: 1638205295}
   - {fileID: 1638205296}
+  - {fileID: 1638205297}
   unlockedWeapons:
   - {fileID: 1638205291}
   numberOfOptions: 3
@@ -1089,6 +1091,26 @@ MonoBehaviour:
   weaponLevel: 1
   damageAreaSize: 3
   howFastEnemiesTakeDamage: 0.5
+--- !u!114 &1638205297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1638205279}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8090f6a5649f674aa3ecb1269f99b20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 2260617350609528724, guid: 74a49ec4aea48a54196fb5b0677f2d2f, type: 3}
+  damage: 5
+  speed: 10
+  shootCooldown: 0
+  weaponLevel: 1
+  orbAmount: 4
+  distanceFromPlayer: 2
+  howFastEnemiesTakeDamage: 0.3
 --- !u!1001 &1710356223
 PrefabInstance:
   m_ObjectHideFlags: 0

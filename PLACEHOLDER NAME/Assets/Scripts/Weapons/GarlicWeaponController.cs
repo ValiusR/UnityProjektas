@@ -31,13 +31,17 @@ public class GarlicWeaponController : WeaponController
     {
         GameObject zone = Instantiate(this.prefab);
         zone.transform.SetParent(this.transform);
-        zone.transform.localPosition = new Vector3(0, 0, 0);
+        // -0.37f so that the garlic looks more centered
+        zone.transform.localPosition = new Vector3(0, -0.3f, 0);
 
         GarlicWeaponBehaviour stats = zone.GetComponent<GarlicWeaponBehaviour>();
 
         stats.damage = this.damage;
         stats.collisionRadius = this.damageAreaSize;
         stats.damageSpeed = howFastEnemiesTakeDamage;
+
+        //Needed because the scale is the size of the zone visually
+        stats.SetScale();
     }
 
     protected override void Update()

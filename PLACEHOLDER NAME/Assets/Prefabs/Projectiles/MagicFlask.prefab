@@ -105,5 +105,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   collisionRadius: 0
+  direction: {x: 0, y: 0}
   damageField: {fileID: 3655188734221225493, guid: b530b34b348f4494c9445ca3202608eb, type: 3}
   areaSize: 0
+  damageSpeed: 0
