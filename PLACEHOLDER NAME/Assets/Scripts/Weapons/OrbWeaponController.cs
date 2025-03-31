@@ -20,7 +20,7 @@ public class OrbWeaponController : WeaponController
 
     public override string GetDescription()
     {
-        return "Two orbs circle around, damaging enemies who dare to touch them";
+        return "Magical orbs circle around, damaging enemies who dare to touch them";
     }
 
     public override string GetEvolutionDescription()
