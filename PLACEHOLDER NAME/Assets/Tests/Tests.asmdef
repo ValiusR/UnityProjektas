@@ -5,7 +5,8 @@
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "SeparateAssembly",
-        "GamePlay"
+        "GamePlay",
+        "Unity.TextMeshPro"
     ],
     "includePlatforms": [
         "Editor"

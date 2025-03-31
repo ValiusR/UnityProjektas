@@ -26,7 +26,7 @@ public class DeathUiManager : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
-    public void ShowDeathUI()
+    public virtual void ShowDeathUI()
     {
 
         //timeText.text = T

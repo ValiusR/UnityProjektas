@@ -13,8 +13,14 @@ public class DamageBlink : MonoBehaviour
 
     [SerializeField] SpriteRenderer sprite;
 
-    public void PlayBlink()
+    private void Awake()
     {
+        Debug.Log("DamageBlink Awake. SpriteRenderer: " + (sprite != null));
+    }
+
+    public virtual void PlayBlink()
+    {
+        Debug.Log("Base play blink");
         StartCoroutine(BlinkAnimation());
     }
 

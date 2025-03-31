@@ -6,14 +6,14 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
 
-    [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] public TextMeshProUGUI scoreText;
     public static int currScore = 0;
     public static void addScore(int score)
     {
         currScore += score;
     }
 
-    void Update()
+    public void Update()
     {
         if(scoreText != null)
         {
