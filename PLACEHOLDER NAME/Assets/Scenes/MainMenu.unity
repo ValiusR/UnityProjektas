@@ -151,6 +151,26 @@ PrefabInstance:
       propertyPath: m_text
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4601604696354971109, guid: aaae9da91298ca44f901606437012f66, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601604696354971109, guid: aaae9da91298ca44f901606437012f66, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601604696354971109, guid: aaae9da91298ca44f901606437012f66, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5278368729584709067, guid: aaae9da91298ca44f901606437012f66, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5278368729584709067, guid: aaae9da91298ca44f901606437012f66, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5476568604918775934, guid: aaae9da91298ca44f901606437012f66, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.000022888184
@@ -238,6 +258,10 @@ PrefabInstance:
     - target: {fileID: 8171209310026352147, guid: aaae9da91298ca44f901606437012f66, type: 3}
       propertyPath: m_Name
       value: SettingsUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 8409386776314928287, guid: aaae9da91298ca44f901606437012f66, type: 3}
+      propertyPath: m_FillAmount
+      value: 0.62
       objectReference: {fileID: 0}
     - target: {fileID: 8776253198067245653, guid: aaae9da91298ca44f901606437012f66, type: 3}
       propertyPath: m_AnchoredPosition.y

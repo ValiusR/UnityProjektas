@@ -29,7 +29,6 @@ public class DeathUiManager : MonoBehaviour
     public void ShowDeathUI()
     {
 
-        //timeText.text = T
         if (gameObject != null)
         {
             scoreText.text = "YOUR SCORE: " + ScoreManager.currScore;

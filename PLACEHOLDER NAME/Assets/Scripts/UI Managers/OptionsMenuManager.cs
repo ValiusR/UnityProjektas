@@ -2,14 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class OptionsMenuManager : MonoBehaviour
 {
     [SerializeField] TMP_Dropdown resDropDown;
+    [SerializeField] private AudioManager audioManager;
+
+    //[SerializeField] Slider bGVolume;
+    //[SerializeField] Slider sFXVolume;
+    [SerializeField] TextMeshProUGUI bGVolumeText = null;
+    [SerializeField] float maxSliderAmount = 100.0f;
+
+    //[SerializeField] TextMeshProUGUI sFXVolumeText;
+
+
 
     Resolution[] allResolutions;
     int selectedResoltuionIndex;
     List<Resolution> selectedResolutionList = new List<Resolution>();
+
+    public void SliderChange(float value)
+    {
+        float localValue = value * maxSliderAmount;
+        bGVolumeText.text = localValue.ToString("0");   
+    }
+
+    private void Awake()
+    {
+        if (audioManager == null)
+        {
+            audioManager = FindObjectOfType<AudioManager>(); // Find it in the scene
+        }
+    }
 
     public void Start()
     {
