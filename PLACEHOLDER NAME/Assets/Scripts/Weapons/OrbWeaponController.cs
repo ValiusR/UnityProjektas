@@ -15,7 +15,8 @@ public class OrbWeaponController : WeaponController
 
     public override void EvolveWeapon()
     {
-        base.EvolveWeapon();
+        this.orbAmount+=2;
+        this.CreateOrbs();
     }
 
     public override string GetDescription()
@@ -25,7 +26,7 @@ public class OrbWeaponController : WeaponController
 
     public override string GetEvolutionDescription()
     {
-        return base.GetEvolutionDescription();
+        return "Get two extra balls";
     }
 
     public override string GetName()
