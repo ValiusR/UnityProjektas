@@ -69,19 +69,24 @@ public class EnemySpawner : MonoBehaviour
             {
                 if (enemyGroup.spawnCount < enemyGroup.enemyCount)
                 {
-                    float xDirection = Random.value > 0.5f ? 1f : -1f;
-                    float yDirection = Random.value > 0.5f ? 1f : -1f;
+                    bool shouldSpawn = !enemyGroup.enemyName.Contains("rare") || Random.value < 0.1f;
 
-                    Vector2 spawnPosition = new Vector2(
-                        player.position.x + Random.Range(xDirection * waves[currentWaveCount].minSpawnDistance,
-                                                      xDirection * waves[currentWaveCount].maxSpawnDistance),
-                        player.position.y + Random.Range(yDirection * waves[currentWaveCount].minSpawnDistance,
-                                                      yDirection * waves[currentWaveCount].maxSpawnDistance)
-                    );
-                    Instantiate(enemyGroup.enemyPrefab, spawnPosition, Quaternion.identity);
+                    if (shouldSpawn)
+                    {
+                        float xDirection = Random.value > 0.5f ? 1f : -1f;
+                        float yDirection = Random.value > 0.5f ? 1f : -1f;
 
-                    enemyGroup.spawnCount++;
-                    waves[currentWaveCount].spawnCount++;
+                        Vector2 spawnPosition = new Vector2(
+                            player.position.x + Random.Range(xDirection * waves[currentWaveCount].minSpawnDistance,
+                                                          xDirection * waves[currentWaveCount].maxSpawnDistance),
+                            player.position.y + Random.Range(yDirection * waves[currentWaveCount].minSpawnDistance,
+                                                          yDirection * waves[currentWaveCount].maxSpawnDistance)
+                        );
+                        Instantiate(enemyGroup.enemyPrefab, spawnPosition, Quaternion.identity);
+
+                        enemyGroup.spawnCount++;
+                        waves[currentWaveCount].spawnCount++;
+                    }
                 }
             }
         }
