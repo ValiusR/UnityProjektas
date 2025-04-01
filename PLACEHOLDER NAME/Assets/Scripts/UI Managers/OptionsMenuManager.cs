@@ -9,25 +9,34 @@ public class OptionsMenuManager : MonoBehaviour
     [SerializeField] TMP_Dropdown resDropDown;
     [SerializeField] private AudioManager audioManager;
 
-    //[SerializeField] Slider bGVolume;
-    //[SerializeField] Slider sFXVolume;
+    [SerializeField] Slider bGVolume;
+    [SerializeField] Slider sFXVolume;
     [SerializeField] TextMeshProUGUI bGVolumeText = null;
+    [SerializeField] TextMeshProUGUI sFXVolumeText = null;
     [SerializeField] float maxSliderAmount = 100.0f;
 
     //[SerializeField] TextMeshProUGUI sFXVolumeText;
-
-
 
     Resolution[] allResolutions;
     int selectedResoltuionIndex;
     List<Resolution> selectedResolutionList = new List<Resolution>();
 
-    public void SliderChange(float value)
+
+    
+    public void SliderChangeBGVolume(float value)
     {
         float localValue = value * maxSliderAmount;
-        bGVolumeText.text = localValue.ToString("0");   
+        bGVolumeText.text = localValue.ToString("0");
+        AudioManager.instance._BackgroundMusicSource.volume = value;
     }
 
+    public void SliderChangeSFXVolume(float value)
+    {
+        float localValue = value * maxSliderAmount;
+        sFXVolumeText.text = localValue.ToString("0");
+        AudioManager.instance._SFXSource.volume = value;
+    }
+    
     private void Awake()
     {
         if (audioManager == null)
@@ -38,6 +47,12 @@ public class OptionsMenuManager : MonoBehaviour
 
     public void Start()
     {
+        
+        sFXVolumeText.text = (maxSliderAmount * AudioManager.instance._SFXSource.volume).ToString("0");
+        sFXVolume.value = AudioManager.instance._SFXSource.volume;
+        bGVolumeText.text = (maxSliderAmount * AudioManager.instance._BackgroundMusicSource.volume).ToString("0");
+        bGVolume.value = AudioManager.instance._BackgroundMusicSource.volume;
+        
         Debug.Log("options menu setActive false");
         gameObject.SetActive(false);
 
@@ -74,11 +89,11 @@ public class OptionsMenuManager : MonoBehaviour
             gameObject.SetActive(true);
         }
     }
-    
+
 
     public void CloseOptionsMenu()
     {
-        if (gameObject != null) 
+        if (gameObject != null)
         {
             gameObject.SetActive(false);
         }
