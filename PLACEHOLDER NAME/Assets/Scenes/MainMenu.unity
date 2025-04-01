@@ -307,6 +307,7 @@ MonoBehaviour:
   playerHit: {fileID: 8300000, guid: e15dcb8b6d37b4846b844756cc69c717, type: 3}
   fireball: {fileID: 8300000, guid: 58eb216b9a9447d4c9ab7c5c389dd49f, type: 3}
   flask: {fileID: 8300000, guid: f616a04e27008ac469b0b2c9b3798849, type: 3}
+  freezeWave: {fileID: 8300000, guid: 8ee36f74d312cc54c893cf64fcb86f7f, type: 3}
   XPOrb: {fileID: 8300000, guid: ab547c0de64f37942a93da635dbfd224, type: 3}
 --- !u!4 &611040837
 Transform:

@@ -13,6 +13,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip playerHit;
     public AudioClip fireball;
     public AudioClip flask;
+    public AudioClip freezeWave;
     public AudioClip XPOrb;
 
     public static AudioManager instance;

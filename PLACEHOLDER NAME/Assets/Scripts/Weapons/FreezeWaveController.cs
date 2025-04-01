@@ -10,6 +10,12 @@ public class FreezeWaveController : WeaponController
     [SerializeField] public float freezeStrength;
     [SerializeField] public bool canPierce;
 
+    AudioManager audioManager;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
 
     protected override void Start()
     {
@@ -27,6 +33,8 @@ public class FreezeWaveController : WeaponController
 
         GameObject wave = Instantiate(prefab);
         wave.transform.position = gameObject.transform.position;
+
+        audioManager.PlaySFX(audioManager.freezeWave);
 
         FreezeWaveBehaviour stats = wave.GetComponent<FreezeWaveBehaviour>();
         stats.damage = this.damage;
