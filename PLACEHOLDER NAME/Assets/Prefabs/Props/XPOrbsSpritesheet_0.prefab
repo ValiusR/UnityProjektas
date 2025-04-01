@@ -144,5 +144,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   xpValue: 20
-  collectSound: {fileID: 8300000, guid: 7eb5f5d56eeba104aa7cdd788d6870bd, type: 3}
   collectEffect: {fileID: 0}
