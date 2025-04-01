@@ -615,7 +615,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &992146197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1066,7 +1066,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 35273354904022579, guid: 110701f1fbb9e43448bde3245da85c3c, type: 3}
   damage: 5
-  speed: 6
+  speed: 8
   shootCooldown: 1
   weaponLevel: 1
   areaPrefab: {fileID: 3655188734221225493, guid: b530b34b348f4494c9445ca3202608eb, type: 3}

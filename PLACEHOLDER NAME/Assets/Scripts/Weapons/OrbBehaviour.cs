@@ -8,6 +8,7 @@ public class OrbBehaviour : BaseWeaponBehaviour
     public float damageSpeed;
     private float currDamageSpeed;
 
+
     protected override void FixedUpdate()
     {
         MoveProjectile();
@@ -24,7 +25,11 @@ public class OrbBehaviour : BaseWeaponBehaviour
 
     protected override void MoveProjectile()
     {
-        this.transform.RotateAround(pointToFollow.position, new Vector3(0, 0, 1), speed * 5 * Time.deltaTime);
+        Quaternion originalRotation = transform.rotation;
+
+        transform.RotateAround(pointToFollow.position, Vector3.forward, speed * 5 * Time.deltaTime);
+
+        transform.rotation = originalRotation;
     }
 
     protected override void OnCollisionWithEnemy(Collider2D collider)
@@ -49,8 +54,8 @@ public class OrbBehaviour : BaseWeaponBehaviour
     // Start is called before the first frame update
     protected override void Start()
     {
-        
+
     }
 
-   
+
 }

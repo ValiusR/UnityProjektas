@@ -59,7 +59,6 @@ public class OrbWeaponController : WeaponController
             orb.transform.SetParent(this.transform);
             orb.transform.localPosition = new Vector3(Mathf.Sin(deg * i) * distanceFromPlayer, Mathf.Cos(deg * i) * distanceFromPlayer, 0);
 
-
             orb.pointToFollow = this.transform;
             orb.speed = this.speed;
             orb.damage = this.damage;
