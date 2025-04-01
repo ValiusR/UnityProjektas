@@ -95,4 +95,10 @@ public class FireBallController : WeaponController
     {
         return $"Fireball";
     }
+    
+    public override GameObject GetPrefab()
+    {
+        return prefab;
+    }
+    
 }

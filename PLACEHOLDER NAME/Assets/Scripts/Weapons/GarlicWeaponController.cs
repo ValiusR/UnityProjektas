@@ -60,4 +60,8 @@ public class GarlicWeaponController : WeaponController
     {
         return "Garlic";
     }
+    public override GameObject GetPrefab()
+    {
+        return prefab;
+    }
 }

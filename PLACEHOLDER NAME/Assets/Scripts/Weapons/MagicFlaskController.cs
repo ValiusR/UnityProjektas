@@ -48,4 +48,8 @@ public class MagicFlaskController : WeaponController
     {
         return $"Magic flask";
     }
+    public override GameObject GetPrefab()
+    {
+        return prefab;
+    }
 }
