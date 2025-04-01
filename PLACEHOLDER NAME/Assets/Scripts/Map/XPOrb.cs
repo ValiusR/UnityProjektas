@@ -3,8 +3,14 @@ using UnityEngine;
 public class XPOrb : MonoBehaviour
 {
     [SerializeField] private int xpValue = 10; // Adjustable in Inspector
-    [SerializeField] private AudioClip collectSound; // Optional sound effect
     [SerializeField] private GameObject collectEffect; // Optional particle effect
+
+    AudioManager audioManager;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -14,11 +20,8 @@ public class XPOrb : MonoBehaviour
             // Add XP to player
             LevelUpSystem.GainXP(xpValue);
 
-            // Play sound if assigned
-            if (collectSound != null)
-            {
-                AudioSource.PlayClipAtPoint(collectSound, transform.position);
-            }
+            // Play sound
+            audioManager.PlaySFX(audioManager.XPOrb);
 
             // Spawn effect if assigned
             if (collectEffect != null)
