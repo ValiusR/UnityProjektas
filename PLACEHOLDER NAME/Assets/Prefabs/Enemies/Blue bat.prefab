@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5057363765544083799}
   m_Layer: 7
   m_Name: Blue bat
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -869422623
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2109065246, guid: 39707c37ad87a9244929e909fb46d905, type: 3}
   m_Color: {r: 0.3569954, g: 0.41998667, b: 0.8679245, a: 1}

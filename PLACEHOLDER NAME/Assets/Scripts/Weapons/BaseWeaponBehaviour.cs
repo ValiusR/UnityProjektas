@@ -73,7 +73,7 @@ public class BaseWeaponBehaviour : MonoBehaviour
             }
 
             //Hit enemy, do damage
-            if (hitCollider.CompareTag("Enemy"))
+            if (hitCollider.CompareTag("Enemy") || hitCollider.GetComponent<EnemyHealthController>() != null)
             {
                 OnCollisionWithEnemy(hitCollider);
             }

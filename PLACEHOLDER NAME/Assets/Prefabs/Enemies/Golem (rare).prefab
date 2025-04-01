@@ -94,7 +94,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7870428670029554652, guid: 620f0aaf9ff44b249b2047076adab4fb, type: 3}
       propertyPath: m_Name
-      value: Golem Variant
+      value: Golem (rare)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

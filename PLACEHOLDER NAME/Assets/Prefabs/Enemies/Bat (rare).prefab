@@ -98,7 +98,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7890012505201186229, guid: 240e178dc60fb7942a6781953c563043, type: 3}
       propertyPath: m_Name
-      value: Rare Bat
+      value: Bat (rare)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

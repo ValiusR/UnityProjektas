@@ -36,7 +36,7 @@ public class GarlicWeaponBehaviour : BaseWeaponBehaviour
         foreach (Collider2D hitCollider in hitColliders)
         {
             //Hit enemy, do damage
-            if (hitCollider.CompareTag("Enemy"))
+            if (hitCollider.CompareTag("Enemy") || hitCollider.GetComponent<EnemyHealthController>() != null)
             {
                 OnCollisionWithEnemy(hitCollider);
             }

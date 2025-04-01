@@ -38,7 +38,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2245326217454355844, guid: 53feeb84a72a0934ea5c35b20614e325, type: 3}
       propertyPath: m_Name
-      value: Skeleton Variant
+      value: Skeleton (rare)
       objectReference: {fileID: 0}
     - target: {fileID: 6745731662293336448, guid: 53feeb84a72a0934ea5c35b20614e325, type: 3}
       propertyPath: m_LocalScale.x
