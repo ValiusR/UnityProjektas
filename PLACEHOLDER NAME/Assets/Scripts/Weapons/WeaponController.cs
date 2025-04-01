@@ -50,6 +50,11 @@ public class WeaponController : MonoBehaviour
         throw new UnassignedReferenceException(" GetDescription() method is run for base weapon class ");
 
     }
+    public virtual GameObject GetPrefab()
+    {
+        throw new UnassignedReferenceException(" GetPrefab() method is run for base weapon class ");
+
+    }
     public virtual string GetName()
     {
         throw new UnassignedReferenceException(" GetName() method is run for base weapon class ");

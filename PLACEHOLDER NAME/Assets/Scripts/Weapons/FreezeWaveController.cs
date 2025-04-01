@@ -56,4 +56,8 @@ public class FreezeWaveController : WeaponController
     {
         return $"Pierces enemies.";
     }
+    public override GameObject GetPrefab()
+    {
+        return prefab;
+    }
 }

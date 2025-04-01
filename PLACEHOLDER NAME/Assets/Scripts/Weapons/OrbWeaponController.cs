@@ -33,6 +33,10 @@ public class OrbWeaponController : WeaponController
     {
         return "Flying orbs";
     }
+    public override GameObject GetPrefab()
+    {
+        return prefab;
+    }
 
     protected override void Attack()
     {
