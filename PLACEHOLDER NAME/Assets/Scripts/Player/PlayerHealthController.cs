@@ -9,11 +9,20 @@ public class PlayerHealthController : MonoBehaviour
     [SerializeField] DeathUiManager deathUIManager; // Assign your Options UI Prefab in the Inspector
     public int maxHP;
     public int currHP;
+
+    AudioManager audioManager;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+
     public void TakeDamage(int damage)
     {
         if(currHP > damage)
         {
             currHP -= damage;
+            audioManager.PlaySFX(audioManager.playerHit);
         }
         else
         {

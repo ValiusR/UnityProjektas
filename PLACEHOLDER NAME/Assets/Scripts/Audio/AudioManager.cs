@@ -9,7 +9,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioSource SFXSource;
 
     [Header("Audio Clip")]
-    [SerializeField] AudioClip background;
+    public AudioClip background;
+    public AudioClip playerHit;
+    public AudioClip XPOrb;
 
     public static AudioManager instance;
 
@@ -30,5 +32,10 @@ public class AudioManager : MonoBehaviour
     {
         backgroundMusicSource.clip = background;
         backgroundMusicSource.Play();
+    }
+
+    public void PlaySFX(AudioClip clip)
+    {
+        SFXSource.PlayOneShot(clip);
     }
 }
