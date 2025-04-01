@@ -61,63 +61,72 @@ public class LevelUpSystem : MonoBehaviour
         levelUpUI.setWeaponUpgradeOptions(options);
         levelUpUI.ShowUI();
     }
-
     private List<WeaponUpgradeOption> GenerateWeaponUpgradeOptions()
     {
         List<WeaponUpgradeOption> options = new List<WeaponUpgradeOption>();
 
-        // Create pools of available options
+        
         List<WeaponController> lockedWeapons = new List<WeaponController>(allWeapons);
         lockedWeapons.RemoveAll(weapon => unlockedWeapons.Contains(weapon));
 
         List<WeaponController> upgradableWeapons = new List<WeaponController>(unlockedWeapons);
 
-        // Calculate how many of each type we should show (adjust ratios as needed)
-        int maxUpgrades = Mathf.Min(upgradableWeapons.Count, numberOfOptions);
+        // dabar puse upgrades, puse locked
+        int maxUpgrades = Mathf.Min(upgradableWeapons.Count, Mathf.CeilToInt(numberOfOptions / 2f));
         int maxUnlocks = Mathf.Min(lockedWeapons.Count, numberOfOptions - maxUpgrades);
 
-        // 1. First add weapon upgrades
+        //upgrades
         Shuffle(upgradableWeapons);
-        for (int i = 0; i < maxUpgrades && options.Count < numberOfOptions; i++)
+        for (int i = 0; i < upgradableWeapons.Count && options.Count < maxUpgrades; i++)
         {
             var weapon = upgradableWeapons[i];
-            if (weapon.weaponLevel == weaponEvolutionInterval -1)
-            {
-                options.Add(new WeaponUpgradeOption(
-                    weapon.GetName(),
-                    $"Upgrade {weapon.GetName()}: Increase damage by 10%. " +
-                    $"EVOLUTION!: {weapon.GetEvolutionDescription()}",
-                    () => ApplyUpgradeAndEvolve(weapon) ));
-                // cia descriptiona extra
-            }
-            else
-            {
-                options.Add(new WeaponUpgradeOption(
-                                    weapon.GetName(),
-                                    $"Upgrade {weapon.GetName()}: Increase damage by 10%",
-                                    () => ApplyUpgrade(weapon)));
-            }
-                
+            string description = weapon.weaponLevel == weaponEvolutionInterval - 1
+                ? $"Upgrade {weapon.GetName()}: EVOLUTION AVAILABLE! {weapon.GetEvolutionDescription()}"
+                : $"Upgrade {weapon.GetName()}: +10% damage";
+
+            options.Add(new WeaponUpgradeOption(
+                weapon.GetName(),
+                description,
+                weapon.weaponLevel == weaponEvolutionInterval - 1
+                    ? () => ApplyUpgradeAndEvolve(weapon)
+                    : () => ApplyUpgrade(weapon)
+            ));
         }
 
-        // 2. Then add weapon unlocks if we have space
+        //unlocks
         Shuffle(lockedWeapons);
-        for (int i = 0; i < maxUnlocks && options.Count < numberOfOptions; i++)
+        for (int i = 0; i < lockedWeapons.Count && options.Count < numberOfOptions; i++)
         {
             var weapon = lockedWeapons[i];
             options.Add(new WeaponUpgradeOption(
                 weapon.GetName(),
                 $"Unlock {weapon.GetName()}: {weapon.GetDescription()}",
-                () => UnlockWeapon(weapon))
-            );
+                () => UnlockWeapon(weapon)
+            ));
         }
+
         
+        if (options.Count < numberOfOptions)
+        {
+            for (int i = 0; i < upgradableWeapons.Count && options.Count < numberOfOptions; i++)
+            {
+                // Avoid duplicates
+                if (!options.Exists(o => o.name == upgradableWeapons[i].GetName()))
+                {
+                    var weapon = upgradableWeapons[i];
+                    options.Add(new WeaponUpgradeOption(
+                        weapon.GetName(),
+                        $"Upgrade {weapon.GetName()}: +10% damage",
+                        () => ApplyUpgrade(weapon)
+                    ));
+                }
+            }
+        }
 
-        // Final shuffle to randomize order
         Shuffle(options);
-
-        return options.Count > numberOfOptions ? options.GetRange(0, numberOfOptions) : options;
+        return options;
     }
+    
 
     private void Shuffle<T>(List<T> list)
     {
