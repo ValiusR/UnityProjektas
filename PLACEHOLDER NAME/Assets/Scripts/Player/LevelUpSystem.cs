@@ -89,7 +89,8 @@ public class LevelUpSystem : MonoBehaviour
                 description,
                 weapon.weaponLevel == weaponEvolutionInterval - 1
                     ? () => ApplyUpgradeAndEvolve(weapon)
-                    : () => ApplyUpgrade(weapon)
+                    : () => ApplyUpgrade(weapon),
+                weapon.prefab
             ));
         }
 
@@ -101,7 +102,8 @@ public class LevelUpSystem : MonoBehaviour
             options.Add(new WeaponUpgradeOption(
                 weapon.GetName(),
                 $"Unlock {weapon.GetName()}: {weapon.GetDescription()}",
-                () => UnlockWeapon(weapon)
+                () => UnlockWeapon(weapon),
+                weapon.prefab
             ));
         }
 
@@ -117,7 +119,8 @@ public class LevelUpSystem : MonoBehaviour
                     options.Add(new WeaponUpgradeOption(
                         weapon.GetName(),
                         $"Upgrade {weapon.GetName()}: +10% damage",
-                        () => ApplyUpgrade(weapon)
+                        () => ApplyUpgrade(weapon),
+                        weapon.prefab
                     ));
                 }
             }
