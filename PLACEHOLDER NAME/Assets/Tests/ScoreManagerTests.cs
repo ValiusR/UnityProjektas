@@ -12,7 +12,7 @@ public class ScoreManagerEditModeTest
     {
         // Reset the score before each test
         ScoreManager.currScore = 0;
-
+        TimerManager.minutes = 0;
     }
 
     [Test]

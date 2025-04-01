@@ -13,7 +13,7 @@ public class FadeOut : MonoBehaviour
 
     [SerializeField] Material material;
 
-    public IEnumerator FadeAnimation()
+    public virtual IEnumerator FadeAnimation()
     {
         sprite.material = material;
 

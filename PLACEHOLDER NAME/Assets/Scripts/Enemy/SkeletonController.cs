@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class SkeletonController : MonoBehaviour
 {
-    [SerializeField] SpriteRenderer sr;
-    [SerializeField] Transform player;
-    [SerializeField] Animator am;
-    [SerializeField] GameObject arrow;
-    [SerializeField] Transform arrowPos;
-    [SerializeField] EnemyMovement em;
+    [SerializeField] public SpriteRenderer sr;
+    [SerializeField] public Transform player;
+    [SerializeField] public Animator am;
+    [SerializeField] public GameObject arrow;
+    [SerializeField] public Transform arrowPos;
+    [SerializeField] public EnemyMovement em;
     [SerializeField] public float attackSpeed;
     [SerializeField] public int damage;
-    private float timer;
+    public float timer;
 
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         em = GetComponent<EnemyMovement>();
         player = FindObjectOfType<PlayerMovementController>().transform;
@@ -27,7 +27,7 @@ public class SkeletonController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         // Constantly move the enemy towards the player
         if (Vector2.Distance(transform.position, player.transform.position) > 3 && am.GetBool("Shoot") == false)
@@ -58,10 +58,8 @@ public class SkeletonController : MonoBehaviour
         }
     }
 
-    void Shoot()
+    public void Shoot()
     {
         Instantiate(arrow, arrowPos.position, Quaternion.identity);
     }
-
-    
 }

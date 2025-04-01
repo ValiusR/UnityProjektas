@@ -16,7 +16,6 @@ public class PlayerHealthController : MonoBehaviour
     }
     public virtual void TakeDamage(int damage)
     {
-        Debug.Log("Base TakeDamage");
         if(currHP > damage)
         {
             currHP -= damage;

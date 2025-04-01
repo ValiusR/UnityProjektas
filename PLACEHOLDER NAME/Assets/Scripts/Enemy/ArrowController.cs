@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class ArrowController : MonoBehaviour
 {
-    private GameObject player;
-    private Rigidbody2D rb;
+    public GameObject player;
+    public Rigidbody2D rb;
     [SerializeField] public GameObject skeleton;
     public float speed;
     private float timer;
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player");
-        
 
         Vector3 direction = player.transform.position - transform.position;
         rb.velocity = new Vector2(direction.x, direction.y).normalized * speed;
@@ -24,12 +23,12 @@ public class ArrowController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         timer += Time.deltaTime;
         if (timer > 5)
         {
-            Destroy(gameObject);
+            DestroyImmediate(gameObject);
         }
     }
 
@@ -39,6 +38,19 @@ public class ArrowController : MonoBehaviour
         {
             collision.gameObject.GetComponent<PlayerHealthController>().TakeDamage(skeleton.GetComponent<SkeletonController>().damage);
             Destroy(gameObject);
+        }
+    }
+
+    public void SimulateCollisionEnter(GameObject other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            PlayerHealthController playerHealth = other.GetComponent<PlayerHealthController>();
+            SkeletonController skeletonController = skeleton.GetComponent<SkeletonController>();
+
+            playerHealth.TakeDamage(skeletonController.damage);
+
+            DestroyImmediate(gameObject); // Simulate arrow destruction
         }
     }
 }

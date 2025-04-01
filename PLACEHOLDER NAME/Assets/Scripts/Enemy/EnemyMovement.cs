@@ -10,14 +10,14 @@ public class EnemyMovement : MonoBehaviour
 
 
     // Start is called before the first frame update
-    protected virtual void Start()
+    public virtual void Start()
     {
         player = FindObjectOfType<PlayerMovementController>().transform;
         startMoveSpeed = moveSpeed;
     }
 
     // Update is called once per frame
-    protected virtual void Update()
+    public virtual void Update()
     {
         // Constantly move the enemy towards the player
         transform.position = Vector2.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
@@ -34,6 +34,22 @@ public class EnemyMovement : MonoBehaviour
     protected virtual void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
+        {
+            moveSpeed = startMoveSpeed;
+        }
+    }
+
+    public virtual void SimulateCollisionEnter(GameObject other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            moveSpeed = 0;
+        }
+    }
+
+    public virtual void SimulateCollisionExit(GameObject other)
+    {
+        if (other.CompareTag("Player"))
         {
             moveSpeed = startMoveSpeed;
         }

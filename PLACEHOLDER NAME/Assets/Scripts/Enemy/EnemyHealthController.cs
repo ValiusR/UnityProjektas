@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EnemyHealthController : MonoBehaviour
 {
-    [SerializeField] DamageBlink damageBlink;
-    [SerializeField] FadeOut fadeOut;
+    [SerializeField] public DamageBlink damageBlink;
+    [SerializeField] public FadeOut fadeOut;
     public int maxHP;
     public int currHP;
 

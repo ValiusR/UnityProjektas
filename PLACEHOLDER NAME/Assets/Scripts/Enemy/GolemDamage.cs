@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class GolemDamage : EnemyDamage
 {
-    [SerializeField] Animator am;
+    [SerializeField] public Animator am;
     // Start is called before the first frame update
-    protected override void Start()
+    public override void Start()
     {
         base.Start();
         am = GetComponent<Animator>();
@@ -14,17 +14,17 @@ public class GolemDamage : EnemyDamage
     }
 
     // Update is called once per frame
-    protected override void Update()
+    public override void Update()
     {
         base.Update();
     }
 
-    void Attack()
+    public void Attack()
     {
         pc.TakeDamage(damage);
-;    }
+;   }
 
-    private protected override void OnCollisionStay2D(Collision2D collision)
+    public override void OnCollisionStay2D(Collision2D collision)
     {
         
     }

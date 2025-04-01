@@ -6,18 +6,18 @@ public class PlayerAnimator : MonoBehaviour
 {
     // References
     [Header("References")]
-    [SerializeField] Animator am;
-    [SerializeField] PlayerMovementController pc;
+    [SerializeField] public Animator am;
+    [SerializeField] public PlayerMovementController pc;
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         am = GetComponent<Animator>();
         pc = GetComponent<PlayerMovementController>();
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         if (pc.playerInput.x != 0)
         {

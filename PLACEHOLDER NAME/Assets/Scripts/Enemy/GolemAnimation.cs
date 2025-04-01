@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class GolemAnimation : MonoBehaviour
 {
-    [SerializeField] Animator am;
-    [SerializeField] SpriteRenderer sr;
-    [SerializeField] Transform player;
+    [SerializeField] public Animator am;
+    [SerializeField] public SpriteRenderer sr;
+    [SerializeField] public Transform player;
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         am = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
@@ -17,7 +17,7 @@ public class GolemAnimation : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         if (transform.position.x < player.transform.position.x)
         {
@@ -41,6 +41,24 @@ public class GolemAnimation : MonoBehaviour
     void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
+        {
+            am.SetBool("Attack", false);
+            am.SetBool("Move", true);
+        }
+    }
+
+    public virtual void SimulateCollisionEnter(GameObject other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            am.SetBool("Move", false);
+            am.SetBool("Attack", true);
+        }
+    }
+
+    public virtual void SimulateCollisionExit(GameObject other)
+    {
+        if (other.CompareTag("Player"))
         {
             am.SetBool("Attack", false);
             am.SetBool("Move", true);
