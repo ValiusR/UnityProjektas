@@ -7,7 +7,13 @@ public class MagicFlaskBehaviour : BaseWeaponBehaviour
     [HideInInspector] public GameObject damageField;
     [HideInInspector] public float areaSize;
     [HideInInspector] public float damageSpeed;
-    
+
+    AudioManager audioManager;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
 
     protected override void Start()
     {
@@ -45,6 +51,8 @@ public class MagicFlaskBehaviour : BaseWeaponBehaviour
 
         //Remove the tween animations
         transform.DOKill();
+
+        audioManager.PlaySFX(audioManager.flask);
 
         CreateDamageArea();
         Destroy(this.gameObject);
