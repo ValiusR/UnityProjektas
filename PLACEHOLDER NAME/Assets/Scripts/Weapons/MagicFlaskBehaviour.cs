@@ -11,10 +11,13 @@ public class MagicFlaskBehaviour : BaseWeaponBehaviour
 
     protected override void Start()
     {
-        Vector2 start = this.gameObject.transform.position;
-        Vector2 destination = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        // The added vector is here to simulate an object that looks like it's falling
+        Vector2 start = this.gameObject.transform.position + new Vector3(5, 9);
 
-        StartCoroutine(PlayFlyingAnimation(start, destination, speed));
+        // The destination spot is around the player in a 3 distance radius
+        Vector2 destination = this.gameObject.transform.position + new Vector3(Random.Range(-3f, 3f), Random.Range(-3f, 3f));
+
+        StartCoroutine(PlayFlyingStraightAnimation(start, destination, speed));
     }
 
     protected override void FixedUpdate()
@@ -24,17 +27,19 @@ public class MagicFlaskBehaviour : BaseWeaponBehaviour
         return;
     }
 
-    private IEnumerator PlayFlyingAnimation(Vector2 start, Vector2 finish, float speed)
+    private IEnumerator PlayFlyingStraightAnimation(Vector2 start, Vector2 finish, float speed)
     {
         float distance = Vector2.Distance(start, finish);
 
         float flyTime = distance / speed;
-        
+
+        this.gameObject.transform.position = start;
+
         //Smooth movement
         transform?.DOMove(finish, flyTime).SetEase(Ease.Linear);
         //Rotation
-        transform?.DORotate(new Vector3(0f, 0f, 360f), 0.5f, RotateMode.FastBeyond360).SetEase(Ease.Linear).SetLoops(-1, LoopType.Restart); 
-        
+        transform?.DORotate(new Vector3(0f, 0f, 360f), 0.5f, RotateMode.FastBeyond360).SetEase(Ease.Linear).SetLoops(-1, LoopType.Restart);
+
         //Wait until flask gets to finish position
         yield return new WaitForSeconds(flyTime);
 
