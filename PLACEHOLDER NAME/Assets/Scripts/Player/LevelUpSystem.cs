@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class LevelUpSystem : MonoBehaviour
@@ -61,75 +62,162 @@ public class LevelUpSystem : MonoBehaviour
         levelUpUI.setWeaponUpgradeOptions(options);
         levelUpUI.ShowUI();
     }
+    /* private List<WeaponUpgradeOption> GenerateWeaponUpgradeOptions()
+     {
+         List<WeaponUpgradeOption> options = new List<WeaponUpgradeOption>();
+
+
+         List<WeaponController> lockedWeapons = new List<WeaponController>(allWeapons);
+         lockedWeapons.RemoveAll(weapon => unlockedWeapons.Contains(weapon));
+
+         List<WeaponController> upgradableWeapons = new List<WeaponController>(unlockedWeapons);
+
+         // dabar puse upgrades, puse locked
+         int maxUpgrades = Mathf.Min(upgradableWeapons.Count, Mathf.CeilToInt(numberOfOptions / 2f));
+         int maxUnlocks = Mathf.Min(lockedWeapons.Count, numberOfOptions - maxUpgrades);
+
+         //upgrades
+         Shuffle(upgradableWeapons);
+         for (int i = 0; i < upgradableWeapons.Count && options.Count < maxUpgrades; i++)
+         {
+             var weapon = upgradableWeapons[i];
+             string description = weapon.weaponLevel == weaponEvolutionInterval - 1
+                 ? $"Upgrade {weapon.GetName()}: EVOLUTION AVAILABLE! {weapon.GetEvolutionDescription()}"
+                 : $"Upgrade {weapon.GetName()}: +10% damage";
+
+             options.Add(new WeaponUpgradeOption(
+                 weapon.GetName(),
+                 description,
+                 weapon.weaponLevel == weaponEvolutionInterval - 1
+                     ? () => ApplyUpgradeAndEvolve(weapon)
+                     : () => ApplyUpgrade(weapon),
+                 weapon.prefab
+             ));
+         }
+
+         //unlocks
+         Shuffle(lockedWeapons);
+         for (int i = 0; i < lockedWeapons.Count && options.Count < numberOfOptions; i++)
+         {
+             var weapon = lockedWeapons[i];
+             options.Add(new WeaponUpgradeOption(
+                 weapon.GetName(),
+                 $"Unlock {weapon.GetName()}: {weapon.GetDescription()}",
+                 () => UnlockWeapon(weapon),
+                 weapon.prefab
+             ));
+         }
+
+
+         if (options.Count < numberOfOptions)
+         {
+             for (int i = 0; i < upgradableWeapons.Count && options.Count < numberOfOptions; i++)
+             {
+                 // Avoid duplicates
+                 if (!options.Exists(o => o.name == upgradableWeapons[i].GetName()))
+                 {
+                     var weapon = upgradableWeapons[i];
+                     options.Add(new WeaponUpgradeOption(
+                         weapon.GetName(),
+                         $"Upgrade {weapon.GetName()}: +10% damage",
+                         () => ApplyUpgrade(weapon),
+                         weapon.prefab
+                     ));
+                 }
+             }
+         }
+
+         Shuffle(options);
+         return options;
+     }*/
     private List<WeaponUpgradeOption> GenerateWeaponUpgradeOptions()
     {
         List<WeaponUpgradeOption> options = new List<WeaponUpgradeOption>();
 
-        
-        List<WeaponController> lockedWeapons = new List<WeaponController>(allWeapons);
-        lockedWeapons.RemoveAll(weapon => unlockedWeapons.Contains(weapon));
+        // Create weapon pools with null checks
+        List<WeaponController> lockedWeapons = allWeapons
+            .Where(w => w != null && !unlockedWeapons.Contains(w))
+            .ToList();
 
-        List<WeaponController> upgradableWeapons = new List<WeaponController>(unlockedWeapons);
+        List<WeaponController> upgradableWeapons = unlockedWeapons
+            .Where(w => w != null)
+            .ToList();
 
-        // dabar puse upgrades, puse locked
-        int maxUpgrades = Mathf.Min(upgradableWeapons.Count, Mathf.CeilToInt(numberOfOptions / 2f));
-        int maxUnlocks = Mathf.Min(lockedWeapons.Count, numberOfOptions - maxUpgrades);
+        // Calculate slots - ensure at least 1 unlock shows if available
+        int upgradeSlots = upgradableWeapons.Count > 0
+            ? Mathf.Min(upgradableWeapons.Count, Mathf.CeilToInt(numberOfOptions / 2f))
+            : 0;
 
-        //upgrades
-        Shuffle(upgradableWeapons);
-        for (int i = 0; i < upgradableWeapons.Count && options.Count < maxUpgrades; i++)
+        int unlockSlots = lockedWeapons.Count > 0
+            ? Mathf.Min(lockedWeapons.Count, numberOfOptions - upgradeSlots)
+            : 0;
+
+        // Adjust if we can't fill slots
+        if (options.Count < numberOfOptions && upgradeSlots + unlockSlots < numberOfOptions)
         {
-            var weapon = upgradableWeapons[i];
-            string description = weapon.weaponLevel == weaponEvolutionInterval - 1
-                ? $"Upgrade {weapon.GetName()}: EVOLUTION AVAILABLE! {weapon.GetEvolutionDescription()}"
-                : $"Upgrade {weapon.GetName()}: +10% damage";
+            if (lockedWeapons.Count > 0)
+            {
+                unlockSlots = Mathf.Min(lockedWeapons.Count, numberOfOptions - upgradeSlots);
+            }
+            else
+            {
+                upgradeSlots = Mathf.Min(upgradableWeapons.Count, numberOfOptions);
+            }
+        }
 
+        // Add upgrades
+        foreach (var weapon in upgradableWeapons
+            .OrderBy(w => w.weaponLevel) // Prioritize lower level weapons
+            .ThenBy(w => Random.value)   // Then randomize
+            .Take(upgradeSlots))
+        {
+            bool isEvolution = weapon.weaponLevel == weaponEvolutionInterval - 1;
             options.Add(new WeaponUpgradeOption(
                 weapon.GetName(),
-                description,
-                weapon.weaponLevel == weaponEvolutionInterval - 1
-                    ? () => ApplyUpgradeAndEvolve(weapon)
-                    : () => ApplyUpgrade(weapon),
-                weapon.prefab
+                isEvolution
+                    ? $"EVOLUTION: {weapon.GetName()} - {weapon.GetEvolutionDescription()}"
+                    : $"Upgrade {weapon.GetName()} (+10% damage)",
+                isEvolution ? () => ApplyUpgradeAndEvolve(weapon) : () => ApplyUpgrade(weapon),
+                weapon.prefab // Make sure prefab is assigned in inspector
             ));
         }
 
-        //unlocks
-        Shuffle(lockedWeapons);
-        for (int i = 0; i < lockedWeapons.Count && options.Count < numberOfOptions; i++)
+        // Add unlocks
+        foreach (var weapon in lockedWeapons
+            .OrderBy(w => Random.value)
+            .Take(unlockSlots))
         {
-            var weapon = lockedWeapons[i];
             options.Add(new WeaponUpgradeOption(
                 weapon.GetName(),
-                $"Unlock {weapon.GetName()}: {weapon.GetDescription()}",
+                $"NEW: {weapon.GetName()} - {weapon.GetDescription()}",
                 () => UnlockWeapon(weapon),
                 weapon.prefab
             ));
         }
 
-        
+        // Fill remaining slots with upgrades if needed
         if (options.Count < numberOfOptions)
         {
-            for (int i = 0; i < upgradableWeapons.Count && options.Count < numberOfOptions; i++)
+            var remainingUpgrades = upgradableWeapons
+                .Where(w => !options.Any(o => o.name == w.GetName()))
+                .OrderBy(w => Random.value)
+                .Take(numberOfOptions - options.Count);
+
+            foreach (var weapon in remainingUpgrades)
             {
-                // Avoid duplicates
-                if (!options.Exists(o => o.name == upgradableWeapons[i].GetName()))
-                {
-                    var weapon = upgradableWeapons[i];
-                    options.Add(new WeaponUpgradeOption(
-                        weapon.GetName(),
-                        $"Upgrade {weapon.GetName()}: +10% damage",
-                        () => ApplyUpgrade(weapon),
-                        weapon.prefab
-                    ));
-                }
+                options.Add(new WeaponUpgradeOption(
+                    weapon.GetName(),
+                    $"Upgrade {weapon.GetName()} (+10% damage)",
+                    () => ApplyUpgrade(weapon),
+                    weapon.prefab
+                ));
             }
         }
 
-        Shuffle(options);
+        // Final shuffle
+        options = options.OrderBy(x => Random.value).ToList();
         return options;
     }
-    
 
     private void Shuffle<T>(List<T> list)
     {
