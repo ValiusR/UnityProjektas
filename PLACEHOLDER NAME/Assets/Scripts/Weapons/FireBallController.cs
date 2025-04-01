@@ -7,6 +7,14 @@ public class FireBallController : WeaponController
 {
     [SerializeField] public bool tripleShot = false;
     [SerializeField] private float spreadAngle = 45f;
+
+    AudioManager audioManager;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+
     protected override void Start()
     {
         base.Start();
@@ -26,6 +34,7 @@ public class FireBallController : WeaponController
 
         // Create center fireball
         CreateFireball(baseDirection);
+        audioManager.PlaySFX(audioManager.fireball);
 
         if (tripleShot)
         {

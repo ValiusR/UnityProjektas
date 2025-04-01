@@ -632,7 +632,8 @@ MonoBehaviour:
   SFXSource: {fileID: 923374167}
   background: {fileID: 8300000, guid: 34cdcb29d594b754d8dd94e7e82cc4a0, type: 3}
   playerHit: {fileID: 8300000, guid: 94dd9378e92a8b945ab1816a66824853, type: 3}
-  XPOrb: {fileID: 8300000, guid: 7eb5f5d56eeba104aa7cdd788d6870bd, type: 3}
+  fireball: {fileID: 8300000, guid: 58eb216b9a9447d4c9ab7c5c389dd49f, type: 3}
+  XPOrb: {fileID: 8300000, guid: ab547c0de64f37942a93da635dbfd224, type: 3}
 --- !u!4 &992146198
 Transform:
   m_ObjectHideFlags: 0

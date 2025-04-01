@@ -11,6 +11,7 @@ public class AudioManager : MonoBehaviour
     [Header("Audio Clip")]
     public AudioClip background;
     public AudioClip playerHit;
+    public AudioClip fireball;
     public AudioClip XPOrb;
 
     public static AudioManager instance;
