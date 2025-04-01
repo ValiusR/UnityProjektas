@@ -85,7 +85,8 @@ public class LevelUpSystem : MonoBehaviour
             {
                 options.Add(new WeaponUpgradeOption(
                     weapon.GetName(),
-                    $"Upgrade {weapon.GetName()}: Increase damage by 10%",
+                    $"Upgrade {weapon.GetName()}: Increase damage by 10%. " +
+                    $"EVOLUTION!: {weapon.GetEvolutionDescription()}",
                     () => ApplyUpgradeAndEvolve(weapon) ));
                 // cia descriptiona extra
             }

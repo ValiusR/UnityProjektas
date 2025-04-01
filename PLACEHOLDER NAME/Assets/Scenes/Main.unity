@@ -1051,7 +1051,7 @@ MonoBehaviour:
   levelUpUI: {fileID: 1891469946}
   currentLevel: 1
   experienceToNextLevel: 100
-  weaponEvolutionInterval: 2
+  weaponEvolutionInterval: 3
 --- !u!114 &1638205295
 MonoBehaviour:
   m_ObjectHideFlags: 0
