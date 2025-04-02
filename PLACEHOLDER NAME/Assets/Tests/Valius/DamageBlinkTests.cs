@@ -25,10 +25,10 @@ public class DamageBlinkTests
     [Test]
     public void BlinkAnimacija_PakeiciaMaterialProperty()
     {
-        // nustatome pradinę reikšmę
+        // nustatome pradine reikšme
         blink.sprite.sharedMaterial.SetFloat("_blinkAmount", 1f);
 
-        // paleidžiame animaciją (simuliuojame koroutiną)
+        // paleidžiame animaciją
         float elapsedTime = 0f;
         while (elapsedTime < blink.blinkAnimationTime)
         {
@@ -45,7 +45,7 @@ public class DamageBlinkTests
     [TearDown]
     public void Teardown()
     {
-        // išvalome testinius objektus
+        // isvalome testinius objektus
         Object.DestroyImmediate(blink.gameObject);
         Object.DestroyImmediate(testMaterial);
     }

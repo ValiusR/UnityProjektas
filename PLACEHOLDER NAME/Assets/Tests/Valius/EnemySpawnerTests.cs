@@ -7,7 +7,7 @@ public class EnemySpawnerTests
     [Test]
     public void SpawnEnemies_TeisingaiSkaiciuojaAtstuma()
     {
-        // paruošiame spawnerį
+        // paruošiame spawneri
         var spawner = new GameObject().AddComponent<EnemySpawner>();
         spawner.waves = new List<EnemySpawner.Wave> {
             new EnemySpawner.Wave {

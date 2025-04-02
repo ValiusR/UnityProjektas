@@ -22,14 +22,14 @@ public class FadeOutTests
         testRenderer.sharedMaterial = testMaterial;
         fadeOut.sprite = testRenderer;
 
-        // privaloma: inicializuojame material kintamąjį
+        // privaloma: inicializuojame material kintamąji
         fadeOut.material = testMaterial;
     }
 
     [Test]
     public void FadeAnimacija_PakeiciaMaterialProperty()
     {
-        // nustatome pradinę reikšmę
+        // nustatome pradinę reikšme
         fadeOut.material.SetFloat("_currFade", 0f);
 
         // paleidžiame animacijos logiką tiesiogiai (nes testuojame Edit Mode)

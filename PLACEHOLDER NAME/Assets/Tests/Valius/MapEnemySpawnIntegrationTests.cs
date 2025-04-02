@@ -7,12 +7,13 @@ public class MapEnemyIntegrationTests
     [Test]
     public void Enemies_SpawnWithinLoadedChunks()
     {
-        // setup
+        // inicializacija
         var mapController = new GameObject().AddComponent<MapController>();
         mapController.chunkSize = 22f;
         mapController.loadRadius = 1;
         mapController.terrainChunks = new List<GameObject> { new GameObject("TestChunk") };
 
+        // sukuriamos priesu grupes
         var spawner = new GameObject().AddComponent<EnemySpawner>();
         spawner.waves = new List<EnemySpawner.Wave> {
             new EnemySpawner.Wave {
@@ -32,6 +33,7 @@ public class MapEnemyIntegrationTests
         mapController.player = player;
         spawner.player = player.transform;
 
+        // papildomi chunks su priesais
         mapController.SpawnChunk(mapController.GetChunkPosition(player.transform.position));
         spawner.SpawnEnemies();
 
@@ -53,4 +55,61 @@ public class MapEnemyIntegrationTests
 
         Assert.IsTrue(allValid);
     }
+    [Test]
+    public void Enemies_NotSpawned_OutsideLoadRadius()
+    {
+        // paruošiame pagrindinius komponentus
+        var mapController = new GameObject().AddComponent<MapController>();
+        mapController.chunkSize = 22f;
+        mapController.loadRadius = 1; // tik 1 chunk spinduliu
+
+        // sukuriamas tolimas chunkas (už loadRadius ribų)
+        var distantChunkPos = new Vector2Int(2, 2);
+        var distantChunk = new GameObject("DistantChunk");
+        mapController.terrainChunks = new List<GameObject> { distantChunk };
+
+        // paruošiame priešų spawnerį
+        var spawner = new GameObject().AddComponent<EnemySpawner>();
+        spawner.waves = new List<EnemySpawner.Wave> {
+        new EnemySpawner.Wave {
+            enemyGroups = new List<EnemySpawner.EnemyGroup> {
+                new EnemySpawner.EnemyGroup {
+                    enemyCount = 1,
+                    enemyPrefab = new GameObject("EnemyPrefab")
+                }
+            }
+        }
+    };
+
+        // žaidėjas centre
+        var player = new GameObject("Player");
+        player.tag = "Player";
+        player.transform.position = Vector3.zero;
+        mapController.player = player;
+        spawner.player = player.transform;
+
+        // bandome spawninti priešus
+        spawner.SpawnEnemies();
+
+        // tikriname ar nepasirodė priešai tolimuose chunks
+        bool foundDistantEnemy = false;
+        foreach (var chunk in mapController.spawnedChunks)
+        {
+            if (Vector2Int.Distance(chunk.Key, distantChunkPos) > mapController.loadRadius)
+            {
+                foreach (Transform child in chunk.Value.transform)
+                {
+                    if (child.name.Contains("EnemyPrefab"))
+                    {
+                        foundDistantEnemy = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+        Assert.IsFalse(foundDistantEnemy,
+            "neturėtų būti priešų už loadRadius ribų");
+    }
+    
 }

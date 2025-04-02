@@ -20,7 +20,7 @@ public class LevelUpSystemTests
         // pridedame patirties taškų
         system.GainExperience(50);
 
-        // tikriname ar teisingai sumažėjo
+        // tikriname ar teisingai sumažejo
         Assert.AreEqual(50, LevelUpSystem.experience);
     }
     
