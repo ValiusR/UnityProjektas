@@ -58,7 +58,7 @@ public class GarlicWeaponController : WeaponController
     }
     public override string GetName()
     {
-        return "Garlic";
+        return "Magic aura";
     }
     public override GameObject GetPrefab()
     {

@@ -98,6 +98,6 @@ public class BaseWeaponBehaviour : MonoBehaviour
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, collisionRadius);
+        Gizmos.DrawWireSphere(transform.position, collisionRadius / 2);
     }
 }
