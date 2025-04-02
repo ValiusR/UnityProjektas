@@ -12,26 +12,22 @@ public class BaseWeaponBehaviourTests
     [SetUp]
     public void SetUp()
     {
-        // Create the weapon GameObject
         weaponObj = new GameObject();
         weapon = weaponObj.AddComponent<BaseWeaponBehaviour>();
 
-        // Attach a real Rigidbody2D component
         rb = weaponObj.AddComponent<Rigidbody2D>();
 
-        // Manually set private Rigidbody2D reference using reflection
         var rbField = typeof(BaseWeaponBehaviour).GetField("rb", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
         rbField.SetValue(weapon, rb);
 
         weapon.speed = 5f;
         weapon.damage = 10;
-        weapon.destroyAfterSeconds = 1f; // Short lifespan for testing
+        weapon.destroyAfterSeconds = 1f;
     }
 
     [TearDown]
     public void TearDown()
     {
-        // Use DestroyImmediate to avoid issues in Edit Mode
         if (weaponObj != null)
         {
             Object.DestroyImmediate(weaponObj);
@@ -42,17 +38,14 @@ public class BaseWeaponBehaviourTests
     [Test]
     public void SolveCollisions_HitsEnemy_DealsDamage()
     {
-        // Create enemy object and add necessary components
         GameObject enemyObj = new GameObject();
         enemyObj.tag = "Enemy";
 
         var enemyCollider = enemyObj.AddComponent<BoxCollider2D>();
         var enemyHealth = enemyObj.AddComponent<EnemyHealthController>();
 
-        // Set enemy health to a known state
         enemyHealth.currHP = 100;
 
-        // Simulate collision manually
         Collider2D[] hitColliders = { enemyCollider };
 
         foreach (var collider in hitColliders)
@@ -63,17 +56,14 @@ public class BaseWeaponBehaviourTests
             }
         }
 
-        // Verify the enemy took damage
         Assert.AreEqual(90, enemyHealth.currHP);
 
-        // Clean up
         Object.DestroyImmediate(enemyObj);
     }
 
     [Test]
     public void DidHitProp_ReturnsTrueForPropLayer()
     {
-        // Create a test object with a collider
         GameObject propObj = new GameObject();
         Collider2D propCollider = propObj.AddComponent<BoxCollider2D>();
         propObj.layer = LayerMask.NameToLayer("Wall");
@@ -84,7 +74,6 @@ public class BaseWeaponBehaviourTests
 
         Assert.IsTrue(result, "DidHitProp should return true for prop layer.");
 
-        // Cleanup
         Object.DestroyImmediate(propObj);
     }
 }

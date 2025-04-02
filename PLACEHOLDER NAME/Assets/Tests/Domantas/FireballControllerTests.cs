@@ -13,18 +13,15 @@ public class FireBallControllerTests
     [SetUp]
     public void SetUp()
     {
-        // Create weapon GameObject
         weaponObj = new GameObject();
         fireBall = weaponObj.AddComponent<FireBallController>();
 
-        // Create a mock prefab for the freeze wave
         prefabMock = new GameObject();
         FireBallBehaviour prefabStats = prefabMock.AddComponent<FireBallBehaviour>();
 
         prefabStats.damage = 10;
         prefabStats.speed = 5;
 
-        // Set weapon stats
         fireBall.damage = 10;
         fireBall.speed = 5;
         fireBall.prefab = prefabMock;
@@ -40,17 +37,14 @@ public class FireBallControllerTests
     [Test]
     public void Attack_SpawnsFireball_WithCorrectStats()
     {
-        // Call attack
         fireBall.Invoke("Attack", 0f);
 
-        // Find spawned object
         FireBallBehaviour spawnedBall = Object.FindObjectOfType<FireBallBehaviour>();
 
         Assert.IsNotNull(spawnedBall, "Wave should be instantiated");
         Assert.AreEqual(fireBall.damage, spawnedBall.damage, "Wave damage should match weapon damage");
         Assert.AreEqual(fireBall.speed, spawnedBall.speed, "Wave speed should match weapon speed");
 
-        // Cleanup
         Object.DestroyImmediate(spawnedBall.gameObject);
     }
 

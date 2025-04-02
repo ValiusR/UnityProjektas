@@ -13,11 +13,9 @@ public class FreezeWaveControllerTests
     [SetUp]
     public void SetUp()
     {
-        // Create weapon GameObject
         weaponObj = new GameObject();
         freezeWave = weaponObj.AddComponent<FreezeWaveController>();
 
-        // Create a mock prefab for the freeze wave
         prefabMock = new GameObject();
         FreezeWaveBehaviour prefabStats = prefabMock.AddComponent<FreezeWaveBehaviour>();
 
@@ -27,7 +25,6 @@ public class FreezeWaveControllerTests
         prefabStats.freezeLength = 3f;
         prefabStats.freezeStrength = 0.5f;
 
-        // Set weapon stats
         freezeWave.damage = 10;
         freezeWave.speed = 5;
         freezeWave.freezeLength = 3f;
@@ -45,10 +42,8 @@ public class FreezeWaveControllerTests
     [Test]
     public void Attack_SpawnsWave_WithCorrectStats()
     {
-        // Call attack
         freezeWave.Invoke("Attack", 0f);
 
-        // Find spawned object
         FreezeWaveBehaviour spawnedWave = Object.FindObjectOfType<FreezeWaveBehaviour>();
 
         Assert.IsNotNull(spawnedWave, "Wave should be instantiated");
@@ -57,7 +52,6 @@ public class FreezeWaveControllerTests
         Assert.AreEqual(freezeWave.freezeLength, spawnedWave.freezeLength, "Wave freeze length should match weapon freeze length");
         Assert.AreEqual(freezeWave.freezeStrength, spawnedWave.freezeStrength, "Wave freeze strength should match weapon freeze strength");
 
-        // Cleanup
         Object.DestroyImmediate(spawnedWave.gameObject);
     }
 

@@ -17,7 +17,6 @@ public class FreezeWaveBehaviourTests
     [SetUp]
     public void Setup()
     {
-        // Create a GameObject for the enemy and add a Collider2D
         enemyGameObject = new GameObject();
         enemyCollider = enemyGameObject.AddComponent<BoxCollider2D>();
         enemyHealthController = enemyGameObject.AddComponent<EnemyHealthController>();
@@ -25,7 +24,6 @@ public class FreezeWaveBehaviourTests
 
         wave = new GameObject();
         freezeWaveBehaviour = wave.AddComponent<FreezeWaveBehaviour>();
-        // Set freeze length and strength for testing
         freezeWaveBehaviour.freezeLength = 5f;
         freezeWaveBehaviour.freezeStrength = 10f;
     }
@@ -33,7 +31,6 @@ public class FreezeWaveBehaviourTests
     [TearDown]
     public void Teardown()
     {
-        // Clean up after each test
         GameObject.DestroyImmediate(enemyGameObject);
         GameObject.DestroyImmediate(wave);
     }
@@ -41,7 +38,6 @@ public class FreezeWaveBehaviourTests
     [Test]
     public void OnCollisionWithEnemy_ThrowsException_WhenNoFreezeAnimationControllerIsPresent()
     {
-        // Act & Assert: Check if the exception is thrown
         var exception = Assert.Throws<Exception>(() => freezeWaveBehaviour.OnCollisionWithEnemy(enemyCollider));
         Assert.AreEqual("Why is there no FreezeAnimationController on enemy?", exception.Message);
     }
