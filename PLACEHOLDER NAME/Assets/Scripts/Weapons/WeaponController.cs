@@ -20,7 +20,7 @@ public class WeaponController : MonoBehaviour
     private float currCooldown;
 
 
-    protected virtual void Start()
+    public virtual void Start()
     {
         currCooldown = 0;
     }
@@ -36,7 +36,7 @@ public class WeaponController : MonoBehaviour
         }
     }
 
-    protected virtual void Attack()
+    public virtual void Attack()
     {
         currCooldown = shootCooldown;
     }
@@ -51,5 +51,8 @@ public class WeaponController : MonoBehaviour
 
     }
 
-
+    public float GetCooldown()
+    {
+        return currCooldown;
+    }
 }

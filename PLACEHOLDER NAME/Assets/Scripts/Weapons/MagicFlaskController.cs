@@ -9,12 +9,12 @@ public class MagicFlaskController : WeaponController
     [SerializeField] float damageAreaSize;
     [SerializeField] float howFastEnemiesTakeDamage;
 
-    protected override void Start()
+    public override void Start()
     {
         base.Start();
     }
 
-    protected override void Attack()
+    public override void Attack()
     {
         base.Attack();
 

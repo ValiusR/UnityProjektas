@@ -6,14 +6,14 @@ using static EnemySpawner;
 public class FireBallController : WeaponController
 {
     // Start is called before the first frame update
-    protected override void Start()
+    public override void Start()
     {
         base.Start();
     }
 
-    
 
-    protected override void Attack()
+
+    public override void Attack()
     {
         base.Attack();
 

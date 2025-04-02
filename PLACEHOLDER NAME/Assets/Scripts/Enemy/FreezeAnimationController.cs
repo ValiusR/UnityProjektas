@@ -12,10 +12,14 @@ public class FreezeAnimationController : MonoBehaviour
 
     public Coroutine freezeCoroutine;
 
+    public bool isFrozen;
+
     public void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         enemyMovement = GetComponent<EnemyMovement>();
+
+        isFrozen = false;
     }
 
     public void ActivateFreeze(float freezeTime, float freezeStrength)
@@ -26,6 +30,7 @@ public class FreezeAnimationController : MonoBehaviour
             //but too lazy rn
             return;
         }
+        isFrozen = true;
         freezeCoroutine = StartCoroutine(ActivateFreezeCoroutine(freezeTime, freezeStrength));
 
     }

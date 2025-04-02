@@ -9,14 +9,14 @@ public class FreezeWaveController : WeaponController
     [SerializeField] public float freezeStrength;
 
 
-    protected override void Start()
+    public override void Start()
     {
         base.Start();
     }
 
 
 
-    protected override void Attack()
+    public override void Attack()
     {
         base.Attack();
 

@@ -39,7 +39,7 @@ public class FlaskControllerTests
     }
 
     [Test]
-    public void Attack_SpawnsWave_WithCorrectStats()
+    public void Attack_SpawnsFlask_WithCorrectStats()
     {
         // Call attack
         flask.Invoke("Attack", 0f);

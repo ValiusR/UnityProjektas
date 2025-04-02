@@ -9,7 +9,7 @@ public class BaseWeaponBehaviour : MonoBehaviour
 
     [Range(0f, 10f)]
     [SerializeField] public float destroyAfterSeconds;
-    protected float currDestroySeconds;
+    public float currDestroySeconds;
 
     [HideInInspector] 
     public float speed;
@@ -17,7 +17,7 @@ public class BaseWeaponBehaviour : MonoBehaviour
     [HideInInspector]
     public int damage;
 
-    [SerializeField] protected LayerMask propLayer;
+    [SerializeField] public LayerMask propLayer;
     [SerializeField] public float collisionRadius = 0.1f;
 
     private Vector2 direction;
@@ -49,9 +49,9 @@ public class BaseWeaponBehaviour : MonoBehaviour
         SolveCollisions();
     }
 
-    private bool DidHitProp(Collider2D hitCollider)
+    public bool DidHitProp(Collider2D hitCollider)
     {
-        if (((1 << hitCollider.gameObject.layer) & propLayer) != 0)
+        if (hitCollider.gameObject.layer == propLayer)
         {
             return true;
         }

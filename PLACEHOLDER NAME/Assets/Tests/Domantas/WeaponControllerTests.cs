@@ -38,5 +38,19 @@ public class WeaponControllerTests
         Assert.AreEqual(properties.Length, 4, "More properties were added or removed");
     }
 
+    [Test]
+    public void RunAttack_CooldownIsSet()
+    {
+        weapon.Attack();
 
+        Assert.AreEqual(weapon.GetCooldown(), weapon.shootCooldown);
+    }
+
+    [Test]
+    public void RunStart_CooldownIsSet()
+    {
+        weapon.Start();
+
+        Assert.AreEqual(weapon.GetCooldown(), weapon.shootCooldown);
+    }
 }

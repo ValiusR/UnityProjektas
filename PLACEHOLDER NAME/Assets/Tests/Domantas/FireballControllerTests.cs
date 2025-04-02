@@ -38,7 +38,7 @@ public class FireBallControllerTests
     }
 
     [Test]
-    public void Attack_SpawnsWave_WithCorrectStats()
+    public void Attack_SpawnsFireball_WithCorrectStats()
     {
         // Call attack
         fireBall.Invoke("Attack", 0f);

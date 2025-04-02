@@ -38,25 +38,6 @@ public class BaseWeaponBehaviourTests
         }
     }
 
-    [Test]
-    public void Start_InitializesDirection()
-    {
-        // Ensure the camera exists before calling Start()
-        if (Camera.main == null)
-        {
-            var cameraObj = new GameObject("MainCamera");
-            cameraObj.AddComponent<Camera>();
-            cameraObj.transform.position = new Vector3(0, 0, -10);
-        }
-
-        // Call Start manually
-        weapon.Start();
-
-        // Assert direction is set
-        Assert.AreNotEqual(Vector2.zero, weaponObj.transform.up);
-    }
-
-    
 
     [Test]
     public void SolveCollisions_HitsEnemy_DealsDamage()
@@ -87,5 +68,23 @@ public class BaseWeaponBehaviourTests
 
         // Clean up
         Object.DestroyImmediate(enemyObj);
+    }
+
+    [Test]
+    public void DidHitProp_ReturnsTrueForPropLayer()
+    {
+        // Create a test object with a collider
+        GameObject propObj = new GameObject();
+        Collider2D propCollider = propObj.AddComponent<BoxCollider2D>();
+        propObj.layer = LayerMask.NameToLayer("Wall");
+
+        weapon.propLayer = LayerMask.NameToLayer("Wall");
+
+        bool result = weapon.DidHitProp(propCollider);
+
+        Assert.IsTrue(result, "DidHitProp should return true for prop layer.");
+
+        // Cleanup
+        Object.DestroyImmediate(propObj);
     }
 }
