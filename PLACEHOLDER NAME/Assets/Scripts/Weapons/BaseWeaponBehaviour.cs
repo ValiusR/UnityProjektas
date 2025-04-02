@@ -92,7 +92,7 @@ public class BaseWeaponBehaviour : MonoBehaviour
         if (enemyHealth != null)
         {
             enemyHealth.TakeDamage(damage);
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 

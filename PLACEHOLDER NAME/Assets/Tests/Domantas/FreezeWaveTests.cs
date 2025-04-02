@@ -2,6 +2,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 using System.Collections;
+using System.Reflection;
 
 public class FreezeWaveControllerTests
 {
@@ -68,8 +69,16 @@ public class FreezeWaveControllerTests
     }
 
     [Test]
-    public void GetName_ReturnsFreezeWave()
+    public void GetName_ReturnsExpectedString()
     {
         Assert.AreEqual("Freeze wave", freezeWave.GetName());
+    }
+
+    [Test]
+    public void GetPropertyCount_ReturnsCorrectPropertyCount()
+    {
+        FieldInfo[] properties = typeof(FreezeWaveController).GetFields();
+
+        Assert.AreEqual(properties.Length, 6, "More properties were added or removed");
     }
 }

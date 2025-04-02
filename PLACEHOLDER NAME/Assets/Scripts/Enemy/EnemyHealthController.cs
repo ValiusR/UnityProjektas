@@ -16,7 +16,7 @@ public class EnemyHealthController : MonoBehaviour
         currHP -= damage;
 
         //Play hurt animation
-        damageBlink.PlayBlink();
+        damageBlink?.PlayBlink();
 
         if (currHP <= 0)
         {

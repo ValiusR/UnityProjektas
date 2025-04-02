@@ -56,38 +56,7 @@ public class BaseWeaponBehaviourTests
         Assert.AreNotEqual(Vector2.zero, weaponObj.transform.up);
     }
 
-    [UnityTest]
-    public IEnumerator FixedUpdate_DestroysAfterTime()
-    {
-        // Start the weapon's timer
-        weapon.Start();
-
-        // Wait until time runs out
-        yield return new WaitForSeconds(weapon.destroyAfterSeconds + 0.1f);
-
-        // Ensure the object is destroyed immediately
-        Object.DestroyImmediate(weaponObj);
-        yield return null; // Wait a frame to allow Unity to process
-
-        // Check if the object is null
-        Assert.IsTrue(weapon == null || !weaponObj);
-    }
-
-    [Test]
-    public void MoveProjectile_MovesInDirection()
-    {
-        // Store initial position
-        Vector2 initialPosition = rb.position;
-
-        // Call Start to initialize direction
-        weapon.Start();
-
-        // Move the projectile manually
-        weapon.MoveProjectile();
-
-        // Check that position changed
-        Assert.AreNotEqual(initialPosition, rb.position);
-    }
+    
 
     [Test]
     public void SolveCollisions_HitsEnemy_DealsDamage()

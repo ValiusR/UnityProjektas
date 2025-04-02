@@ -2,6 +2,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 using System.Collections;
+using System.Reflection;
 
 public class FireBallControllerTests
 {
@@ -64,5 +65,13 @@ public class FireBallControllerTests
     public void GetName_ReturnsFreezeWave()
     {
         Assert.AreEqual("Fireball", fireBall.GetName());
+    }
+
+    [Test]
+    public void GetPropertyCount_ReturnsCorrectPropertyCount()
+    {
+        FieldInfo[] properties = typeof(FreezeWaveController).GetFields();
+
+        Assert.AreEqual(properties.Length, 6, "More properties were added or removed");
     }
 }
