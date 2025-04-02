@@ -29,10 +29,10 @@ public class EnemySpawner : MonoBehaviour
     }
 
     public int currentWaveCount;
-    Transform player;
+    public Transform player;
     [Header("Spawner Attributes")]
     float spawnTimer;
-    void Start()
+    public void Start()
     {
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
 
@@ -42,7 +42,7 @@ public class EnemySpawner : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         spawnTimer += Time.deltaTime;
 
@@ -52,7 +52,7 @@ public class EnemySpawner : MonoBehaviour
             SpawnEnemies();
         }
     }
-    void CalculateWaveQuota()
+    public void CalculateWaveQuota()
     {
         int currentWaveQuota = 0;
         foreach (var enemyGroup in waves[currentWaveCount].enemyGroups)
@@ -61,7 +61,7 @@ public class EnemySpawner : MonoBehaviour
         }
         waves[currentWaveCount].waveQuota = currentWaveQuota; 
     }
-    void SpawnEnemies()
+    public void SpawnEnemies()
     {
         if (waves[currentWaveCount].spawnCount < waves[currentWaveCount].waveQuota)
         {

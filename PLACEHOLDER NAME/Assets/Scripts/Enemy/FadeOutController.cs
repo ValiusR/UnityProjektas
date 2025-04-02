@@ -5,13 +5,13 @@ using UnityEngine;
 public class FadeOut : MonoBehaviour
 {
 
-    [SerializeField] float fadeAnimationTime;
+    [SerializeField] public float fadeAnimationTime;
 
-    [SerializeField] float currFadeAmount;
+    [SerializeField] public float currFadeAmount;
 
-    [SerializeField] SpriteRenderer sprite;
+    [SerializeField] public SpriteRenderer sprite;
 
-    [SerializeField] Material material;
+    [SerializeField] public Material material;
 
     public virtual IEnumerator FadeAnimation()
     {

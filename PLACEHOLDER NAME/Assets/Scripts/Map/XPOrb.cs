@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class XPOrb : MonoBehaviour
 {
-    [SerializeField] private int xpValue = 10; // Adjustable in Inspector
-    [SerializeField] private AudioClip collectSound; // Optional sound effect
-    [SerializeField] private GameObject collectEffect; // Optional particle effect
+    [SerializeField] public int xpValue = 10; // Adjustable in Inspector
+    [SerializeField] public AudioClip collectSound; // Optional sound effect
+    [SerializeField] public GameObject collectEffect; // Optional particle effect
 
-    private void OnTriggerEnter2D(Collider2D other)
+    public void OnTriggerEnter2D(Collider2D other)
     {
         // Check if colliding with player
         if (other.CompareTag("Player"))
@@ -27,7 +27,7 @@ public class XPOrb : MonoBehaviour
             }
 
             // Destroy the orb
-            Destroy(gameObject);
+            DestroyImmediate(gameObject);
         }
     }
 }

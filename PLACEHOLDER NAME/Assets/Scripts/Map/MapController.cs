@@ -9,15 +9,15 @@ public class MapController : MonoBehaviour
     public float chunkSize = 22f; // Adjust based on chunk dimensions
     public int loadRadius = 1; // Number of chunks to load around the player
 
-    private Dictionary<Vector2Int, GameObject> spawnedChunks = new Dictionary<Vector2Int, GameObject>();
-    private Dictionary<Vector2Int, List<GameObject>> chunkProps = new Dictionary<Vector2Int, List<GameObject>>();
+    public Dictionary<Vector2Int, GameObject> spawnedChunks = new Dictionary<Vector2Int, GameObject>();
+    public Dictionary<Vector2Int, List<GameObject>> chunkProps = new Dictionary<Vector2Int, List<GameObject>>();
 
-    void Update()
+    public void Update()
     {
         UpdateChunks();
     }
 
-    void UpdateChunks()
+    public void UpdateChunks()
     {
         Vector2Int playerChunkPos = GetChunkPosition(player.transform.position);
 
@@ -57,7 +57,7 @@ public class MapController : MonoBehaviour
         }
     }
 
-    void SpawnChunk(Vector2Int chunkPos)
+    public void SpawnChunk(Vector2Int chunkPos)
     {
         int rand = Random.Range(0, terrainChunks.Count);
         Vector3 worldPos = new Vector3(chunkPos.x * chunkSize, chunkPos.y * chunkSize, 0);
@@ -78,7 +78,7 @@ public class MapController : MonoBehaviour
         chunkProps[chunkPos] = props;
     }
 
-    void SetChunkPropsActive(Vector2Int chunkPos, bool active)
+    public void SetChunkPropsActive(Vector2Int chunkPos, bool active)
     {
         if (chunkProps.ContainsKey(chunkPos))
         {
@@ -109,7 +109,7 @@ public class MapController : MonoBehaviour
         }
     }
 
-    Vector2Int GetChunkPosition(Vector3 position)
+    public Vector2Int GetChunkPosition(Vector3 position)
     {
         return new Vector2Int(Mathf.FloorToInt(position.x / chunkSize), Mathf.FloorToInt(position.y / chunkSize));
     }

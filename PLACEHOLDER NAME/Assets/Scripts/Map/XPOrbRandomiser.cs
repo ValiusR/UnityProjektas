@@ -10,11 +10,11 @@ public class XPOrbRandomiser : MonoBehaviour
         public bool hasSpawned = false;
     }
 
-    [SerializeField] private List<OrbSpawnData> spawnPoints = new List<OrbSpawnData>();
-    [SerializeField] private List<GameObject> orbPrefabs = new List<GameObject>();
+    [SerializeField] public List<OrbSpawnData> spawnPoints = new List<OrbSpawnData>();
+    [SerializeField] public List<GameObject> orbPrefabs = new List<GameObject>();
     [Range(0f, 1f)] public float spawnChance = 0.5f;
 
-    private void Start()
+    public void Start()
     {
         InitializeSpawnPoints();
         SpawnOrbs();
@@ -35,7 +35,7 @@ public class XPOrbRandomiser : MonoBehaviour
         }
     }
 
-    private void SpawnOrbs()
+    public void SpawnOrbs()
     {
         if (orbPrefabs.Count == 0)
         {

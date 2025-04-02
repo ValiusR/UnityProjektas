@@ -5,13 +5,13 @@ using UnityEngine;
 public class DamageBlink : MonoBehaviour
 {
     [ColorUsage(true, true)]
-    [SerializeField] Color blinkColor;
+    [SerializeField] public Color blinkColor;
 
-    [SerializeField] float blinkAnimationTime;
+    [SerializeField] public float blinkAnimationTime;
 
-    [SerializeField] float currBlinkAmount;
+    [SerializeField] public float currBlinkAmount;
 
-    [SerializeField] SpriteRenderer sprite;
+    [SerializeField] public SpriteRenderer sprite;
 
     private void Awake()
     {

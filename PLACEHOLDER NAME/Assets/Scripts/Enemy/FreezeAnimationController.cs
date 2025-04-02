@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class FreezeAnimationController : MonoBehaviour
 {
-    [SerializeField] Color freezeColor;
+    [SerializeField] public Color freezeColor;
 
-    private SpriteRenderer spriteRenderer;
+    public SpriteRenderer spriteRenderer;
 
-    private EnemyMovement enemyMovement;
+    public EnemyMovement enemyMovement;
 
-    private Coroutine freezeCoroutine;
+    public Coroutine freezeCoroutine;
 
-    private void Start()
+    public void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         enemyMovement = GetComponent<EnemyMovement>();
@@ -30,7 +30,7 @@ public class FreezeAnimationController : MonoBehaviour
 
     }
 
-    private IEnumerator ActivateFreezeCoroutine(float freezeTime, float freezeStrength) 
+    public IEnumerator ActivateFreezeCoroutine(float freezeTime, float freezeStrength) 
     {
         float currTime = 0;
 

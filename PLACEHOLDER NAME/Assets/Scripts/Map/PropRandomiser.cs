@@ -8,12 +8,12 @@ public class PropRandomizer : MonoBehaviour
     public List<GameObject> propPrefabs;
 
 
-    void Start()
+    public void Start()
     {
         SpawnProps();
     }
 
-    void SpawnProps()
+    public void SpawnProps()
     {
         //Spawn a random prop at every spawn point
         foreach (GameObject sp in propSpawnPoints)
