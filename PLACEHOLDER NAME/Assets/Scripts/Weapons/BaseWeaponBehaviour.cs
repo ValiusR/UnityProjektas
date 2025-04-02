@@ -8,7 +8,7 @@ public class BaseWeaponBehaviour : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
 
     [Range(0f, 10f)]
-    [SerializeField] protected float destroyAfterSeconds;
+    [SerializeField] public float destroyAfterSeconds;
     protected float currDestroySeconds;
 
     [HideInInspector] 
