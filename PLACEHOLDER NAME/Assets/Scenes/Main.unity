@@ -1072,7 +1072,7 @@ MonoBehaviour:
   prefab: {fileID: 35273354904022579, guid: 110701f1fbb9e43448bde3245da85c3c, type: 3}
   damage: 5
   speed: 8
-  shootCooldown: 1.5
+  shootCooldown: 1
   weaponLevel: 1
   areaPrefab: {fileID: 3655188734221225493, guid: b530b34b348f4494c9445ca3202608eb, type: 3}
   damageAreaSize: 3
