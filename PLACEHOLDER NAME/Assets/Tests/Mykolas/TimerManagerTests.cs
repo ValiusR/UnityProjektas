@@ -3,13 +3,6 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
-
-using NUnit.Framework;
-using UnityEngine;
-using TMPro;
-
-using NUnit.Framework;
-using UnityEngine;
 using TMPro;
 
 public class TimerManagerEditModeTest

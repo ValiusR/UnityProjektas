@@ -1,29 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
-
-
-    [SerializeField] GameObject optionsMenu; // Assign your Options UI Prefab in the Inspector
+    [SerializeField] public GameObject optionsMenu;
 
     public void NewGame()
     {
-        Debug.Log("MainMenuManager NewGame()");
-        SceneManager.LoadScene("Main");
-        //SceneManager.UnloadSceneAsync("PauseMenu");
+        LoadGameScene();
     }
+
     public void Options()
     {
-        optionsMenu.SetActive(true);
-        Debug.Log("MainMenuManager Options()");
+        if (optionsMenu != null)
+        {
+            optionsMenu.SetActive(true);
+        }
     }
 
     public void QuitGame()
     {
-        Debug.Log("MainMenuManager QuitGame()");
+        QuitApplication();
+    }
+
+    protected virtual void LoadGameScene()
+    {
+        SceneManager.LoadScene("Main");
+    }
+
+    protected virtual void QuitApplication()
+    {
         Application.Quit();
     }
 }

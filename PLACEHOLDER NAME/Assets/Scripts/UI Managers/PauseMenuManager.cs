@@ -1,34 +1,51 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PauseMenuManager : MonoBehaviour
 {
-    [SerializeField] GameObject optionsMenu; // Assign your Options UI Prefab in the Inspector
+    [SerializeField] public GameObject optionsMenu;
+    protected MenuListener menuListener;
+
     public void Resume()
     {
-        Debug.Log("Resume button: Resume()");
-        MenuListener menuListener = FindObjectOfType<MenuListener>();
-        if (menuListener != null)
+        var listener = GetMenuListener();
+        if (listener != null)
         {
-            menuListener.ResumeGame();
+            listener.ResumeGame();
         }
     }
+
     public void QuitToMainMenu()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("MainMenu");
+        LoadMainMenuScene();
     }
 
     public void QuitGame()
     {
-        Application.Quit();
+        QuitApplication();
     }
 
     public void Options()
     {
-        optionsMenu.SetActive(true);
-        Debug.Log("MainMenuManager Options()");
+        if (optionsMenu != null)
+        {
+            optionsMenu.SetActive(true);
+        }
+    }
+
+    protected virtual MenuListener GetMenuListener()
+    {
+        return FindObjectOfType<MenuListener>();
+    }
+
+    protected virtual void LoadMainMenuScene()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    protected virtual void QuitApplication()
+    {
+        Application.Quit();
     }
 }

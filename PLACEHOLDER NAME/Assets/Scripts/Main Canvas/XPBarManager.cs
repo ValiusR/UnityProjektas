@@ -1,37 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class XPBarManager : MonoBehaviour
 {
-    [SerializeField] LevelUpSystem levelUpSystem; // Public field to assign the Player script
-    [Header("Image")]
-    [SerializeField] Image xpBarFill;
-    [SerializeField] TextMeshProUGUI xpMeterText;
+    [SerializeField] public LevelUpSystem levelUpSystem;
+    [SerializeField] public Image xpBarFill;
+    [SerializeField] public TextMeshProUGUI xpMeterText;
 
-    void Start()
+    public void Update()
     {
+        if (levelUpSystem != null)
+        {
+            UpdateXpBar(LevelUpSystem.experience, levelUpSystem.experienceToNextLevel);
+        }
     }
 
-    void Update()
+    public void UpdateXpBar(int currentExperience, int experienceToNextLevel)
     {
-        UpdateXpBar(LevelUpSystem.experience, levelUpSystem.experienceToNextLevel);
-    }
-
-    private void UpdateXpBar(int currentExperience, int experienceToNextLevel)
-    {
-        //Debug.Log("Current HEALTH: " + currentHealth);
-        //Debug.Log("Max health: " + maxHealth);
         if (xpBarFill != null)
         {
-            xpBarFill.fillAmount = currentExperience / (float)experienceToNextLevel;
-
+            xpBarFill.fillAmount = experienceToNextLevel > 0 ?
+                Mathf.Clamp01(currentExperience / (float)experienceToNextLevel) : 0f;
         }
+
         if (xpMeterText != null)
         {
-            xpMeterText.text = "XP: " + currentExperience + "/" + experienceToNextLevel;
+            xpMeterText.text = $"XP: {currentExperience}/{experienceToNextLevel}";
         }
     }
 }
