@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class DeathUiManager : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI scoreText;
-    [SerializeField] TextMeshProUGUI timeText;
+    [SerializeField] public TextMeshProUGUI scoreText;
+    [SerializeField] public TextMeshProUGUI timeText;
 
     void Start()
     {
@@ -23,20 +21,25 @@ public class DeathUiManager : MonoBehaviour
     public void QuitToMainMenu()
     {
         this.HideUI();
-        SceneManager.LoadScene("MainMenu");
+        LoadMainMenuScene();
     }
 
     public virtual void ShowDeathUI()
     {
-
-        //timeText.text = T
-        if (gameObject != null)
+        if (gameObject != null && this != null)
         {
             scoreText.text = "YOUR SCORE: " + ScoreManager.currScore;
             timeText.text = "YOU HAVE SURVIVED: " + TimerManager.formattedTime;
             Time.timeScale = 0f;
             gameObject.SetActive(true);
         }
-        
+    }
+
+    protected virtual void LoadMainMenuScene()
+    {
+        if(this != null)
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
     }
 }

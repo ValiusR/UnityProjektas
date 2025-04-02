@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class OptionsMenuManager : MonoBehaviour
 {
-    [SerializeField] TMP_Dropdown resDropDown;
+    [SerializeField] public TMP_Dropdown resDropDown;
 
     Resolution[] allResolutions;
     int selectedResoltuionIndex;
@@ -13,11 +13,8 @@ public class OptionsMenuManager : MonoBehaviour
 
     public void Start()
     {
-        Debug.Log("options menu setActive false");
         gameObject.SetActive(false);
-
-        allResolutions = Screen.resolutions;
-
+        allResolutions = GetScreenResolutions();
 
         List<string> resolutionStringList = new List<string>();
         string newRes;
@@ -36,28 +33,36 @@ public class OptionsMenuManager : MonoBehaviour
     public void ChangeResolution()
     {
         selectedResoltuionIndex = resDropDown.value;
-        Screen.SetResolution(selectedResolutionList[selectedResoltuionIndex].width, selectedResolutionList[selectedResoltuionIndex].height, true);
+        ApplyResolution(
+            selectedResolutionList[selectedResoltuionIndex].width,
+            selectedResolutionList[selectedResoltuionIndex].height,
+            true
+        );
     }
 
     public void OpenOptionsMenu()
     {
-        Debug.Log("open options menu");
-        // optionsMenu.SetActive(true);
-        gameObject.SetActive(true);
-        if (gameObject != null) // Prevent multiple instances
+        if (this && gameObject)
         {
             gameObject.SetActive(true);
         }
     }
-    
 
     public void CloseOptionsMenu()
     {
-        if (gameObject != null) 
+        if (this && gameObject)
         {
             gameObject.SetActive(false);
         }
     }
 
+    protected virtual Resolution[] GetScreenResolutions()
+    {
+        return Screen.resolutions;
+    }
 
+    protected virtual void ApplyResolution(int width, int height, bool fullscreen)
+    {
+        Screen.SetResolution(width, height, fullscreen);
+    }
 }
