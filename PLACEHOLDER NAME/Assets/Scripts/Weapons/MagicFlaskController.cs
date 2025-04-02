@@ -13,6 +13,17 @@ public class MagicFlaskController : WeaponController
     {
         base.Start();
     }
+
+    protected override void Update()
+    {
+        currCooldown -= Time.deltaTime;
+
+        if (currCooldown <= 0)
+        {
+            Attack();
+        }
+    }
+
     public override void EvolveWeapon()
     {
          this.damageAreaSize *= (float)1.2;

@@ -17,7 +17,7 @@ public class WeaponController : MonoBehaviour
     [Range(0f, 15)]
     public float shootCooldown;
 
-    private float currCooldown;
+    protected float currCooldown;
     public int weaponLevel=1;
 
 
