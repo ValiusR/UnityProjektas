@@ -15,14 +15,14 @@ public class OptionsMenuManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI sFXVolumeText = null;
     [SerializeField] float maxSliderAmount = 100.0f;
 
+    [SerializeField] TMP_Dropdown screenModeDropDown;
+
     //[SerializeField] TextMeshProUGUI sFXVolumeText;
 
     Resolution[] allResolutions;
     int selectedResoltuionIndex;
     List<Resolution> selectedResolutionList = new List<Resolution>();
 
-
-    
     public void SliderChangeBGVolume(float value)
     {
         float localValue = value * maxSliderAmount;
@@ -36,7 +36,7 @@ public class OptionsMenuManager : MonoBehaviour
         sFXVolumeText.text = localValue.ToString("0");
         AudioManager.instance._SFXSource.volume = value;
     }
-    
+
     private void Awake()
     {
         if (audioManager == null)
@@ -47,12 +47,12 @@ public class OptionsMenuManager : MonoBehaviour
 
     public void Start()
     {
-        
+
         sFXVolumeText.text = (maxSliderAmount * AudioManager.instance._SFXSource.volume).ToString("0");
         sFXVolume.value = AudioManager.instance._SFXSource.volume;
         bGVolumeText.text = (maxSliderAmount * AudioManager.instance._BackgroundMusicSource.volume).ToString("0");
         bGVolume.value = AudioManager.instance._BackgroundMusicSource.volume;
-        
+
         Debug.Log("options menu setActive false");
         gameObject.SetActive(false);
 
@@ -71,12 +71,37 @@ public class OptionsMenuManager : MonoBehaviour
             }
         }
         resDropDown.AddOptions(resolutionStringList);
+
+        List<string> screenModeOptions = new List<string> { "Windowed", "Fullscreen" };
+        screenModeDropDown.AddOptions(screenModeOptions);
+
+        if (Screen.fullScreenMode == FullScreenMode.FullScreenWindow || Screen.fullScreenMode == FullScreenMode.ExclusiveFullScreen)
+        {
+            screenModeDropDown.value = 1; // Fullscreen
+        }
+        else
+        {
+            screenModeDropDown.value = 0; // Windowed
+        }
     }
 
     public void ChangeResolution()
     {
         selectedResoltuionIndex = resDropDown.value;
-        Screen.SetResolution(selectedResolutionList[selectedResoltuionIndex].width, selectedResolutionList[selectedResoltuionIndex].height, true);
+        bool isFullScreen = (Screen.fullScreenMode == FullScreenMode.FullScreenWindow || Screen.fullScreenMode == FullScreenMode.ExclusiveFullScreen);
+        Screen.SetResolution(selectedResolutionList[selectedResoltuionIndex].width, selectedResolutionList[selectedResoltuionIndex].height, isFullScreen);
+    }
+
+    public void ChangeScreenMode()
+    {
+        if (screenModeDropDown.value == 0)
+        {
+            Screen.fullScreenMode = FullScreenMode.Windowed;
+        }
+        else if (screenModeDropDown.value == 1)
+        {
+            Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+        }
     }
 
     public void OpenOptionsMenu()
@@ -98,6 +123,4 @@ public class OptionsMenuManager : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
-
-
 }
