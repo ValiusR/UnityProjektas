@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
@@ -7,7 +9,9 @@ public class GarlicWeaponController : WeaponController
 {
     [Header("Garlic zone stats")]
     public float damageAreaSize;
+    private GameObject currentZone;
     public float howFastEnemiesTakeDamage;
+   // private GarlicWeaponBehaviour stats = null;
 
 
 
@@ -22,19 +26,35 @@ public class GarlicWeaponController : WeaponController
         // spawn the damage zone
         Attack();
     }
-    public override void EvolveWeapon()
+    public override void EvolveWeapon(int evolutionLevel)
     {
-        this.howFastEnemiesTakeDamage *= (float)0.8;
+        switch (evolutionLevel)
+        {
+            case 1:
+                this.howFastEnemiesTakeDamage *= (float)0.8;
+                break;
+            case 2:
+                this.DeleteZoneFromParent();
+                this.damageAreaSize += 2;
+                
+               // stats = null;
+                this.Attack();
+                break;
+            default:
+                throw new InvalidOperationException("Maximum evolution level reached. Cannot evolve further.");
+        }
+      //  this.howFastEnemiesTakeDamage *= (float)0.8;
 
     }
     protected override void Attack()
     {
-        GameObject zone = Instantiate(this.prefab);
-        zone.transform.SetParent(this.transform);
+       
+        currentZone = Instantiate(this.prefab);
+        currentZone.transform.SetParent(this.transform);
         // -0.37f so that the garlic looks more centered
-        zone.transform.localPosition = new Vector3(0, -0.3f, 0);
+        currentZone.transform.localPosition = new Vector3(0, -0.3f, 0);
 
-        GarlicWeaponBehaviour stats = zone.GetComponent<GarlicWeaponBehaviour>();
+        GarlicWeaponBehaviour stats = currentZone.GetComponent<GarlicWeaponBehaviour>();
 
         stats.damage = this.damage;
         stats.collisionRadius = this.damageAreaSize;
@@ -48,13 +68,36 @@ public class GarlicWeaponController : WeaponController
     {
         // Empty override needed
     }
+    private void DeleteZoneFromParent()
+    {
+        if (currentZone != null)
+        {
+            DG.Tweening.DOTween.Clear(currentZone);
+           
+            Destroy(currentZone); // Destroy the zone
+            currentZone = null;
+        }
+        else
+        {
+            Debug.LogWarning("No zone to delete.");
+        }
+    }
     public override string GetDescription()
     {
         return "Creates a zone around the player that damages surrounding enemies";
     }
-    public override string GetEvolutionDescription()
+    public override string GetEvolutionDescription(int evolutionLevel)
     {
-        return $"Decreases the damage interval of garlic by 20%.";
+        switch (evolutionLevel)
+        {
+            case 1:
+                return "Decreases the damage interval of garlic by 20%.";
+            case 2:
+                return "Extra radius.";
+            default:
+                throw new InvalidOperationException("Maximum evolution level reached. Cannot evolve further.");
+        }
+       // return $"Decreases the damage interval of garlic by 20%.";
     }
     public override string GetName()
     {

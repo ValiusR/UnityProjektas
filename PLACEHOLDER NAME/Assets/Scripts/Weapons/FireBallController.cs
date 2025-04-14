@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,7 @@ public class FireBallController : WeaponController
 {
     [SerializeField] public bool tripleShot = false;
     [SerializeField] private float spreadAngle = 45f;
-
+    [SerializeField] public bool doubleShot = false;
     AudioManager audioManager;
 
     private void Awake()
@@ -33,10 +34,14 @@ public class FireBallController : WeaponController
         Vector2 baseDirection = (mousePos - transform.position).normalized;
 
         // Create center fireball
-        CreateFireball(baseDirection);
+        if (tripleShot || !doubleShot)
+        {
+            CreateFireball(baseDirection);
+
+        }
         audioManager.PlaySFX(audioManager.fireball);
 
-        if (tripleShot)
+        if (doubleShot)
         {
             // Calculate spread directions
             Vector2 leftDirection = Quaternion.Euler(0, 0, spreadAngle) * baseDirection;
@@ -77,15 +82,35 @@ public class FireBallController : WeaponController
 
         }
     }*/
-    public override void EvolveWeapon()
+    public override void EvolveWeapon(int evolutionLevel)
     {
-        
-        this.tripleShot = true;
+        switch (evolutionLevel)
+        {
+            case 1:
+                this.doubleShot = true;
+                break;
+            case 2:
+                this.tripleShot = true;
+                break;
+            default:
+                throw new InvalidOperationException("Maximum evolution level reached. Cannot evolve further.");
+        }
+       // this.tripleShot = true;
 
     }
-    public override string GetEvolutionDescription()
+    public override string GetEvolutionDescription(int evolutionLevel)
     {
-        return $"Tripple shot";
+        switch (evolutionLevel)
+        {
+            case 1:
+                return $"Shoot two fireballs at 45° instead";
+            case 2:
+                return $"Shoot the fireball at the center position again";
+               
+            default:
+                throw new InvalidOperationException("Maximum evolution level reached. Cannot evolve further.");
+        }
+       // return $"Tripple shot";
     }
     public override string GetDescription()
     {

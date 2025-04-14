@@ -56,12 +56,14 @@ public class GarlicWeaponBehaviour : BaseWeaponBehaviour
     // Start is called before the first frame update
     protected override void Start()
     {
-        transform?.DORotate(new Vector3(0f, 0f, 360f), 20f, RotateMode.FastBeyond360).SetEase(Ease.Linear).SetLoops(-1, LoopType.Restart);
+        
+            transform?.DORotate(new Vector3(0f, 0f, 360f), 20f, RotateMode.FastBeyond360).SetEase(Ease.Linear).SetLoops(-1, LoopType.Restart);
 
-        currDestroySeconds = destroyAfterSeconds;
-        currDamageSpeed = 0;
+            currDestroySeconds = destroyAfterSeconds;
+            currDamageSpeed = 0;
 
-        SolveCollisions();
+            SolveCollisions();
+
     }
 
     public void SetScale()

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,7 +17,18 @@ public class PlayerHealthController : MonoBehaviour
     {
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
-
+    public void Heal(int healthToAdd)
+    {
+        if (currHP+healthToAdd >= maxHP)
+        {
+            currHP = maxHP;
+        }
+        else
+        {
+           
+            currHP += healthToAdd;
+        }
+    }
     public void TakeDamage(int damage)
     {
         if(currHP > damage)

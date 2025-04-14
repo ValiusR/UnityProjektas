@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,9 +23,20 @@ public class FreezeWaveController : WeaponController
         base.Start();
     }
 
-    public override void EvolveWeapon()
+    public override void EvolveWeapon(int evolutionLevel)
     {
-        this.canPierce = true;
+        switch (evolutionLevel)
+        {
+            case 1:
+                this.canPierce = true;
+                break;
+            case 2:
+                this.freezeLength += 1;
+                break;
+            default:
+                throw new InvalidOperationException("Maximum evolution level reached. Cannot evolve further.");
+        }
+        //this.canPierce = true;
 
     }
     protected override void Attack()
@@ -52,9 +64,18 @@ public class FreezeWaveController : WeaponController
     {
         return $"Freeze wave";
     }
-    public override string GetEvolutionDescription()
+    public override string GetEvolutionDescription(int evolutionLevel)
     {
-        return $"Pierces enemies.";
+        switch (evolutionLevel)
+        {
+            case 1:
+                return "Pierces enemies.";
+            case 2:
+                return "Freeze lasts an extra second.";
+            default:
+                throw new InvalidOperationException("Maximum evolution level reached. Cannot evolve further.");
+        }
+      //  return $"Pierces enemies.";
     }
     public override GameObject GetPrefab()
     {

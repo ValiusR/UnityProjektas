@@ -12,6 +12,7 @@ public class LevelUpSystem : MonoBehaviour
     public static int experience = 0;
     public int experienceToNextLevel = 100;
     public int weaponEvolutionInterval = 2;
+    public int maxEvolutionLevel;
 
     private void Start()
     {
@@ -171,13 +172,17 @@ public class LevelUpSystem : MonoBehaviour
             .ThenBy(w => Random.value)   // Then randomize
             .Take(upgradeSlots))
         {
-            bool isEvolution = weapon.weaponLevel == weaponEvolutionInterval - 1;
+            bool isEvolution = (weapon.weaponLevel > (weaponEvolutionInterval-1) &&
+                weapon.weaponLevel % (weaponEvolutionInterval) == 0 && weapon.weaponLevel / (weaponEvolutionInterval) <= maxEvolutionLevel);
+
+          //  bool isEvolution = weapon.weaponLevel == weaponEvolutionInterval - 1;
+            int evolutionLevel = weapon.weaponLevel / (weaponEvolutionInterval);
             options.Add(new WeaponUpgradeOption(
                 weapon.GetName(),
                 isEvolution
-                    ? $"EVOLUTION: {weapon.GetName()} - {weapon.GetEvolutionDescription()}"
+                    ? $"EVOLUTION: {weapon.GetName()} - {weapon.GetEvolutionDescription(evolutionLevel)}"
                     : $"Upgrade {weapon.GetName()} (+10% damage)",
-                isEvolution ? () => ApplyUpgradeAndEvolve(weapon) : () => ApplyUpgrade(weapon),
+                isEvolution ? () => ApplyUpgradeAndEvolve(weapon, evolutionLevel) : () => ApplyUpgrade(weapon),
                 weapon.prefab // Make sure prefab is assigned in inspector
             ));
         }
@@ -236,11 +241,11 @@ public class LevelUpSystem : MonoBehaviour
         weapon.damage = (int)(weapon.damage * 1.1f); // Increase damage by 10%
         Debug.Log($"Upgraded {weapon.name} to {weapon.damage} damage");
     }
-    private void ApplyUpgradeAndEvolve(WeaponController weapon)
+    private void ApplyUpgradeAndEvolve(WeaponController weapon, int evolutionLevel)
     {
         weapon.weaponLevel++;
         weapon.damage = (int)(weapon.damage * 1.1f); // Increase damage by 10%
-        weapon.EvolveWeapon();
+        weapon.EvolveWeapon(evolutionLevel);
         Debug.Log($"EVOLVED {weapon.name} to {weapon.damage} damage");
     }
     private void UnlockWeapon(WeaponController weapon)

@@ -1,6 +1,8 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class OrbWeaponController : WeaponController
@@ -13,10 +15,23 @@ public class OrbWeaponController : WeaponController
     public float distanceFromPlayer;
     public float howFastEnemiesTakeDamage;
 
-    public override void EvolveWeapon()
+    public override void EvolveWeapon(int evolutionLevel)
     {
-        this.orbAmount+=2;
-        this.CreateOrbs();
+        switch (evolutionLevel)
+        {
+            case 1:                
+                    this.orbAmount += 2;
+                    this.CreateOrbs();
+                break;
+            case 2:
+                this.distanceFromPlayer += 1;
+                this.CreateOrbs();
+                break;
+            default:
+                throw new InvalidOperationException("Maximum evolution level reached. Cannot evolve further.");
+        }
+        //this.orbAmount+=2;
+       // this.CreateOrbs();
     }
 
     public override string GetDescription()
@@ -24,9 +39,18 @@ public class OrbWeaponController : WeaponController
         return "Magical orbs circle around, damaging enemies who dare to touch them";
     }
 
-    public override string GetEvolutionDescription()
+    public override string GetEvolutionDescription(int evolutionLevel)
     {
-        return "Get two extra balls";
+       // return "Get two extra balls";
+        switch (evolutionLevel)
+        {
+            case 1:
+                return "Get two extra balls.";
+            case 2:
+                return "Balls are further from your character.";
+            default:
+                throw new InvalidOperationException("Maximum evolution level reached. Cannot evolve further.");
+        }
     }
 
     public override string GetName()
