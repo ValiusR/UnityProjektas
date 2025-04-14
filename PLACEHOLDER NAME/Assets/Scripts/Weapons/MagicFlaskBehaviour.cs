@@ -7,6 +7,7 @@ public class MagicFlaskBehaviour : BaseWeaponBehaviour
     [HideInInspector] public GameObject damageField;
     [HideInInspector] public float areaSize;
     [HideInInspector] public float damageSpeed;
+    public bool doubledTime = false;
 
     AudioManager audioManager;
 
@@ -63,6 +64,8 @@ public class MagicFlaskBehaviour : BaseWeaponBehaviour
         GameObject area = Instantiate(damageField);
 
         MagicFlaskDamageAreaBehaviour behaviour = area.GetComponent<MagicFlaskDamageAreaBehaviour>();
+        if (doubledTime)
+            behaviour.doubledTime = true;
 
         behaviour.damage = this.damage;
         behaviour.collisionRadius = areaSize;

@@ -18,6 +18,7 @@ public class XPOrb : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // Add XP to player
+            
             LevelUpSystem.GainXP(xpValue);
 
             // Play sound

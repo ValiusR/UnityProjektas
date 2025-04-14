@@ -8,10 +8,13 @@ public class MagicFlaskDamageAreaBehaviour : BaseWeaponBehaviour
     public float damageSpeed;
 
     private float currDamageSpeed;
+    public bool doubledTime = false;
 
     protected override void Start()
     {
         currDestroySeconds = destroyAfterSeconds;
+        if (doubledTime)
+            currDestroySeconds *= 2;
         currDamageSpeed = 0;
 
         this.transform.localScale = new Vector3(collisionRadius, collisionRadius, 1);
