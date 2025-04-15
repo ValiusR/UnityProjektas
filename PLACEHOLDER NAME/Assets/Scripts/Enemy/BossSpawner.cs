@@ -29,10 +29,15 @@ public class BossSpawner : MonoBehaviour
     {
         if (bossPrefab != null && player != null)
         {
+
+            PlayerBoundary playerBoundary = player.GetComponent<PlayerBoundary>();
+
+
             Vector2 randomOffset = Random.insideUnitCircle.normalized * spawnDistance;
             Vector3 spawnPosition = player.position + new Vector3(randomOffset.x, randomOffset.y, 0);
 
             Instantiate(bossPrefab, spawnPosition, Quaternion.identity);
+            playerBoundary.CreateBoundaryOnBossSpawn();
         }
     }
 }

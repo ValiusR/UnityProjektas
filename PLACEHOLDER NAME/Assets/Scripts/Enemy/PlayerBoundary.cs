@@ -12,26 +12,21 @@ public class PlayerBoundary : MonoBehaviour
 
     private GameObject boundaryContainer;
     private GameObject visualLinesContainer;
-    private GameObject player;
+    private Transform playerTransform;
+    private bool boundaryCreated = false;
 
     void Start()
     {
-        player = GameObject.Find("Player");
-        if (player == null)
-        {
-            Debug.LogError("Player object not found!");
-            return;
-        }
-
-        CreateBoundary();
+        playerTransform = transform;
     }
 
-    void CreateBoundary()
+    public void CreateBoundaryOnBossSpawn()
     {
+        if (boundaryCreated) return;
 
         // Create main container
-        boundaryContainer = new GameObject("BoundaryEdges");
-        boundaryContainer.transform.position = player.transform.position;
+        boundaryContainer = new GameObject("BoundaryColliders");
+        boundaryContainer.transform.position = playerTransform.position;
         boundaryContainer.layer = boundaryLayer;
 
         // Setup static Rigidbody2D for physics interactions
@@ -39,41 +34,36 @@ public class PlayerBoundary : MonoBehaviour
         rb.bodyType = RigidbodyType2D.Static;
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
 
-        float half = boundarySize / 2f;
+        float halfSize = boundarySize / 2f;
 
-        // Create four edge colliders (top, bottom, left, right)
-        CreateEdge("TopEdge", new Vector2(-half, half), new Vector2(half, half));
-        CreateEdge("BottomEdge", new Vector2(-half, -half), new Vector2(half, -half));
-        CreateEdge("LeftEdge", new Vector2(-half, -half), new Vector2(-half, half));
-        CreateEdge("RightEdge", new Vector2(half, -half), new Vector2(half, half));
+        // Create four Box Colliders (top, bottom, left, right)
+        CreateBoxCollider("TopBoundary", new Vector2(0f, halfSize + lineThickness / 2f), new Vector2(boundarySize, lineThickness));
+        CreateBoxCollider("BottomBoundary", new Vector2(0f, -halfSize + lineThickness / 2f), new Vector2(boundarySize, lineThickness));
+        CreateBoxCollider("LeftBoundary", new Vector2(-halfSize - lineThickness / 2f, 0f), new Vector2(lineThickness, boundarySize));
+        CreateBoxCollider("RightBoundary", new Vector2(halfSize + lineThickness / 2f, 0f), new Vector2(lineThickness, boundarySize));
 
         // Create visible boundaries
         CreateVisualBoundary();
-        PhysicsMaterial2D noFrictionMaterial = new PhysicsMaterial2D();
-        noFrictionMaterial.friction = 0f;
-        noFrictionMaterial.bounciness = 0f;
 
-        // Apply to all edge colliders
-        foreach (EdgeCollider2D edge in boundaryContainer.GetComponentsInChildren<EdgeCollider2D>())
-        {
-            edge.sharedMaterial = noFrictionMaterial;
-        }
+        boundaryCreated = true;
     }
 
-    void CreateEdge(string name, Vector2 start, Vector2 end)
+    void CreateBoxCollider(string name, Vector2 offset, Vector2 size)
     {
-        GameObject edge = new GameObject(name);
-        edge.transform.parent = boundaryContainer.transform;
-        edge.layer = boundaryLayer;
+        GameObject boundaryPart = new GameObject(name);
+        boundaryPart.transform.SetParent(boundaryContainer.transform);
+        boundaryPart.transform.localPosition = offset;
+        boundaryPart.layer = boundaryLayer;
 
-        EdgeCollider2D edgeCollider = edge.AddComponent<EdgeCollider2D>();
-        edgeCollider.points = new Vector2[] { start, end };
+        BoxCollider2D boxCollider = boundaryPart.AddComponent<BoxCollider2D>();
+        boxCollider.size = size;
+        boxCollider.isTrigger = false; // Ensure it's a solid collider
     }
 
     void CreateVisualBoundary()
     {
         visualLinesContainer = new GameObject("BoundaryVisuals");
-        visualLinesContainer.transform.position = player.transform.position;
+        visualLinesContainer.transform.position = playerTransform.position;
 
         // Create four visible lines to match boundary
         CreateVisualLine("TopLine", new Vector2(0, boundarySize / 2),
@@ -102,7 +92,6 @@ public class PlayerBoundary : MonoBehaviour
 
     Sprite CreateSolidSprite(Vector2 size)
     {
-        // Create a properly sized white sprite
         int width = Mathf.CeilToInt(size.x * 100);
         int height = Mathf.CeilToInt(size.y * 100);
         Texture2D tex = new Texture2D(width, height);
