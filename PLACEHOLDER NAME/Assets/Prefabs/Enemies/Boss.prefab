@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: -8255814649159158804}
   - component: {fileID: -8264770950833124604}
   - component: {fileID: -2526145623984183792}
+  - component: {fileID: -8717167181566786742}
   m_Layer: 7
   m_Name: Boss
   m_TagString: Enemy
@@ -265,3 +266,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   freezeColor: {r: 0.21176471, g: 0.30980393, b: 0.6313726, a: 1}
+--- !u!114 &-8717167181566786742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838671491375828895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f10d7386e78fabe4e8f191be9215e865, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boundarySize: 20
+  lineThickness: 0.5
+  lineColor: {r: 0, g: 0, b: 0, a: 1}
+  boundaryLayer: 8
+  enemyLayer: 9
