@@ -19,10 +19,10 @@ public class PlayerMovementController : MonoBehaviour
 
     [Header("Controls")]
 
-    public KeyCode moveUpKey = KeyCode.W;
-    public KeyCode moveDownKey = KeyCode.S;
-    public KeyCode moveLeftKey = KeyCode.A;
-    public KeyCode moveRightKey = KeyCode.D;
+    public static KeyCode moveUpKey = KeyCode.W;
+    public static KeyCode moveDownKey = KeyCode.S;
+    public static KeyCode moveLeftKey = KeyCode.A;
+    public static KeyCode moveRightKey = KeyCode.D;
 
     // Key names for PlayerPrefs
     private const string MOVE_UP_KEY = "MoveUpKey";
@@ -65,7 +65,7 @@ public class PlayerMovementController : MonoBehaviour
             else
             {
                 currentVelocity = Vector2.zero; // Snap to zero if slow enough
-                rb.velocity = Vector2.zero; // Ensure Rigidbody stops fully
+                rb.velocity = Vector2.zero; 
             }
         }
     }
@@ -73,12 +73,8 @@ public class PlayerMovementController : MonoBehaviour
     void MovePlayer(float accel, Vector2 direction)
     {
         Vector2 targetVelocity = direction * maxSpeed;
-        // Use Time.fixedDeltaTime in FixedUpdate if moving Rigidbody directly with velocity
-        // Since we're using Lerp and rb.position, Time.deltaTime in Update is acceptable
         currentVelocity = Vector2.Lerp(currentVelocity, targetVelocity, accel * Time.deltaTime);
 
-        // Try to move in that direction while checking for obstacles
-        // Using rb.MovePosition is generally better for physics interactions
         AttemptMoveWithMovePosition(currentVelocity * Time.deltaTime);
     }
 
@@ -98,7 +94,7 @@ public class PlayerMovementController : MonoBehaviour
             currentVelocity = Vector2.zero; 
         }
     }
-    public void LoadKeyBindings()
+    public static void LoadKeyBindings()
     {
         moveUpKey = (KeyCode)PlayerPrefs.GetInt(MOVE_UP_KEY, (int)KeyCode.W);
         moveDownKey = (KeyCode)PlayerPrefs.GetInt(MOVE_DOWN_KEY, (int)KeyCode.S);
@@ -107,30 +103,4 @@ public class PlayerMovementController : MonoBehaviour
         Debug.Log("Player controls loaded.");
     }
 
-    public void SaveKeyBindings()
-    {
-        PlayerPrefs.SetInt(MOVE_UP_KEY, (int)moveUpKey);
-        PlayerPrefs.SetInt(MOVE_DOWN_KEY, (int)moveDownKey);
-        PlayerPrefs.SetInt(MOVE_LEFT_KEY, (int)moveLeftKey);
-        PlayerPrefs.SetInt(MOVE_RIGHT_KEY, (int)moveRightKey);
-        PlayerPrefs.Save(); // Ensure changes are written to disk
-        Debug.Log("Player controls saved.");
-    }
-
-    // Methods called by OptionsMenuManager to update keys
-    public void SetMoveUpKey(KeyCode newKey) { moveUpKey = newKey; }
-    public void SetMoveDownKey(KeyCode newKey) { moveDownKey = newKey; }
-    public void SetMoveLeftKey(KeyCode newKey) { moveLeftKey = newKey; }
-    public void SetMoveRightKey(KeyCode newKey) { moveRightKey = newKey; }
-
-    // Optional: Reset to defaults
-    public void ResetKeyBindings()
-    {
-        moveUpKey = KeyCode.W;
-        moveDownKey = KeyCode.S;
-        moveLeftKey = KeyCode.A;
-        moveRightKey = KeyCode.D;
-        SaveKeyBindings(); // Save defaults after resetting
-        Debug.Log("Player controls reset to defaults.");
-    }
 }

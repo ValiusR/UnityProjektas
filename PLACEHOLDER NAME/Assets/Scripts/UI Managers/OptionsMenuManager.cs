@@ -36,7 +36,6 @@ public class OptionsMenuManager : MonoBehaviour
 
     private Image rebindBackground;
 
-    private PlayerMovementController playerMovement;
     private KeyCode keyToRebind;
     private bool isRebinding = false;
 
@@ -44,6 +43,7 @@ public class OptionsMenuManager : MonoBehaviour
 
     private void Awake()
     {
+        LoadKeyBindings();
         if (audioManager == null)
         {
             audioManager = FindObjectOfType<AudioManager>(); // Find it in the scene
@@ -89,24 +89,13 @@ public class OptionsMenuManager : MonoBehaviour
             screenModeDropDown.value = 0; // Windowed
         }
 
-        playerMovement = FindObjectOfType<PlayerMovementController>();
         UpdateKeyButtonTexts();
         upKeyButton.onClick.AddListener(() => StartRebinding("MoveUp"));
         downKeyButton.onClick.AddListener(() => StartRebinding("MoveDown"));
         leftKeyButton.onClick.AddListener(() => StartRebinding("MoveLeft"));
         rightKeyButton.onClick.AddListener(() => StartRebinding("MoveRight"));
 
-
-        // Get reference to the background image
         rebindBackground = rebindPanel.GetComponent<Image>();
-
-        // Initialize with transparent color
-        /*
-        Color bgColor = rebindBackground.color;
-        bgColor.a = 0f;
-        rebindBackground.color = bgColor;
-        */
-
         rebindPanel.SetActive(false);
 
     }
@@ -126,6 +115,7 @@ public class OptionsMenuManager : MonoBehaviour
                         if (keyCode.ToString().Contains("Mouse")) continue;
 
                         FinishRebinding(keyCode);
+                        LoadKeyBindings();
                         return;
                     }
                 }
@@ -133,12 +123,12 @@ public class OptionsMenuManager : MonoBehaviour
         }
     }
 
+    private string rebindingAction; // Add this class variable
     private void StartRebinding(string keyAction)
     {
 
-        // Set the prompt text
+        rebindingAction = keyAction; // Store which action we're rebinding
         rebindPromptText.text = $"Press a key for {keyAction}\n<size=24><color=#AAAAAA>ESC to cancel</color></size>";
-
         isRebinding = true;
         rebindPanel.SetActive(true);
 
@@ -147,19 +137,19 @@ public class OptionsMenuManager : MonoBehaviour
         {
             case "MoveUp":
                 rebindPromptText.text = "Press a key for Move Up";
-                keyToRebind = playerMovement.moveUpKey;
+                keyToRebind = moveUpKey;
                 break;
             case "MoveDown":
                 rebindPromptText.text = "Press a key for Move Down";
-                keyToRebind = playerMovement.moveDownKey;
+                keyToRebind = moveDownKey;
                 break;
             case "MoveLeft":
                 rebindPromptText.text = "Press a key for Move Left";
-                keyToRebind = playerMovement.moveLeftKey;
+                keyToRebind = moveLeftKey;
                 break;
             case "MoveRight":
                 rebindPromptText.text = "Press a key for Move Right";
-                keyToRebind = playerMovement.moveRightKey;
+                keyToRebind = moveRightKey;
                 break;
         }
     }
@@ -169,33 +159,32 @@ public class OptionsMenuManager : MonoBehaviour
         isRebinding = false;
         rebindPanel.SetActive(false);
 
-        // Update the appropriate key in PlayerMovementController
-        switch (rebindPromptText.text)
+        switch (rebindingAction)
         {
-            case "Press a key for Move Up":
-                playerMovement.SetMoveUpKey(newKey);
+            case "MoveUp":
+                SetMoveUpKey(newKey);
                 break;
-            case "Press a key for Move Down":
-                playerMovement.SetMoveDownKey(newKey);
+            case "MoveDown":
+                SetMoveDownKey(newKey);
                 break;
-            case "Press a key for Move Left":
-                playerMovement.SetMoveLeftKey(newKey);
+            case "MoveLeft":
+                SetMoveLeftKey(newKey);
                 break;
-            case "Press a key for Move Right":
-                playerMovement.SetMoveRightKey(newKey);
+            case "MoveRight":
+                SetMoveRightKey(newKey);
                 break;
         }
 
-        playerMovement.SaveKeyBindings();
+        SaveKeyBindings();
         UpdateKeyButtonTexts();
     }
 
     private void UpdateKeyButtonTexts()
     {
-        upKeyText.text = playerMovement.moveUpKey.ToString();
-        downKeyText.text = playerMovement.moveDownKey.ToString();
-        leftKeyText.text = playerMovement.moveLeftKey.ToString();
-        rightKeyText.text = playerMovement.moveRightKey.ToString();
+        upKeyText.text = moveUpKey.ToString();
+        downKeyText.text = moveDownKey.ToString();
+        leftKeyText.text = moveLeftKey.ToString();
+        rightKeyText.text = moveRightKey.ToString();
     }
 
     public void SliderChangeBGVolume(float value)
@@ -249,5 +238,57 @@ public class OptionsMenuManager : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
+    }
+
+
+
+    [Header("Controls")]
+
+    public KeyCode moveUpKey = KeyCode.W;
+    public KeyCode moveDownKey = KeyCode.S;
+    public KeyCode moveLeftKey = KeyCode.A;
+    public KeyCode moveRightKey = KeyCode.D;
+
+    // Key names for PlayerPrefs
+    private const string MOVE_UP_KEY = "MoveUpKey";
+    private const string MOVE_DOWN_KEY = "MoveDownKey";
+    private const string MOVE_LEFT_KEY = "MoveLeftKey";
+    private const string MOVE_RIGHT_KEY = "MoveRightKey";
+
+    public void LoadKeyBindings()
+    {
+        moveUpKey = (KeyCode)PlayerPrefs.GetInt(MOVE_UP_KEY, (int)KeyCode.W);
+        moveDownKey = (KeyCode)PlayerPrefs.GetInt(MOVE_DOWN_KEY, (int)KeyCode.S);
+        moveLeftKey = (KeyCode)PlayerPrefs.GetInt(MOVE_LEFT_KEY, (int)KeyCode.A);
+        moveRightKey = (KeyCode)PlayerPrefs.GetInt(MOVE_RIGHT_KEY, (int)KeyCode.D);
+        Debug.Log("Player controls loaded.");
+    }
+
+    public void SaveKeyBindings()
+    {
+        PlayerPrefs.SetInt(MOVE_UP_KEY, (int)moveUpKey);
+        PlayerPrefs.SetInt(MOVE_DOWN_KEY, (int)moveDownKey);
+        PlayerPrefs.SetInt(MOVE_LEFT_KEY, (int)moveLeftKey);
+        PlayerPrefs.SetInt(MOVE_RIGHT_KEY, (int)moveRightKey);
+        PlayerPrefs.Save(); // Ensure changes are written to disk
+        PlayerMovementController.LoadKeyBindings();
+        Debug.Log("Player controls saved.");
+    }
+
+    // Methods called by OptionsMenuManager to update keys
+    public void SetMoveUpKey(KeyCode newKey) { moveUpKey = newKey; }
+    public void SetMoveDownKey(KeyCode newKey) { moveDownKey = newKey; }
+    public void SetMoveLeftKey(KeyCode newKey) { moveLeftKey = newKey; }
+    public void SetMoveRightKey(KeyCode newKey) { moveRightKey = newKey; }
+
+    // Optional: Reset to defaults
+    public void ResetKeyBindings()
+    {
+        moveUpKey = KeyCode.W;
+        moveDownKey = KeyCode.S;
+        moveLeftKey = KeyCode.A;
+        moveRightKey = KeyCode.D;
+        SaveKeyBindings(); // Save defaults after resetting
+        Debug.Log("Player controls reset to defaults.");
     }
 }

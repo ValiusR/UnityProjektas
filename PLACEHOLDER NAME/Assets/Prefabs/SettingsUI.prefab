@@ -7221,6 +7221,10 @@ MonoBehaviour:
   rightKeyText: {fileID: 1731234026196685025}
   rebindPanel: {fileID: 5142713816955245789}
   rebindPromptText: {fileID: 1352749175396953080}
+  moveUpKey: 119
+  moveDownKey: 115
+  moveLeftKey: 97
+  moveRightKey: 100
 --- !u!1 &8495975700147881332
 GameObject:
   m_ObjectHideFlags: 0
