@@ -1,73 +1,45 @@
-using UnityEngine;
-
+﻿using UnityEngine;
 
 public class PlayerMovementController : MonoBehaviour
-
 {
-
     [Header("References")]
-
     [SerializeField] private Rigidbody2D rb;
-
     [SerializeField] private BoxCollider2D boxCollider;
 
-
     [Header("Movement")]
-
     [Range(0.1f, 20f)][SerializeField] private float maxSpeed;
-
     [Range(0.1f, 20f)][SerializeField] private float acceleration;
-
     [Range(0.1f, 20f)][SerializeField] private float deacceleration;
-
-    [SerializeField] private LayerMask obstacleLayer; // Add this to filter what the player collides with
-
-    private Vector2 currentVelocity;
+    [SerializeField] private LayerMask obstacleLayer;
 
     [SerializeField] public Vector2 playerInput;
 
+    private Vector2 currentVelocity;
+
+    private const float skinWidth = 0.01f;
 
     void Update()
-
     {
-
         playerInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
 
-
         if (playerInput != Vector2.zero)
-
         {
-
             MovePlayer(acceleration, playerInput);
-
         }
-
         else
-
         {
-
             MovePlayer(deacceleration, Vector2.zero);
-
         }
-
     }
-
 
     void MovePlayer(float accel, Vector2 direction)
-
     {
-
         Vector2 targetVelocity = direction * maxSpeed;
-
         currentVelocity = Vector2.Lerp(currentVelocity, targetVelocity, accel * Time.deltaTime);
 
-
-        // Try to move in that direction while checking for obstacles
-
+        // Apply movement with collision checks
         AttemptMove(currentVelocity * Time.deltaTime);
-
     }
-
 
     void AttemptMove(Vector2 moveAmount)
     {
@@ -75,10 +47,13 @@ public class PlayerMovementController : MonoBehaviour
         Vector2 verticalMove = new Vector2(0, moveAmount.y);
 
         // Horizontal Movement Check
-        if (horizontalMove.magnitude > 0) // Only check if there is horizontal movement.
+        if (horizontalMove.magnitude > 0)
         {
             RaycastHit2D[] horizontalHits = new RaycastHit2D[1];
-            int horizontalHitCount = rb.Cast(horizontalMove.normalized, new ContactFilter2D { layerMask = obstacleLayer, useLayerMask = true }, horizontalHits, horizontalMove.magnitude);
+            int horizontalHitCount = rb.Cast(horizontalMove.normalized,
+                new ContactFilter2D { layerMask = obstacleLayer, useLayerMask = true },
+                horizontalHits,
+                horizontalMove.magnitude + skinWidth);
 
             if (horizontalHitCount == 0)
             {
@@ -87,10 +62,13 @@ public class PlayerMovementController : MonoBehaviour
         }
 
         // Vertical Movement Check
-        if (verticalMove.magnitude > 0) // Only check if there is vertical movement.
+        if (verticalMove.magnitude > 0)
         {
             RaycastHit2D[] verticalHits = new RaycastHit2D[1];
-            int verticalHitCount = rb.Cast(verticalMove.normalized, new ContactFilter2D { layerMask = obstacleLayer, useLayerMask = true }, verticalHits, verticalMove.magnitude);
+            int verticalHitCount = rb.Cast(verticalMove.normalized,
+                new ContactFilter2D { layerMask = obstacleLayer, useLayerMask = true },
+                verticalHits,
+                verticalMove.magnitude + skinWidth);
 
             if (verticalHitCount == 0)
             {
@@ -98,5 +76,4 @@ public class PlayerMovementController : MonoBehaviour
             }
         }
     }
-
 }

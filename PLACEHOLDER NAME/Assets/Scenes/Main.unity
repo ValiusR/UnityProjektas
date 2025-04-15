@@ -742,7 +742,6 @@ MonoBehaviour:
   lineThickness: 0.2
   lineColor: {r: 0, g: 0, b: 0, a: 1}
   boundaryLayer: 8
-  enemyLayer: 9
 --- !u!1 &1638205279
 GameObject:
   m_ObjectHideFlags: 0
