@@ -19,11 +19,11 @@ public class PlayerAnimator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (pc.playerInput.x != 0)
+        if (pc.PlayerInput.x != 0)
         {
             am.SetBool("MoveUp", false);
             am.SetBool("MoveDown", false);
-            if (pc.playerInput.x > 0)
+            if (pc.PlayerInput.x > 0)
             {
                 am.SetBool("MoveLeft", false);
                 am.SetBool("MoveRight", true);
@@ -34,11 +34,11 @@ public class PlayerAnimator : MonoBehaviour
                 am.SetBool("MoveLeft", true);
             }
         }
-        else if (pc.playerInput.y != 0)
+        else if (pc.PlayerInput.y != 0)
         {
             am.SetBool("MoveRight", false);
             am.SetBool("MoveLeft", false);
-            if (pc.playerInput.y > 0)
+            if (pc.PlayerInput.y > 0)
             {
                 am.SetBool("MoveDown", false);
                 am.SetBool("MoveUp", true);

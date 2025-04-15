@@ -1,30 +1,28 @@
 using UnityEngine;
-using System.Collections; // Needed for Coroutine
 
 public class PlayerMovementController : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Rigidbody2D rb;
-    // BoxCollider is not used in the provided movement logic, but kept if needed elsewhere
     [SerializeField] private BoxCollider2D boxCollider;
 
     [Header("Movement")]
-    [Range(0.1f, 20f)][SerializeField] private float maxSpeed;
-    [Range(0.1f, 20f)][SerializeField] private float acceleration;
-    [Range(0.1f, 20f)][SerializeField] private float deacceleration;
+    [Range(0.1f, 20f)][SerializeField] private float maxSpeed = 5f;
+    [Range(0.1f, 20f)][SerializeField] private float acceleration = 10f;
+    [Range(0.1f, 20f)][SerializeField] private float deacceleration = 10f;
     [SerializeField] private LayerMask obstacleLayer;
 
     private Vector2 currentVelocity;
-    [HideInInspector] public Vector2 playerInput; // Hide from inspector, calculated internally
+    private Vector2 targetInput;
+    private Vector2 finalMove;
+    public Vector2 PlayerInput => targetInput;
 
     [Header("Controls")]
-
     public static KeyCode moveUpKey = KeyCode.W;
     public static KeyCode moveDownKey = KeyCode.S;
     public static KeyCode moveLeftKey = KeyCode.A;
     public static KeyCode moveRightKey = KeyCode.D;
 
-    // Key names for PlayerPrefs
     private const string MOVE_UP_KEY = "MoveUpKey";
     private const string MOVE_DOWN_KEY = "MoveDownKey";
     private const string MOVE_LEFT_KEY = "MoveLeftKey";
@@ -32,53 +30,36 @@ public class PlayerMovementController : MonoBehaviour
 
     void Awake()
     {
-        // Load saved keybindings or use defaults
         LoadKeyBindings();
     }
 
     void Update()
     {
-        // Calculate input based on currently assigned keys
-        float horizontalInput = 0f;
-        if (Input.GetKey(moveRightKey)) horizontalInput += 1f;
-        if (Input.GetKey(moveLeftKey)) horizontalInput -= 1f;
+        // Input detection (not physics related)
+        float horizontal = 0f;
+        if (Input.GetKey(moveRightKey)) horizontal += 1f;
+        if (Input.GetKey(moveLeftKey)) horizontal -= 1f;
 
-        float verticalInput = 0f;
-        if (Input.GetKey(moveUpKey)) verticalInput += 1f;
-        if (Input.GetKey(moveDownKey)) verticalInput -= 1f;
+        float vertical = 0f;
+        if (Input.GetKey(moveUpKey)) vertical += 1f;
+        if (Input.GetKey(moveDownKey)) vertical -= 1f;
 
-        // Create and normalize the input vector
-        playerInput = new Vector2(horizontalInput, verticalInput).normalized;
-
-        // Apply movement logic
-        if (playerInput != Vector2.zero)
-        {
-            MovePlayer(acceleration, playerInput);
-        }
-        else
-        {
-            // Decelerate only if there's existing velocity and no input
-            if (currentVelocity.magnitude > 0.01f)
-            {
-                MovePlayer(deacceleration, Vector2.zero);
-            }
-            else
-            {
-                currentVelocity = Vector2.zero; // Snap to zero if slow enough
-                rb.velocity = Vector2.zero; 
-            }
-        }
+        targetInput = new Vector2(horizontal, vertical).normalized;
     }
 
-    void MovePlayer(float accel, Vector2 direction)
+    void FixedUpdate()
     {
-        Vector2 targetVelocity = direction * maxSpeed;
-        currentVelocity = Vector2.Lerp(currentVelocity, targetVelocity, accel * Time.deltaTime);
+        // Smooth velocity calculation
+        Vector2 targetVelocity = targetInput * maxSpeed;
 
-        AttemptMoveWithMovePosition(currentVelocity * Time.deltaTime);
+        float usedAccel = (targetInput != Vector2.zero) ? acceleration : deacceleration;
+        currentVelocity = Vector2.Lerp(currentVelocity, targetVelocity, usedAccel * Time.fixedDeltaTime);
+
+        Vector2 moveAmount = currentVelocity * Time.fixedDeltaTime;
+        AttemptMove(moveAmount);
     }
 
-    void AttemptMoveWithMovePosition(Vector2 moveAmount)
+    void AttemptMove(Vector2 moveAmount)
     {
         Vector2 startPos = rb.position;
         Vector2 endPos = startPos + moveAmount;
@@ -91,9 +72,10 @@ public class PlayerMovementController : MonoBehaviour
         }
         else
         {
-            currentVelocity = Vector2.zero; 
+            currentVelocity = Vector2.zero;
         }
     }
+
     public static void LoadKeyBindings()
     {
         moveUpKey = (KeyCode)PlayerPrefs.GetInt(MOVE_UP_KEY, (int)KeyCode.W);
@@ -102,5 +84,4 @@ public class PlayerMovementController : MonoBehaviour
         moveRightKey = (KeyCode)PlayerPrefs.GetInt(MOVE_RIGHT_KEY, (int)KeyCode.D);
         Debug.Log("Player controls loaded.");
     }
-
 }
