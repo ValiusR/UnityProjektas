@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -35,10 +36,14 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    // Just for testing when launching game from Main
     private void Start()
     {
-        backgroundMusicSource.clip = background;
-        backgroundMusicSource.Play();
+        if (SceneManager.GetActiveScene().name == "Main")
+        {
+            backgroundMusicSource.clip = background;
+            backgroundMusicSource.Play();
+        }
     }
 
     public void PlaySFX(AudioClip clip)
@@ -85,4 +90,21 @@ public class AudioManager : MonoBehaviour
         backgroundMusicSource.volume = startVolume;
     }
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "MainMenu")
+        {
+            StartCoroutine(FadeAndSwitchMusic(background));
+        }
+    }
 }
