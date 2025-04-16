@@ -27,15 +27,22 @@ public class EnemyHealthController : MonoBehaviour
             if (GetComponent<EnemyMovement>() != null)
             {
                 GetComponent<EnemyMovement>().enabled = false;
-
-                if (GetComponent<SkeletonController>() != null)
-                {
-                    GetComponent<SkeletonController>().enabled = false;
-                    GetComponent<Animator>().enabled = false;
-                }
             }
 
-            GetComponent<Collider2D>().enabled = false;
+            if (GetComponent<SkeletonController>() != null)
+            {
+                GetComponent<SkeletonController>().enabled = false;
+            }
+
+            if (GetComponent<Animator>() != null)
+            {
+                GetComponent<Animator>().enabled = false;
+            }
+
+            if (GetComponent<Collider2D>() != null)
+            {
+                GetComponent<Collider2D>().enabled = false;
+            }
 
             // Trigger death event
             OnDeath?.Invoke();
