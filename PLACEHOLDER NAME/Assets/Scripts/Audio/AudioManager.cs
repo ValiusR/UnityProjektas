@@ -11,11 +11,14 @@ public class AudioManager : MonoBehaviour
     public AudioSource _SFXSource => SFXSource; // Read-only
     [Header("Audio Clip")]
     public AudioClip background;
+    public AudioClip bossBattle;
     public AudioClip playerHit;
     public AudioClip fireball;
     public AudioClip flask;
     public AudioClip freezeWave;
     public AudioClip XPOrb;
+
+    private float backgroundMusicTime = 0f;
 
     public static AudioManager instance;
 
@@ -42,4 +45,44 @@ public class AudioManager : MonoBehaviour
     {
         SFXSource.PlayOneShot(clip);
     }
+
+    public void PlayBossMusic()
+    {
+        backgroundMusicTime = backgroundMusicSource.time;
+        StartCoroutine(FadeAndSwitchMusic(bossBattle));
+    }
+
+    public void ResumeBackgroundMusic()
+    {
+        StartCoroutine(FadeAndSwitchMusic(background, resumeTime: backgroundMusicTime));
+    }
+
+
+    private IEnumerator FadeAndSwitchMusic(AudioClip newClip, float fadeDuration = 1.5f, float resumeTime = 0f)
+    {
+        float startVolume = backgroundMusicSource.volume;
+
+        // Fade out
+        while (backgroundMusicSource.volume > 0)
+        {
+            backgroundMusicSource.volume -= startVolume * Time.deltaTime / fadeDuration;
+            yield return null;
+        }
+
+        // Switch clip
+        backgroundMusicSource.Stop();
+        backgroundMusicSource.clip = newClip;
+        backgroundMusicSource.time = resumeTime;
+        backgroundMusicSource.Play();
+
+        // Fade in
+        while (backgroundMusicSource.volume < startVolume)
+        {
+            backgroundMusicSource.volume += startVolume * Time.deltaTime / fadeDuration;
+            yield return null;
+        }
+
+        backgroundMusicSource.volume = startVolume;
+    }
+
 }

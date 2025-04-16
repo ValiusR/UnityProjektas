@@ -8,9 +8,15 @@ public class BossSpawner : MonoBehaviour
     [SerializeField] private float spawnTime = 60f; // Time in seconds
     [SerializeField] private float spawnDistance = 5f; // Distance from player
     [SerializeField] private Transform player;
+    private AudioManager audioManager;
 
     private float timer;
     private bool bossSpawned = false;
+
+    private void Start()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
 
     void Update()
     {
@@ -38,6 +44,8 @@ public class BossSpawner : MonoBehaviour
 
             Instantiate(bossPrefab, spawnPosition, Quaternion.identity);
             playerBoundary.CreateBoundaryOnBossSpawn();
+
+            audioManager.PlayBossMusic();
         }
     }
 }

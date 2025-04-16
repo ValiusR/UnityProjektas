@@ -5,9 +5,11 @@ using UnityEngine;
 public class BossHealthController : EnemyHealthController
 {
     private GameObject player;
+    private AudioManager audioManager;
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
     public override void TakeDamage(int damage)
     {
@@ -38,6 +40,7 @@ public class BossHealthController : EnemyHealthController
                 player.GetComponent<PlayerBoundary>().enabled = false;
             }
 
+            audioManager.ResumeBackgroundMusic();
             // Trigger death event
             //OnDeath?.Invoke();
         }
