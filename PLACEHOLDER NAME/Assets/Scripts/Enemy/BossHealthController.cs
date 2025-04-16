@@ -1,19 +1,15 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using System;
 
-public class EnemyHealthController : MonoBehaviour
+public class BossHealthController : EnemyHealthController
 {
-    public event Action OnDeath; // New event
-
-    [SerializeField] protected DamageBlink damageBlink;
-    [SerializeField] protected FadeOut fadeOut;
-    public int maxHP;
-    public int currHP;
-    public int scorePoints;
-    public int xp;
-
-    public virtual void TakeDamage(int damage)
+    private GameObject player;
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
+    public override void TakeDamage(int damage)
     {
         currHP -= damage;
         damageBlink.PlayBlink();
@@ -37,14 +33,13 @@ public class EnemyHealthController : MonoBehaviour
 
             GetComponent<Collider2D>().enabled = false;
 
-            // Trigger death event
-            OnDeath?.Invoke();
-        }
-    }
+            if (player.GetComponent<PlayerBoundary>() != null)
+            {
+                player.GetComponent<PlayerBoundary>().enabled = false;
+            }
 
-    public IEnumerator PlayDeathAnimation()
-    {
-        yield return StartCoroutine(fadeOut.FadeAnimation());
-        Destroy(gameObject);
+            // Trigger death event
+            //OnDeath?.Invoke();
+        }
     }
 }

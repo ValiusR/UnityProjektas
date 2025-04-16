@@ -112,4 +112,10 @@ public class PlayerBoundary : MonoBehaviour
         if (boundaryContainer != null) Destroy(boundaryContainer);
         if (visualLinesContainer != null) Destroy(visualLinesContainer);
     }
+
+    void OnDisable()
+    {
+        if (boundaryContainer != null) Destroy(boundaryContainer);
+        if (visualLinesContainer != null) Destroy(visualLinesContainer);
+    }
 }

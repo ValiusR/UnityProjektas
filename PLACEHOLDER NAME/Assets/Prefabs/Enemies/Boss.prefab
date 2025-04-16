@@ -14,11 +14,11 @@ GameObject:
   - component: {fileID: -2503707362091810049}
   - component: {fileID: 6614051802102611131}
   - component: {fileID: -4120487572097336684}
-  - component: {fileID: -4495812710211362193}
   - component: {fileID: -8255814649159158804}
   - component: {fileID: -8264770950833124604}
   - component: {fileID: -2526145623984183792}
   - component: {fileID: 6248116321219214822}
+  - component: {fileID: -3589953624009638469}
   m_Layer: 7
   m_Name: Boss
   m_TagString: Enemy
@@ -205,24 +205,6 @@ MonoBehaviour:
   startMoveSpeed: 0
   am: {fileID: 0}
   sr: {fileID: 0}
---- !u!114 &-4495812710211362193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 838671491375828895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 165ae471a20252d438aa7bdd0fa4d3c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageBlink: {fileID: -8255814649159158804}
-  fadeOut: {fileID: -8264770950833124604}
-  maxHP: 1000
-  currHP: 1000
-  scorePoints: 50
-  xp: 50
 --- !u!114 &-8255814649159158804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334,6 +316,24 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-3589953624009638469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838671491375828895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58420d7988b3f8d4da28ace3b24485fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageBlink: {fileID: -8255814649159158804}
+  fadeOut: {fileID: -8264770950833124604}
+  maxHP: 100
+  currHP: 100
+  scorePoints: 10
+  xp: 10
 --- !u!1 &1667286718422464572
 GameObject:
   m_ObjectHideFlags: 0
@@ -429,7 +429,7 @@ PrefabInstance:
     - target: {fileID: 63235554273392521, guid: 59ad2da39d9938d4f8b44b54a6d98b1f, type: 3}
       propertyPath: enemyHealthController
       value: 
-      objectReference: {fileID: -4495812710211362193}
+      objectReference: {fileID: -3589953624009638469}
     - target: {fileID: 332866293444019083, guid: 59ad2da39d9938d4f8b44b54a6d98b1f, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 1.6
