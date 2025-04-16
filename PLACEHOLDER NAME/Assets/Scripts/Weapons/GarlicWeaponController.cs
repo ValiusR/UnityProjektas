@@ -91,7 +91,7 @@ public class GarlicWeaponController : WeaponController
         switch (evolutionLevel)
         {
             case 1:
-                return "Decreases the damage interval of garlic by 20%.";
+                return "Decreases the damage interval of magic aura by 20%.";
             case 2:
                 return "Extra radius.";
             default:

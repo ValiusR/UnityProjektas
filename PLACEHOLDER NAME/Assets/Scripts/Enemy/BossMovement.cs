@@ -13,6 +13,8 @@ public class BossMovement : EnemyMovement
         base.Start();
         am = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
+
+        am.SetBool("Move", true);
     }
 
     protected override void Update()
@@ -27,22 +29,29 @@ public class BossMovement : EnemyMovement
         }
 
 
-        float distance = Vector2.Distance(transform.position, player.transform.position);
+        //float distance = Vector2.Distance(transform.position, player.transform.position);
 
-        if (!isMoving && distance > 4.1f)
-        {
-            isMoving = true;
-            am.SetBool("Move", true);
-        }
-        else if (isMoving && distance < 3.9f)
-        {
-            isMoving = false;
-            am.SetBool("Move", false);
-        }
+        //if (!isMoving && distance > 4.1f)
+        //{
+        //    isMoving = true;
+        //    am.SetBool("Move", true);
+        //}
+        //else if (isMoving && distance < 3.9f)
+        //{
+        //    isMoving = false;
+        //    am.SetBool("Move", false);
+        //}
+
+        isMoving = true;
 
         if (isMoving)
         {
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
         }
+    }
+
+    public void SetIsMoving(bool shouldMove)
+    {
+        am.SetBool("Move", shouldMove);
     }
 }
