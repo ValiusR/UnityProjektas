@@ -118,4 +118,19 @@ public class PlayerBoundary : MonoBehaviour
         if (boundaryContainer != null) Destroy(boundaryContainer);
         if (visualLinesContainer != null) Destroy(visualLinesContainer);
     }
+    // Add this to PlayerBoundary.cs
+    public void DestroyBoundary()
+    {
+        if (boundaryContainer != null)
+        {
+            Destroy(boundaryContainer);
+            boundaryContainer = null;
+        }
+        if (visualLinesContainer != null)
+        {
+            Destroy(visualLinesContainer);
+            visualLinesContainer = null;
+        }
+        boundaryCreated = false;
+    }
 }

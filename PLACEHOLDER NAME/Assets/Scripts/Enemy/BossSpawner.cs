@@ -35,7 +35,7 @@ public class BossSpawner : MonoBehaviour
     {
         if (bossPrefab != null && player != null)
         {
-
+            
             PlayerBoundary playerBoundary = player.GetComponent<PlayerBoundary>();
 
 
