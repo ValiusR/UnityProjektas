@@ -6,7 +6,8 @@ using UnityEngine;
 public class BossAttackManager : MonoBehaviour
 {
     [SerializeField] float attackRange;
-    [SerializeField] float timeUntilAttack;
+    [SerializeField] float meleeJumpAnimationTime;
+    [SerializeField] SpriteRenderer PLACEHOLDER_damageZone;
     [SerializeField] AnimationCurve jumpCurve;
 
     private GameObject player;
@@ -40,8 +41,13 @@ public class BossAttackManager : MonoBehaviour
 
         float distance = Vector2.Distance(transform.position, playerTransform.position);
 
-       if(distance < attackRange)
+        BossMovement.enabled = true;
+        BossMovement.SetIsMoving(true);
+
+        if (distance < attackRange)
        {
+            
+
             isAttacking = true;
 
             BossAttackType chosenAttack = BossAttackType.MeleeSlash;
@@ -75,11 +81,16 @@ public class BossAttackManager : MonoBehaviour
         transform.DOJump(transform.position, 1.5f, 1, 1f)
                      .SetEase(jumpCurve);
 
-        yield return new WaitForSeconds(3 * timeUntilAttack);
+        yield return new WaitForSeconds(meleeJumpAnimationTime);
 
+        PLACEHOLDER_damageZone.enabled = true;
 
-        BossMovement.enabled = true;
-        BossMovement.SetIsMoving(true);
+        yield return new WaitForSeconds(0.2f);
+
+        PLACEHOLDER_damageZone.enabled = false;
+
+        yield return new WaitForSeconds(0.2f);
+
     }
 
     private void OnDrawGizmos()
