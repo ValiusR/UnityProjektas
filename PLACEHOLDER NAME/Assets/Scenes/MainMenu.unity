@@ -586,6 +586,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
+    - target: {fileID: 1623049923141522594, guid: 4fa4ed549820fa14080ea4f423e3c2ff, type: 3}
+      propertyPath: bossBattle
+      value: 
+      objectReference: {fileID: 8300000, guid: 7571f7d19b1cb2a43a321bf6ac3d921b, type: 3}
     - target: {fileID: 5542168511433631157, guid: 4fa4ed549820fa14080ea4f423e3c2ff, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.9364852
