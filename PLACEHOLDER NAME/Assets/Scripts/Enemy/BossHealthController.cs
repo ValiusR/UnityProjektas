@@ -1,14 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BossHealthController : EnemyHealthController
 {
-    private GameObject player;
+    private PlayerBoundary playerBoundary;
+
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        // Find the PlayerBoundary component on the player
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            playerBoundary = player.GetComponent<PlayerBoundary>();
+        }
     }
+
     public override void TakeDamage(int damage)
     {
         currHP -= damage;
@@ -16,10 +21,7 @@ public class BossHealthController : EnemyHealthController
 
         if (currHP <= 0)
         {
-            StartCoroutine(PlayDeathAnimation());
-            ScoreManager.addScore(scorePoints);
-            LevelUpSystem.GainXP(xp);
-
+            // Disable movement and collisions first
             if (GetComponent<EnemyMovement>() != null)
             {
                 GetComponent<EnemyMovement>().enabled = false;
@@ -30,16 +32,23 @@ public class BossHealthController : EnemyHealthController
                     GetComponent<Animator>().enabled = false;
                 }
             }
-
             GetComponent<Collider2D>().enabled = false;
 
-            if (player.GetComponent<PlayerBoundary>() != null)
+            // Remove the boundary when boss dies
+            if (playerBoundary != null)
             {
-                player.GetComponent<PlayerBoundary>().enabled = false;
+                playerBoundary.DestroyBoundary();
             }
 
-            // Trigger death event
-            //OnDeath?.Invoke();
+            // Handle score and XP
+            ScoreManager.addScore(scorePoints);
+            LevelUpSystem.GainXP(xp);
+
+            // Play death animation
+            StartCoroutine(PlayDeathAnimation());
+
+            // Trigger any additional death events
+           // OnDeath?.Invoke();
         }
     }
 }
