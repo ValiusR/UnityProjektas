@@ -316,6 +316,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  projectileSpreadAngle: 15
+  meleeCooldown: 0.25
+  rangedCooldown: 1
+  rangedPrefab: {fileID: 6473968197472878942, guid: def14a1297d32f940b99901246e46258, type: 3}
 --- !u!114 &-3589953624009638469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,8 +334,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageBlink: {fileID: -8255814649159158804}
   fadeOut: {fileID: -8264770950833124604}
-  maxHP: 100
-  currHP: 100
+  maxHP: 300
+  currHP: 300
   scorePoints: 10
   xp: 10
 --- !u!1 &1667286718422464572
