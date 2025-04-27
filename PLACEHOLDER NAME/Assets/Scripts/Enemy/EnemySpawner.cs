@@ -51,8 +51,31 @@ public class EnemySpawner : MonoBehaviour
             spawnTimer = 0f;
             SpawnEnemies();
         }
+
+        // Basic wave advancement: Move to the next wave when all enemies are spawned
+        if (currentWaveCount < waves.Count && waves[currentWaveCount].spawnCount >= waves[currentWaveCount].waveQuota)
+        {
+            currentWaveCount++;
+            if (currentWaveCount < waves.Count)
+            {
+                Debug.Log("Wave " + (currentWaveCount + 1) + " starting!");
+                waves[currentWaveCount].spawnCount = 0; // Reset spawn count for the new wave
+                foreach (var group in waves[currentWaveCount].enemyGroups)
+                {
+                    group.spawnCount = 0; // Reset spawn count for enemy groups in the new wave
+                }
+                CalculateWaveQuota(); // Recalculate quota for the new wave
+                spawnTimer = 0f; // Reset spawn timer
+            }
+            else
+            {
+                Debug.Log("All waves completed!");
+                // You might want to stop spawning or handle the end of the spawning sequence here
+                enabled = false; // Example: Disable the spawner
+            }
+        }
     }
-    void CalculateWaveQuota()
+    public void CalculateWaveQuota()
     {
         int currentWaveQuota = 0;
         foreach (var enemyGroup in waves[currentWaveCount].enemyGroups)

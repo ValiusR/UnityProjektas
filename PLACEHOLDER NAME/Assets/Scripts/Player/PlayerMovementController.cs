@@ -7,7 +7,7 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField] private BoxCollider2D boxCollider;
 
     [Header("Movement")]
-    [Range(0.1f, 20f)][SerializeField] private float maxSpeed = 5f;
+    [Range(0.1f, 20f)][SerializeField] public float maxSpeed = 5f;
     [Range(0.1f, 20f)][SerializeField] private float acceleration = 10f;
     [Range(0.1f, 20f)][SerializeField] private float deacceleration = 10f;
     [SerializeField] private LayerMask obstacleLayer;
