@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class PlayerHealthController : MonoBehaviour
 {
     [SerializeField] DamageBlink damageBlink;
-    [SerializeField] DeathUiManager deathUIManager; // Assign your Options UI Prefab in the Inspector
+    [SerializeField] public DeathUiManager deathUIManager; // Assign your Options UI Prefab in the Inspector
     public int maxHP;
     public int currHP;
 
@@ -16,6 +16,33 @@ public class PlayerHealthController : MonoBehaviour
     private void Awake()
     {
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+    public void ForceDeath()
+    {
+        // Immediately set health to 0
+        currHP = 0;
+
+        // Disable movement components
+        var movement = GetComponent<PlayerMovementController>();
+        if (movement != null) movement.enabled = false;
+
+        // Stop any physics
+        var rb = GetComponent<Rigidbody2D>();
+        if (rb != null) rb.velocity = Vector2.zero;
+
+        // Show death UI
+        if (deathUIManager != null)
+        {
+            deathUIManager.ShowDeathUI();
+        }
+        else
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
+
+        // Ensure game is paused
+        Time.timeScale = 0f;
+        Debug.Log("Game should be paused now - Time.timeScale: " + Time.timeScale);
     }
     public void Heal(int healthToAdd)
     {
@@ -55,7 +82,7 @@ public class PlayerHealthController : MonoBehaviour
             {
                 SceneManager.LoadScene("MainMenu");
             }
-
+           // SceneManager.LoadScene("MainMenu");
         }
     }
 }

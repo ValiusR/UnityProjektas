@@ -1,10 +1,40 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BloodMoneyEffect : MonoBehaviour
 {
     public int damageAmount = 50;
 
+    public GameObject deathBatPrefab; // Assign a bat prefab in inspector
+
     public void ApplyBloodMoney(GameObject player)
+    {
+        PlayerHealthController health = player.GetComponent<PlayerHealthController>();
+        if (health == null) return;
+
+        bool willDie = health.currHP <= damageAmount;
+        health.TakeDamage(damageAmount);
+
+        if (willDie)
+        {
+            // Spawn death bat right on player
+            if (deathBatPrefab != null)
+            {
+                Instantiate(deathBatPrefab, player.transform.position, Quaternion.identity);
+            }
+            else
+            {
+                Debug.LogError("No death bat prefab assigned!");
+            }
+
+            // Still try to pause game
+           // Time.timeScale = 0f;
+            //health.GetComponent<PlayerMovementController>().enabled = false;
+        }
+
+        Destroy(this);
+    }
+    /*public void ApplyBloodMoney(GameObject player)
     {
         LevelUpSystem levelUp = player.GetComponent<LevelUpSystem>();
         PlayerHealthController healthController = player.GetComponent<PlayerHealthController>();
@@ -31,5 +61,5 @@ public class BloodMoneyEffect : MonoBehaviour
 
         // You might want to destroy this effect component after it's applied
         Destroy(this);
-    }
+    }*/
 }
