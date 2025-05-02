@@ -1077,6 +1077,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 50
+  deathBatPrefab: {fileID: 7890012505201186229, guid: 240e178dc60fb7942a6781953c563043, type: 3}
 --- !u!114 &1638205301
 MonoBehaviour:
   m_ObjectHideFlags: 0
