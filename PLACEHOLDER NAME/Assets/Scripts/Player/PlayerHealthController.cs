@@ -33,6 +33,8 @@ public class PlayerHealthController : MonoBehaviour
         // Show death UI
         if (deathUIManager != null)
         {
+            // Save the high score
+            FindObjectOfType<ScoreManager>().SaveHighScore(ScoreManager.currScore);
             deathUIManager.ShowDeathUI();
         }
         else
@@ -76,6 +78,8 @@ public class PlayerHealthController : MonoBehaviour
         {
             if (deathUIManager != null)
             {
+                // Save the high score
+                FindObjectOfType<ScoreManager>().SaveHighScore(ScoreManager.currScore);
                 deathUIManager.ShowDeathUI();
             }
             else

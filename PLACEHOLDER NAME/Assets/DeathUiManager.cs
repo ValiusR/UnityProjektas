@@ -8,6 +8,8 @@ public class DeathUiManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] TextMeshProUGUI timeText;
+    [SerializeField] TextMeshProUGUI highScoreText;
+
 
     void Start()
     {
@@ -33,6 +35,8 @@ public class DeathUiManager : MonoBehaviour
         {
             scoreText.text = "YOUR SCORE: " + ScoreManager.currScore;
             timeText.text = "YOU HAVE SURVIVED: " + TimerManager.formattedTime;
+            int highScore = FindObjectOfType<ScoreManager>().LoadHighScore();
+            highScoreText.text = "HIGH SCORE: " + highScore;
             Time.timeScale = 0f;
             gameObject.SetActive(true);
         }

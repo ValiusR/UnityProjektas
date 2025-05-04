@@ -1116,14 +1116,6 @@ PrefabInstance:
       value: DeathUI
       objectReference: {fileID: 0}
     - target: {fileID: 7523742551260130734, guid: 9fa88c7bee3123b4ea158baaa43bb448, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7523742551260130734, guid: 9fa88c7bee3123b4ea158baaa43bb448, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7523742551260130734, guid: 9fa88c7bee3123b4ea158baaa43bb448, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
