@@ -12,6 +12,7 @@ public class MainMenuManager : MonoBehaviour
     public void NewGame()
     {
         Debug.Log("MainMenuManager NewGame()");
+        ScoreManager.currScore = 0;
         SceneManager.LoadScene("Main");
         //SceneManager.UnloadSceneAsync("PauseMenu");
     }
