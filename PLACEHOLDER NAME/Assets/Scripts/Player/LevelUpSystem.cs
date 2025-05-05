@@ -13,7 +13,7 @@ public class LevelUpSystem : MonoBehaviour
     public int experienceToNextLevel = 100;
     public int weaponEvolutionInterval = 2;
     public int maxEvolutionLevel;
-
+    private bool currentIsCursed = false;
     [Header("Cursed Upgrades")]
     [Range(0f, 1f)]
     public float cursedUpgradeChance = 0.2f; // Chance to offer a cursed upgrade
@@ -64,7 +64,7 @@ public class LevelUpSystem : MonoBehaviour
         // Generate level-up options
         List<WeaponUpgradeOption> options = GenerateWeaponUpgradeOptions();
 
-        levelUpUI.setWeaponUpgradeOptions(options);
+        levelUpUI.setWeaponUpgradeOptions(options, currentIsCursed);
         levelUpUI.ShowUI();
     }
 
@@ -171,6 +171,7 @@ public class LevelUpSystem : MonoBehaviour
         // Chance for a cursed upgrade as the first option
         if (Random.value < cursedUpgradeChance && possibleCursedUpgrades.Count > 0)
         {
+            currentIsCursed = true;
             offeredCursedUpgrade = possibleCursedUpgrades[Random.Range(0, possibleCursedUpgrades.Count)];
             options.Add(new WeaponUpgradeOption(
                 offeredCursedUpgrade.name,
@@ -179,11 +180,15 @@ public class LevelUpSystem : MonoBehaviour
                 offeredCursedUpgrade.effectPrefab
             ));
         }
+        else
+        {
+            currentIsCursed = false;
+        }
 
-        // Create weapon pools with null checks
-        List<WeaponController> lockedWeapons = allWeapons
-            .Where(w => w != null && !unlockedWeapons.Contains(w))
-            .ToList();
+            // Create weapon pools with null checks
+            List<WeaponController> lockedWeapons = allWeapons
+                .Where(w => w != null && !unlockedWeapons.Contains(w))
+                .ToList();
 
         List<WeaponController> upgradableWeapons = unlockedWeapons
             .Where(w => w != null)

@@ -12,6 +12,7 @@ public class LevelUpUiManager : MonoBehaviour
     private System.Action button1Action;
     private System.Action button2Action;
     private System.Action button3Action;
+    private bool isCursed = false;
 
     [SerializeField] TextMeshProUGUI button1Title;
     [SerializeField] TextMeshProUGUI button1Description;
@@ -97,7 +98,7 @@ public class LevelUpUiManager : MonoBehaviour
         Time.timeScale = 0f;
     }
 
-    public void setWeaponUpgradeOptions(List<WeaponUpgradeOption> weaponUpgradeOptions)
+    public void setWeaponUpgradeOptions(List<WeaponUpgradeOption> weaponUpgradeOptions, bool isCursed)
     {
         this.weaponUpgradeOptions = weaponUpgradeOptions;
     }
