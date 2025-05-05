@@ -22,5 +22,23 @@ public class ScoreManager : MonoBehaviour
         //Debug.Log("score:" + currScore);
     }
 
+    public void SaveHighScore(int score)
+    {
+        int currentHighScore = PlayerPrefs.GetInt("HighScore", 0);
+        if (score > currentHighScore)
+        {
+            PlayerPrefs.SetInt("HighScore", score);
+            PlayerPrefs.Save();
+        }
+    }
 
+    public int LoadHighScore()
+    {
+        return PlayerPrefs.GetInt("HighScore", 0);
+    }
+
+    public void ResetHighScore()
+    {
+        PlayerPrefs.DeleteKey("HighScore");
+    }
 }
