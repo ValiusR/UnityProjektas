@@ -176,7 +176,8 @@ public class LevelUpSystem : MonoBehaviour
                 offeredCursedUpgrade.name,
                 offeredCursedUpgrade.description,
                 () => ApplyCursedUpgrade(offeredCursedUpgrade),
-                offeredCursedUpgrade.effectPrefab
+                offeredCursedUpgrade.effectPrefab,
+                true
             ));
         }
 
