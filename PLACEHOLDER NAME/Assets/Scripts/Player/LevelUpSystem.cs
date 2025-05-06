@@ -319,7 +319,7 @@ public class LevelUpSystem : MonoBehaviour
 
         // Enable the weapon's behavior script on the Player
         EnableWeaponBehavior(weapon);
-        unlockedWeaponsUI.AddUnlockedWeaponToUI(weapon.prefab);
+        //unlockedWeaponsUI.AddUnlockedWeaponToUI(weapon.prefab);
     }
 
     private void EnableWeaponBehavior(WeaponController weapon)

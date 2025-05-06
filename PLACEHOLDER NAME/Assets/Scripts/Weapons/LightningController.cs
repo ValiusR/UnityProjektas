@@ -6,15 +6,20 @@ using UnityEngine;
 
 public class LightningController : WeaponController
 {
+    [Header("Lightning weapon stats")]
+    public float lightningRange = 10f;
+    public int howManyEnemiesToStrike;
+
+
     public override void EvolveWeapon(int evolutionLevel)
     {
         switch (evolutionLevel)
         {
             case 1:
-                //this.doubleShot = true;
+                howManyEnemiesToStrike++;
                 break;
             case 2:
-                //this.tripleShot = true;
+                howManyEnemiesToStrike++;
                 break;
             default:
                 throw new InvalidOperationException("Maximum evolution level reached. Cannot evolve further.");
@@ -33,7 +38,7 @@ public class LightningController : WeaponController
             case 1:
                 return $"Smites 2 enemies instead of 1";
             case 2:
-                return $" [INSERT_EVOLUTION_TEXT]";
+                return $"Smites 3 enemies instead of 2";
 
             default:
                 throw new InvalidOperationException("Maximum evolution level reached. Cannot evolve further.");
@@ -47,34 +52,48 @@ public class LightningController : WeaponController
 
     protected override void Attack()
     {
-        StartCoroutine(PlayAttackAnimation());
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(this.transform.position, lightningRange);
+
+        List<Collider2D> enemyColliders = new List<Collider2D>();
+
+        foreach (Collider2D collider in hitColliders)
+        {
+            if (collider.GetComponent<EnemyHealthController>() != null)
+            {
+                enemyColliders.Add(collider);
+            }
+        }
+
+        // Determine how many enemies to actually strike (up to the number of enemies available)
+        int enemiesToStrike = Mathf.Min(howManyEnemiesToStrike, enemyColliders.Count);
+
+        for (int i = 0; i < enemiesToStrike; i++)
+        {
+            int randomIndex = UnityEngine.Random.Range(0, enemyColliders.Count);
+            Collider2D targetCollider = enemyColliders[randomIndex];
+
+            enemyColliders.RemoveAt(randomIndex);
+
+            StartCoroutine(PlayAttackAnimation(targetCollider.GetComponent<EnemyHealthController>()));
+        }
     }
 
-    private IEnumerator PlayAttackAnimation()
+    private IEnumerator PlayAttackAnimation(EnemyHealthController enemy)
     {
         currCooldown = float.MaxValue;
 
-        float distanceFromplayer = 10f;
-        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(this.transform.position, distanceFromplayer);
-        int randomCollider = UnityEngine.Random.Range(0, hitColliders.Length);
-
-        EnemyHealthController enemy = hitColliders[randomCollider].GetComponent<EnemyHealthController>();
-
-        if(enemy == null)
+        if (enemy != null)
         {
-            this.currCooldown = 0;
-            yield break;
+            GameObject lightning = Instantiate(this.prefab);
+            lightning.transform.parent = enemy.gameObject.transform;
+            lightning.transform.position = enemy.gameObject.transform.position;
+
+            enemy.TakeDamage(this.damage);
+
+            yield return new WaitForSeconds(0.32f);
+
+            Destroy(lightning);
         }
-
-        GameObject lightning = Instantiate(this.prefab);
-        lightning.transform.parent = enemy.gameObject.transform;
-        lightning.transform.position = enemy.gameObject.transform.position;
-
-        enemy.TakeDamage(this.damage);
-
-        yield return new WaitForSeconds(0.32f);
-
-        Destroy(lightning);
 
         this.currCooldown = this.shootCooldown;
     }
