@@ -124,7 +124,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2245326217454355844, guid: 53feeb84a72a0934ea5c35b20614e325, type: 3}
       propertyPath: m_Name
-      value: Skeleton Variant
+      value: Skeleton (explosive)
       objectReference: {fileID: 0}
     - target: {fileID: 6745731662293336448, guid: 53feeb84a72a0934ea5c35b20614e325, type: 3}
       propertyPath: m_LocalPosition.x
@@ -172,10 +172,44 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6745731662293336448, guid: 53feeb84a72a0934ea5c35b20614e325, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2780042452956959656}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2245326217454355844, guid: 53feeb84a72a0934ea5c35b20614e325, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -5928795328481145125}
   m_SourcePrefab: {fileID: 100100000, guid: 53feeb84a72a0934ea5c35b20614e325, type: 3}
 --- !u!4 &1828698581550925607 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6745731662293336448, guid: 53feeb84a72a0934ea5c35b20614e325, type: 3}
   m_PrefabInstance: {fileID: 4971253392216360615}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5844951867886639551 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1576260275808542488, guid: 53feeb84a72a0934ea5c35b20614e325, type: 3}
+  m_PrefabInstance: {fileID: 4971253392216360615}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6617037806197670691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 165ae471a20252d438aa7bdd0fa4d3c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &6617037806197670691 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2245326217454355844, guid: 53feeb84a72a0934ea5c35b20614e325, type: 3}
+  m_PrefabInstance: {fileID: 4971253392216360615}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-5928795328481145125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6617037806197670691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f773789933702a047b6a5e89ca04c5b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthController: {fileID: 5844951867886639551}
+  explosionRange: 2
+  explosionDamage: 20

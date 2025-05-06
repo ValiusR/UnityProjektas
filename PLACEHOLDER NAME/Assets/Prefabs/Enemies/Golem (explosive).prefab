@@ -164,7 +164,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7870428670029554652, guid: 620f0aaf9ff44b249b2047076adab4fb, type: 3}
       propertyPath: m_Name
-      value: Golem Variant
+      value: Golem (explosive)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -172,8 +172,42 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4633589757910026550, guid: 620f0aaf9ff44b249b2047076adab4fb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 131593165685842968}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7870428670029554652, guid: 620f0aaf9ff44b249b2047076adab4fb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -3323829820706252710}
   m_SourcePrefab: {fileID: 100100000, guid: 620f0aaf9ff44b249b2047076adab4fb, type: 3}
+--- !u!114 &3241850172225793307 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1673410401482684142, guid: 620f0aaf9ff44b249b2047076adab4fb, type: 3}
+  m_PrefabInstance: {fileID: 4306699544183118837}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6268194053237930025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 165ae471a20252d438aa7bdd0fa4d3c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &6268194053237930025 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7870428670029554652, guid: 620f0aaf9ff44b249b2047076adab4fb, type: 3}
+  m_PrefabInstance: {fileID: 4306699544183118837}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-3323829820706252710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6268194053237930025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f773789933702a047b6a5e89ca04c5b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthController: {fileID: 3241850172225793307}
+  explosionRange: 2
+  explosionDamage: 20
 --- !u!4 &8901832227164426947 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4633589757910026550, guid: 620f0aaf9ff44b249b2047076adab4fb, type: 3}

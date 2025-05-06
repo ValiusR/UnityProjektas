@@ -27,8 +27,8 @@ Transform:
   m_GameObject: {fileID: 2285147351543362444}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalPosition: {x: 0, y: 0.9, z: 0}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1201360891892989840}
@@ -114,6 +114,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4142797973484129456, guid: 53feeb84a72a0934ea5c35b20614e325, type: 3}
+      propertyPath: moveSpeed
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1037465701472859362, guid: 53feeb84a72a0934ea5c35b20614e325, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -124,15 +128,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2245326217454355844, guid: 53feeb84a72a0934ea5c35b20614e325, type: 3}
       propertyPath: m_Name
-      value: Skeleton Speed
+      value: Skeleton (fast)
       objectReference: {fileID: 0}
     - target: {fileID: 6745731662293336448, guid: 53feeb84a72a0934ea5c35b20614e325, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.3051374
+      value: -9.476894
       objectReference: {fileID: 0}
     - target: {fileID: 6745731662293336448, guid: 53feeb84a72a0934ea5c35b20614e325, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.0529413
+      value: -2.8577397
       objectReference: {fileID: 0}
     - target: {fileID: 6745731662293336448, guid: 53feeb84a72a0934ea5c35b20614e325, type: 3}
       propertyPath: m_LocalPosition.z

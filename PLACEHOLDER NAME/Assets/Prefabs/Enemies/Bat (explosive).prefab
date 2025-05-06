@@ -172,7 +172,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7890012505201186229, guid: 240e178dc60fb7942a6781953c563043, type: 3}
       propertyPath: m_Name
-      value: Bat Exploding
+      value: Bat (explosive)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -180,10 +180,44 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6746005066330777203, guid: 240e178dc60fb7942a6781953c563043, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1702527595562868133}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7890012505201186229, guid: 240e178dc60fb7942a6781953c563043, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -6145182407765089320}
   m_SourcePrefab: {fileID: 100100000, guid: 240e178dc60fb7942a6781953c563043, type: 3}
+--- !u!114 &1196555714082572586 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5924182587477082791, guid: 240e178dc60fb7942a6781953c563043, type: 3}
+  m_PrefabInstance: {fileID: 4804753362094082957}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3446130214165503544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 165ae471a20252d438aa7bdd0fa4d3c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2248270812121067006 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6746005066330777203, guid: 240e178dc60fb7942a6781953c563043, type: 3}
   m_PrefabInstance: {fileID: 4804753362094082957}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3446130214165503544 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7890012505201186229, guid: 240e178dc60fb7942a6781953c563043, type: 3}
+  m_PrefabInstance: {fileID: 4804753362094082957}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-6145182407765089320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3446130214165503544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f773789933702a047b6a5e89ca04c5b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthController: {fileID: 1196555714082572586}
+  explosionRange: 2
+  explosionDamage: 20
