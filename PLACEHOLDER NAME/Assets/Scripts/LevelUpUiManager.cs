@@ -79,6 +79,12 @@ public class LevelUpUiManager : MonoBehaviour
                 button1Title.fontStyle = FontStyles.Bold;
                 button1Description.fontStyle = FontStyles.Bold;
             }
+            else
+            {
+                button1BG.color = new Color(1f, 1f, 1f);
+                button1Title.fontStyle = FontStyles.Normal;
+                button1Title.fontStyle = FontStyles.Normal;
+            }
 
             button1Action = weaponUpgradeOptions[0].applyEffect;
 
