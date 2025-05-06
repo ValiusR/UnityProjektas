@@ -695,6 +695,7 @@ GameObject:
   - component: {fileID: 1638205295}
   - component: {fileID: 1638205296}
   - component: {fileID: 1638205297}
+  - component: {fileID: 1638205303}
   - component: {fileID: 1638205298}
   - component: {fileID: 1638205300}
   - component: {fileID: 1638205299}
@@ -1005,6 +1006,7 @@ MonoBehaviour:
   - {fileID: 1638205295}
   - {fileID: 1638205296}
   - {fileID: 1638205297}
+  - {fileID: 1638205303}
   unlockedWeapons:
   - {fileID: 1638205291}
   numberOfOptions: 3
@@ -1217,6 +1219,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c0ced3aa3dcfd445b25bd226812aada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1638205303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1638205279}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 040cb065341c26848a84ca7653c35d99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 2520920212582657922, guid: 9ae68bb95bf85c94c97cf282ffc352a6, type: 3}
+  damage: 10
+  speed: 0
+  shootCooldown: 1
+  weaponLevel: 1
 --- !u!1001 &1710356223
 PrefabInstance:
   m_ObjectHideFlags: 0
