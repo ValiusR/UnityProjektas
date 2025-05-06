@@ -13,6 +13,11 @@ public class LevelUpUiManager : MonoBehaviour
     private System.Action button2Action;
     private System.Action button3Action;
 
+
+
+
+    //[SerializeField] TextMeshProUGUI button1Title;
+    [SerializeField] Image button1BG;
     [SerializeField] TextMeshProUGUI button1Title;
     [SerializeField] TextMeshProUGUI button1Description;
     [SerializeField] TextMeshProUGUI button2Title;
@@ -63,12 +68,21 @@ public class LevelUpUiManager : MonoBehaviour
         {
             SpriteRenderer spriteRenderer = weaponUpgradeOptions[0].imagePrefab.GetComponent<SpriteRenderer>();
             Color currentColor = button1Image.color;
-            
             button1Image.sprite = spriteRenderer.sprite;
             currentColor.a = 1.0f;
             button1Title.text = weaponUpgradeOptions[0].name;
             button1Description.text = weaponUpgradeOptions[0].description;
+
+            if (weaponUpgradeOptions[0].isCursed)
+            {
+                button1BG.color = new Color(1f, 0.2f, 0.2f);
+                button1Title.fontStyle = FontStyles.Bold;
+                button1Description.fontStyle = FontStyles.Bold;
+            }
+
             button1Action = weaponUpgradeOptions[0].applyEffect;
+
+
         }
         if(weaponUpgradeOptions != null && weaponUpgradeOptions.Count >= 2)
         {
