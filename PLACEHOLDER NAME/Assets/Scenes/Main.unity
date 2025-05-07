@@ -1002,7 +1002,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   - name: Bullet hell
-    description: Destroy normal and rare bats and golems for this wave, MORE SKELETONS!!!
+    description: Replace normal enemies with only skeletons for this wave.
     effectPrefab: {fileID: 2577347948664676240, guid: 9bd9f3630547e204eace9c5529a5e25a, type: 3}
     ApplyEffectEvent:
       m_PersistentCalls:
