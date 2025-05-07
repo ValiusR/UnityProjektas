@@ -6,6 +6,7 @@ public class BossHealthController : EnemyHealthController
 {
     private GameObject player;
     private AudioManager audioManager;
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -20,7 +21,10 @@ public class BossHealthController : EnemyHealthController
         {
             StartCoroutine(PlayDeathAnimation());
             ScoreManager.addScore(scorePoints);
-            LevelUpSystem.GainXP(xp);
+            if (levelUpSystem != null)
+            {
+                levelUpSystem.GainXP(xp);
+            }
 
             if (GetComponent<EnemyMovement>() != null)
             {

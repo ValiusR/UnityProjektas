@@ -13,11 +13,12 @@ public class XPBarManager : MonoBehaviour
 
     void Start()
     {
+        levelUpSystem = FindObjectOfType<LevelUpSystem>();
     }
 
     void Update()
     {
-        UpdateXpBar(LevelUpSystem.experience, levelUpSystem.experienceToNextLevel);
+        UpdateXpBar(levelUpSystem.experience, levelUpSystem.experienceToNextLevel);
     }
 
     private void UpdateXpBar(int currentExperience, int experienceToNextLevel)

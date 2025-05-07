@@ -962,7 +962,7 @@ MonoBehaviour:
   experienceToNextLevel: 100
   weaponEvolutionInterval: 2
   maxEvolutionLevel: 2
-  unlockedWeaponsUI: {fileID: 0}
+  unlockedWeaponsUI: {fileID: 5571549510523291768}
   cursedUpgradeChance: 0.949
   possibleCursedUpgrades:
   - name: Blood money
@@ -1555,6 +1555,10 @@ PrefabInstance:
       propertyPath: levelUpSystem
       value: 
       objectReference: {fileID: 1638205294}
+    - target: {fileID: 6456524398261425877, guid: 5ef2b82e99b19c247a08a6f36be25a1f, type: 3}
+      propertyPath: levelUpSystem
+      value: 
+      objectReference: {fileID: 1638205294}
     - target: {fileID: 7874495381474405572, guid: 5ef2b82e99b19c247a08a6f36be25a1f, type: 3}
       propertyPath: playerController
       value: 
@@ -1582,6 +1586,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5571549510523291768 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6456524398261425877, guid: 5ef2b82e99b19c247a08a6f36be25a1f, type: 3}
+  m_PrefabInstance: {fileID: 5571549510523291766}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1afaff88170117849a6c9958314e2833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &6246337564854801922

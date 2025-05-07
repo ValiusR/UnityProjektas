@@ -9,7 +9,7 @@ public class LevelUpSystem : MonoBehaviour
     public int numberOfOptions = 3; // Number of options to present on level up
     public LevelUpUiManager levelUpUI;
     public int currentLevel = 1;
-    public static int experience = 0;
+    public int experience = 0;
     public int experienceToNextLevel = 100;
     public int weaponEvolutionInterval = 2;
     public int maxEvolutionLevel;
@@ -37,17 +37,25 @@ public class LevelUpSystem : MonoBehaviour
 
     private void Update()
     {
+        /*
         if (experience >= experienceToNextLevel)
         {
             int experienceToAdd = experience % experienceToNextLevel;
             LevelUp();
             experience += experienceToAdd;
         }
+        */
     }
 
-    public static void GainXP(int amount)
+    public void GainXP(int amount)
     {
         experience += amount;
+        if (experience >= experienceToNextLevel)
+        {
+            int experienceToAdd = experience % experienceToNextLevel;
+            LevelUp();
+            experience += experienceToAdd;
+        }
     }
 
     public void GainExperience(int amount)
@@ -322,10 +330,9 @@ public class LevelUpSystem : MonoBehaviour
     {
         unlockedWeapons.Add(weapon);
         Debug.Log($"Unlocked {weapon.name}");
-
-        // Enable the weapon's behavior script on the Player
         EnableWeaponBehavior(weapon);
-        //unlockedWeaponsUI.AddUnlockedWeaponToUI(weapon.prefab);
+        unlockedWeaponsUI.AddUnlockedWeaponToUI(weapon.prefab);
+
     }
 
     private void EnableWeaponBehavior(WeaponController weapon)

@@ -13,6 +13,7 @@ public class MainMenuManager : MonoBehaviour
     {
         Debug.Log("MainMenuManager NewGame()");
         ScoreManager.currScore = 0;
+        //LevelUpSystem.experience = 0;
         SceneManager.LoadScene("Main");
         //SceneManager.UnloadSceneAsync("PauseMenu");
     }

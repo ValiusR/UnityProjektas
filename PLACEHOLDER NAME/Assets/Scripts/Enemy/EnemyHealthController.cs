@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 public class EnemyHealthController : MonoBehaviour
 {
@@ -8,10 +9,21 @@ public class EnemyHealthController : MonoBehaviour
 
     [SerializeField] protected DamageBlink damageBlink;
     [SerializeField] protected FadeOut fadeOut;
+    public LevelUpSystem levelUpSystem;
     public int maxHP;
     public int currHP;
     public int scorePoints;
     public int xp;
+    private void Start()
+    {
+        // Find the first LevelUpSystem component in the scene
+        levelUpSystem = FindObjectOfType<LevelUpSystem>();
+        if (levelUpSystem == null)
+        {
+            Debug.LogError("No LevelUpSystem component found in the scene!");
+            enabled = false;
+        }
+    }
 
     public virtual void TakeDamage(int damage)
     {
@@ -22,7 +34,10 @@ public class EnemyHealthController : MonoBehaviour
         {
             StartCoroutine(PlayDeathAnimation());
             ScoreManager.addScore(scorePoints);
-            LevelUpSystem.GainXP(xp);
+            if (levelUpSystem != null)
+            {
+                levelUpSystem.GainXP(xp);
+            }
 
             if (GetComponent<EnemyMovement>() != null)
             {
