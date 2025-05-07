@@ -143,5 +143,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93791aee51248b34cbe549e075992baa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xpValue: 2000
+  xpValue: 20
   collectEffect: {fileID: 0}
