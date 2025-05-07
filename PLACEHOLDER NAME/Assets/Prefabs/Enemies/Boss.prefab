@@ -262,7 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78416cfce9bef1a4c97a97852946881c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRange: 5
+  attackRange: 3.5
   meleeJumpAnimationTime: 1
   PLACEHOLDER_damageZone: {fileID: 137790261107081818}
   jumpCurve:
@@ -317,8 +317,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   projectileSpreadAngle: 15
-  meleeCooldown: 0.25
-  rangedCooldown: 1
+  meleeCooldown: 0.8
+  rangedCooldown: 1.25
   rangedPrefab: {fileID: 6473968197472878942, guid: def14a1297d32f940b99901246e46258, type: 3}
 --- !u!114 &-3589953624009638469
 MonoBehaviour:
@@ -334,8 +334,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageBlink: {fileID: -8255814649159158804}
   fadeOut: {fileID: -8264770950833124604}
-  maxHP: 300
-  currHP: 300
+  levelUpSystem: {fileID: 0}
+  maxHP: 3000
+  currHP: 3000
   scorePoints: 10
   xp: 10
 --- !u!1 &1667286718422464572
@@ -411,7 +412,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 0.24447739, g: 1, b: 0, a: 0.105882354}
   m_FlipX: 0
   m_FlipY: 0
@@ -419,7 +420,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1001 &4823221421720111273
