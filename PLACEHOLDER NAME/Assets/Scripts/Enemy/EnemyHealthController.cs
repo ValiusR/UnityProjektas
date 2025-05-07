@@ -44,6 +44,15 @@ public class EnemyHealthController : MonoBehaviour
                 GetComponent<Collider2D>().enabled = false;
             }
 
+            foreach (Transform child in transform)
+            {
+                if (child.name.Contains("Effect"))
+                {
+                    Destroy(child.gameObject);
+                }
+            }
+
+
             // Trigger death event
             OnDeath?.Invoke();
         }

@@ -35,9 +35,10 @@ public class OptionsMenuManager : MonoBehaviour
     //[SerializeField] private float backgroundDimAlpha = 0.95f; 
 
     private Image rebindBackground;
-
     private KeyCode keyToRebind;
     private bool isRebinding = false;
+    private const string BG_VOLUME_KEY = "BGVolume";
+    private const string SFX_VOLUME_KEY = "SFXVolume";
 
 
 
@@ -52,6 +53,16 @@ public class OptionsMenuManager : MonoBehaviour
 
     public void Start()
     {
+        float savedBGVolume = PlayerPrefs.GetFloat(BG_VOLUME_KEY, AudioManager.instance._BackgroundMusicSource.volume);
+        float savedSFXVolume = PlayerPrefs.GetFloat(SFX_VOLUME_KEY, AudioManager.instance._SFXSource.volume);
+
+        AudioManager.instance._BackgroundMusicSource.volume = savedBGVolume;
+        AudioManager.instance._SFXSource.volume = savedSFXVolume;
+
+        sFXVolumeText.text = (maxSliderAmount * savedSFXVolume).ToString("0");
+        sFXVolume.value = savedSFXVolume;
+        bGVolumeText.text = (maxSliderAmount * savedBGVolume).ToString("0");
+        bGVolume.value = savedBGVolume;
 
         sFXVolumeText.text = (maxSliderAmount * AudioManager.instance._SFXSource.volume).ToString("0");
         sFXVolume.value = AudioManager.instance._SFXSource.volume;
@@ -62,20 +73,36 @@ public class OptionsMenuManager : MonoBehaviour
         gameObject.SetActive(false);
 
         allResolutions = Screen.resolutions;
-
-
         List<string> resolutionStringList = new List<string>();
         string newRes;
-        foreach (Resolution resolution in allResolutions)
+
+        selectedResolutionList.Clear();
+        int currentResolutionIndex = 0;
+
+        for (int i = 0; i < allResolutions.Length; i++)
         {
-            newRes = resolution.width.ToString() + "x" + resolution.height.ToString();
+            Resolution resolution = allResolutions[i];
+            newRes = resolution.width + "x" + resolution.height;
+
             if (!resolutionStringList.Contains(newRes))
             {
                 resolutionStringList.Add(newRes);
                 selectedResolutionList.Add(resolution);
+
+                // Check if this matches current screen resolution
+                if (resolution.width == Screen.currentResolution.width &&
+                    resolution.height == Screen.currentResolution.height)
+                {
+                    currentResolutionIndex = selectedResolutionList.Count - 1;
+                }
             }
         }
+
+        resDropDown.ClearOptions();
         resDropDown.AddOptions(resolutionStringList);
+        resDropDown.value = currentResolutionIndex;
+        resDropDown.RefreshShownValue();
+
 
         List<string> screenModeOptions = new List<string> { "Windowed", "Fullscreen" };
         screenModeDropDown.AddOptions(screenModeOptions);
@@ -192,6 +219,8 @@ public class OptionsMenuManager : MonoBehaviour
         float localValue = value * maxSliderAmount;
         bGVolumeText.text = localValue.ToString("0");
         AudioManager.instance._BackgroundMusicSource.volume = value;
+        PlayerPrefs.SetFloat(BG_VOLUME_KEY, value);
+        PlayerPrefs.Save();
     }
 
     public void SliderChangeSFXVolume(float value)
@@ -199,6 +228,8 @@ public class OptionsMenuManager : MonoBehaviour
         float localValue = value * maxSliderAmount;
         sFXVolumeText.text = localValue.ToString("0");
         AudioManager.instance._SFXSource.volume = value;
+        PlayerPrefs.SetFloat(SFX_VOLUME_KEY, value);
+        PlayerPrefs.Save();
     }
 
     public void ChangeResolution()

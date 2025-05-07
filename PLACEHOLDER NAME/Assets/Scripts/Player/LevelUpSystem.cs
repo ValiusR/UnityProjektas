@@ -13,7 +13,10 @@ public class LevelUpSystem : MonoBehaviour
     public int experienceToNextLevel = 100;
     public int weaponEvolutionInterval = 2;
     public int maxEvolutionLevel;
+
     private bool currentIsCursed = false;
+    public UnlockedWeaponsUI unlockedWeaponsUI;
+
     [Header("Cursed Upgrades")]
     [Range(0f, 1f)]
     public float cursedUpgradeChance = 0.2f; // Chance to offer a cursed upgrade
@@ -24,8 +27,11 @@ public class LevelUpSystem : MonoBehaviour
         unlockedWeapons = new List<WeaponController>();
         if (allWeapons.Count > 0)
         {
+
             unlockedWeapons.Add(allWeapons[0]); // Unlock the first weapon by default
             EnableWeaponBehavior(allWeapons[0]); // Enable the starting weapon's behavior
+
+            unlockedWeaponsUI.AddUnlockedWeaponToUI(allWeapons[0].prefab);
         }
     }
 
@@ -177,7 +183,8 @@ public class LevelUpSystem : MonoBehaviour
                 offeredCursedUpgrade.name,
                 offeredCursedUpgrade.description,
                 () => ApplyCursedUpgrade(offeredCursedUpgrade),
-                offeredCursedUpgrade.effectPrefab
+                offeredCursedUpgrade.effectPrefab,
+                true
             ));
         }
         else
@@ -318,6 +325,7 @@ public class LevelUpSystem : MonoBehaviour
 
         // Enable the weapon's behavior script on the Player
         EnableWeaponBehavior(weapon);
+        //unlockedWeaponsUI.AddUnlockedWeaponToUI(weapon.prefab);
     }
 
     private void EnableWeaponBehavior(WeaponController weapon)

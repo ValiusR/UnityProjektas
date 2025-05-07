@@ -180,8 +180,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   collisionRadius: 0.1
+  direction: {x: 0, y: 0}
   freezeLength: 0
   freezeStrength: 0
+  canPierce: 0
 --- !u!95 &-6002742264195158492
 Animator:
   serializedVersion: 5
