@@ -4898,6 +4898,7 @@ GameObject:
   - component: {fileID: 1832444089892872916}
   - component: {fileID: 4931406490281180806}
   - component: {fileID: 2951000255371369040}
+  - component: {fileID: 4105231480243248977}
   m_Layer: 0
   m_Name: ExplosionParticle
   m_TagString: Untagged
@@ -4913,15 +4914,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3716561049883582134}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 14.702017, y: -5.7131925, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 992868303157401156}
   - {fileID: 333446936993917722}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &4931406490281180806
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -9744,7 +9745,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_RenderMode: 4
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -9775,6 +9776,19 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &4105231480243248977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3716561049883582134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 651765a3daa763545938961577ba516a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeUntilDestroyObject: 1
 --- !u!1 &6533404830860518153
 GameObject:
   m_ObjectHideFlags: 0

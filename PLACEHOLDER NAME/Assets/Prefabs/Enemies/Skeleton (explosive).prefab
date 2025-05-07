@@ -211,5 +211,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthController: {fileID: 5844951867886639551}
-  explosionRange: 2
+  explosionRange: 3
   explosionDamage: 20
+  explosion: {fileID: 3716561049883582134, guid: 479ee6ed8dcb6d84d8ec3d3c68f4828e, type: 3}

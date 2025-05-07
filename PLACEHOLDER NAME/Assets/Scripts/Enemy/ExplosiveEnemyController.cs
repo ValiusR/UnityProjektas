@@ -7,15 +7,32 @@ public class ExplosiveEnemyController : MonoBehaviour
     [SerializeField] EnemyHealthController healthController;
     [SerializeField] float explosionRange;
     [SerializeField] int explosionDamage;
-    private bool hasExploded = false;
 
-    void Update()
+    [SerializeField] GameObject explosion;
+
+    void Start()
     {
-        if (!hasExploded && healthController.currHP <= 0)
+        // Subscribe to the OnDeath event of the EnemyHealthController
+        if (healthController != null)
         {
-            SolveCollisions();
-            hasExploded = true;
+            healthController.OnDeath += HandleOnDeath;
         }
+        else
+        {
+            Debug.LogError("EnemyHealthController is not assigned in the Inspector for " + gameObject.name);
+        }
+    }
+
+    // This function will be called when the OnDeath event is invoked
+    private void HandleOnDeath()
+    {
+        MakeExplosion();
+        SolveCollisions();
+    }
+
+    private void MakeExplosion()
+    {
+        GameObject expl = Instantiate(explosion, this.transform.position, Quaternion.identity);
     }
 
     protected virtual void SolveCollisions()
@@ -30,6 +47,15 @@ public class ExplosiveEnemyController : MonoBehaviour
             {
                 player.TakeDamage(explosionDamage);
             }
+        }
+    }
+
+    // It's good practice to unsubscribe from events when the object is destroyed
+    private void OnDestroy()
+    {
+        if (healthController != null)
+        {
+            healthController.OnDeath -= HandleOnDeath;
         }
     }
 }
